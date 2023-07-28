@@ -3,7 +3,6 @@ import Head from 'next/head'
 import React from 'react'
 
 export default function evangelioDeHoy({ date, first_reading, gospel, psalm }) {
-  console.log({ date, first_reading, gospel, psalm })
   return (
     <>
       <Head>
@@ -31,14 +30,15 @@ export default function evangelioDeHoy({ date, first_reading, gospel, psalm }) {
 }
 
 export async function getStaticProps(context) {
-  // Crear un objeto Date para la fecha de hoy
-  const today = new Date()
+  // Crear un objeto Date para la fecha y hora de hoy en UTC
+  let today = new Date()
+
+  // Convertir a la hora estándar del centro (CST) para la Ciudad de México
+  let offset = today.getTimezoneOffset() + 6 * 60
+  today.setMinutes(today.getMinutes() - offset)
 
   // Restar un día
   today.setDate(today.getDate() - 1)
-
-  // Ajustar a la zona horaria local
-  today.setMinutes(today.getMinutes() - today.getTimezoneOffset())
 
   // Formatear la fecha en el formato 'yyyy-mm-dd'
   const date = today.toISOString().split('T')[0]
