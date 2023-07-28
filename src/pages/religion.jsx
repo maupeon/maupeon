@@ -34,6 +34,9 @@ export async function getStaticProps(context) {
   // Crear un objeto Date para la fecha de hoy
   const today = new Date()
 
+  // Restar un día
+  today.setDate(today.getDate() - 1)
+
   // Ajustar a la zona horaria local
   today.setMinutes(today.getMinutes() - today.getTimezoneOffset())
 
