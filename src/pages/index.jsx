@@ -141,7 +141,7 @@ function Resume() {
     {
       company: 'Medu',
       title: 'CTO',
-      logo: logoMedu,
+      logo: logoMedu.src,
       start: '2019',
       end: {
         label: 'Present',
@@ -151,14 +151,14 @@ function Resume() {
     {
       company: 'IBM',
       title: 'Business Analyst (Student)',
-      logo: logoIBM,
+      logo: logoIBM.src,
       start: '2019',
       end: '2020',
     },
     {
       company: 'Culver Summer School and Camps',
       title: 'Personal Member (Counselor)',
-      logo: logoCulver,
+      logo: logoCulver.src,
       start: '2017',
       end: '2017',
     },
@@ -174,7 +174,7 @@ function Resume() {
         {resume.map((role, roleIndex) => (
           <li key={roleIndex} className="flex gap-4">
             <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
-              <Image
+              <img
                 src={role.logo}
                 alt=""
                 className="h-7 w-7 rounded-full"
@@ -236,8 +236,8 @@ function Photos() {
               rotations[imageIndex % rotations.length]
             )}
           >
-            <Image
-              src={image}
+            <img
+              src={image.src}
               alt=""
               sizes="(min-width: 640px) 18rem, 11rem"
               className="absolute inset-0 h-full w-full object-cover"
