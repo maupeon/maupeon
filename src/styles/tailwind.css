@@ -2,3 +2,313 @@
 @import 'tailwindcss/components';
 @import './prism.css';
 @import 'tailwindcss/utilities';
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   BIBLICAL THEME - Inspired by ancient manuscripts and sacred texts
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Biblical Font Families */
+.font-biblical-heading {
+  font-family: 'Cinzel', 'Times New Roman', serif;
+}
+
+.font-biblical-decorative {
+  font-family: 'Cinzel Decorative', 'Cinzel', serif;
+}
+
+.font-biblical-body {
+  font-family: 'EB Garamond', 'Georgia', serif;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Biblical Animations
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* Gentle glow animation for sacred elements */
+@keyframes divine-glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 2px rgba(212, 175, 55, 0.3));
+  }
+  50% {
+    filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.6));
+  }
+}
+
+/* Fade in from above - like divine revelation */
+@keyframes descend-reveal {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scroll unroll effect */
+@keyframes scroll-unfurl {
+  0% {
+    opacity: 0;
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+  100% {
+    opacity: 1;
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+}
+
+/* Gentle flicker like candlelight */
+@keyframes candlelight {
+  0%, 100% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0.95;
+  }
+  50% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 0.97;
+  }
+}
+
+/* Staggered fade in for verse lines */
+@keyframes verse-appear {
+  0% {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Biblical Animation Classes
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.animate-divine-glow {
+  animation: divine-glow 3s ease-in-out infinite;
+}
+
+.animate-descend {
+  animation: descend-reveal 0.8s ease-out forwards;
+}
+
+.animate-scroll-unfurl {
+  animation: scroll-unfurl 0.6s ease-out forwards;
+}
+
+.animate-candlelight {
+  animation: candlelight 4s ease-in-out infinite;
+}
+
+.animate-verse-appear {
+  animation: verse-appear 0.5s ease-out forwards;
+}
+
+/* Stagger children animations */
+.stagger-children > *:nth-child(1) { animation-delay: 0.1s; }
+.stagger-children > *:nth-child(2) { animation-delay: 0.2s; }
+.stagger-children > *:nth-child(3) { animation-delay: 0.3s; }
+.stagger-children > *:nth-child(4) { animation-delay: 0.4s; }
+.stagger-children > *:nth-child(5) { animation-delay: 0.5s; }
+.stagger-children > *:nth-child(6) { animation-delay: 0.6s; }
+.stagger-children > *:nth-child(7) { animation-delay: 0.7s; }
+.stagger-children > *:nth-child(8) { animation-delay: 0.8s; }
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Biblical Decorative Elements
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* Ornate divider using CSS */
+.biblical-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.biblical-divider::before,
+.biblical-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, currentColor, transparent);
+}
+
+.biblical-divider-symbol {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.5rem;
+  color: inherit;
+}
+
+/* Drop cap for first letter - like illuminated manuscripts */
+.drop-cap::first-letter {
+  float: left;
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 4rem;
+  line-height: 0.8;
+  padding-right: 0.5rem;
+  padding-top: 0.1rem;
+}
+
+/* Parchment texture overlay */
+.parchment-texture {
+  position: relative;
+}
+
+.parchment-texture::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(ellipse at 20% 30%, rgba(139, 69, 19, 0.03) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 70%, rgba(139, 69, 19, 0.03) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(139, 69, 19, 0.02) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Verse number styling */
+.verse-number {
+  font-family: 'Cinzel', serif;
+  font-size: 0.75em;
+  font-weight: 600;
+  vertical-align: super;
+  margin-right: 0.25em;
+  opacity: 0.7;
+}
+
+/* Scripture reference styling */
+.scripture-ref {
+  font-family: 'Cinzel', serif;
+  font-style: italic;
+  letter-spacing: 0.05em;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Biblical Color Scheme (applied via utility classes)
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* Gold accent for sacred elements */
+.text-biblical-gold {
+  color: #d4af37;
+}
+
+.bg-biblical-gold {
+  background-color: #d4af37;
+}
+
+.border-biblical-gold {
+  border-color: #d4af37;
+}
+
+/* Deep burgundy for emphasis */
+.text-biblical-burgundy {
+  color: #722f37;
+}
+
+.bg-biblical-burgundy {
+  background-color: #722f37;
+}
+
+/* Parchment/cream backgrounds */
+.bg-biblical-parchment {
+  background-color: #f5f0e6;
+}
+
+.dark .bg-biblical-parchment {
+  background-color: #1a1814;
+}
+
+/* Sepia tones */
+.text-biblical-sepia {
+  color: #5c4033;
+}
+
+.dark .text-biblical-sepia {
+  color: #c4a77d;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Biblical Loading Spinner
+   ───────────────────────────────────────────────────────────────────────────── */
+
+@keyframes cross-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+}
+
+.biblical-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.biblical-loader-cross {
+  font-size: 2rem;
+  animation: cross-pulse 2s ease-in-out infinite;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Biblical Card/Section Styling
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.biblical-card {
+  position: relative;
+  border: 1px solid;
+  border-image: linear-gradient(
+    135deg,
+    rgba(212, 175, 55, 0.5),
+    rgba(139, 69, 19, 0.3),
+    rgba(212, 175, 55, 0.5)
+  ) 1;
+  padding: 2rem;
+  background: linear-gradient(
+    to bottom,
+    rgba(245, 240, 230, 0.5),
+    rgba(245, 240, 230, 0.8)
+  );
+}
+
+.dark .biblical-card {
+  background: linear-gradient(
+    to bottom,
+    rgba(26, 24, 20, 0.8),
+    rgba(26, 24, 20, 0.95)
+  );
+}
+
+/* Corner ornaments */
+.biblical-card::before,
+.biblical-card::after {
+  content: '✦';
+  position: absolute;
+  font-size: 0.75rem;
+  color: rgba(212, 175, 55, 0.6);
+}
+
+.biblical-card::before {
+  top: 0.5rem;
+  left: 0.5rem;
+}
+
+.biblical-card::after {
+  bottom: 0.5rem;
+  right: 0.5rem;
+}

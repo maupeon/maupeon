@@ -16,6 +16,23 @@ Next, create a `.env.local` file in the root of your project and set the `NEXT_P
 NEXT_PUBLIC_SITE_URL=https://example.com
 ```
 
+### Strava (Ejercicio)
+
+This repo includes an `Ejercicio` page that can connect to Strava via OAuth and display recent activities.
+
+1. Create a Strava app at https://www.strava.com/settings/api
+2. Set these variables in `.env.local` (see `.env.example`):
+
+```
+STRAVA_CLIENT_ID=...
+STRAVA_CLIENT_SECRET=...
+SESSION_PASSWORD=... (>= 32 chars)
+```
+
+3. Configure your Strava app **Authorization Callback Domain** to match your domain.
+	- In local dev, the callback URL is: `http://localhost:3000/api/strava/callback`
+	- You can also set `STRAVA_REDIRECT_URI` if you need a fixed redirect.
+
 Next, run the development server:
 
 ```bash
