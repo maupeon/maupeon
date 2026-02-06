@@ -22,21 +22,23 @@ module.exports = {
         },
       },
       fontFamily: {
-        'biblical-heading': ['Cinzel', 'Times New Roman', 'serif'],
-        'biblical-decorative': ['Cinzel Decorative', 'Cinzel', 'serif'],
-        'biblical-body': ['EB Garamond', 'Georgia', 'serif'],
+        sans: ['Lato', 'sans-serif'],
+        serif: ['Playfair Display', 'serif'],
+        display: ['Playfair Display', 'serif'],
       },
       animation: {
         'divine-glow': 'divine-glow 3s ease-in-out infinite',
-        'descend': 'descend-reveal 0.8s ease-out forwards',
+        descend: 'descend-reveal 0.8s ease-out forwards',
         'scroll-unfurl': 'scroll-unfurl 0.6s ease-out forwards',
-        'candlelight': 'candlelight 4s ease-in-out infinite',
+        candlelight: 'candlelight 4s ease-in-out infinite',
         'verse-appear': 'verse-appear 0.5s ease-out forwards',
         'cross-pulse': 'cross-pulse 2s ease-in-out infinite',
       },
       keyframes: {
         'divine-glow': {
-          '0%, 100%': { filter: 'drop-shadow(0 0 2px rgba(212, 175, 55, 0.3))' },
+          '0%, 100%': {
+            filter: 'drop-shadow(0 0 2px rgba(212, 175, 55, 0.3))',
+          },
           '50%': { filter: 'drop-shadow(0 0 8px rgba(212, 175, 55, 0.6))' },
         },
         'descend-reveal': {
@@ -44,10 +46,18 @@ module.exports = {
           '100%': { opacity: '1', transform: 'translateY(0)' },
         },
         'scroll-unfurl': {
-          '0%': { opacity: '0', transform: 'scaleY(0)', transformOrigin: 'top' },
-          '100%': { opacity: '1', transform: 'scaleY(1)', transformOrigin: 'top' },
+          '0%': {
+            opacity: '0',
+            transform: 'scaleY(0)',
+            transformOrigin: 'top',
+          },
+          '100%': {
+            opacity: '1',
+            transform: 'scaleY(1)',
+            transformOrigin: 'top',
+          },
         },
-        'candlelight': {
+        candlelight: {
           '0%, 100%': { opacity: '1' },
           '25%': { opacity: '0.95' },
           '50%': { opacity: '1' },

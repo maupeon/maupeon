@@ -2,6 +2,9 @@ import Image from 'next/image'
 import Head from 'next/head'
 import Link from 'next/link'
 import clsx from 'clsx'
+import { useEffect, useRef } from 'react'
+import gsap from 'gsap'
+import dynamic from 'next/dynamic'
 
 import { Button } from '@/components/Button'
 import { Card } from '@/components/Card'
@@ -25,6 +28,11 @@ import { generateRssFeed } from '@/lib/generateRssFeed'
 import { getAllArticles } from '@/lib/getAllArticles'
 import { formatDate } from '@/lib/formatDate'
 import { LightBulbIcon } from '@heroicons/react/24/outline'
+
+const RunnerGame = dynamic(
+  () => import('@/components/RunnerGame').then((mod) => mod.RunnerGame),
+  { ssr: false }
+)
 function MailIcon(props) {
   return (
     <svg
@@ -101,8 +109,8 @@ function Article({ article }) {
 
 function SocialLink({ icon: Icon, ...props }) {
   return (
-    <Link className="group -m-1 p-1" {...props}>
-      <Icon className="h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300" />
+    <Link className="p-1 -m-1 group" {...props}>
+      <Icon className="w-6 h-6 transition fill-zinc-500 group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300" />
     </Link>
   )
 }
@@ -111,16 +119,16 @@ function Newsletter() {
   return (
     <form
       action="/thank-you"
-      className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40"
+      className="p-6 border rounded-2xl border-zinc-100 dark:border-zinc-700/40"
     >
       <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-        <LightBulbIcon className="h-6 w-6 flex-none fill-zinc-100 stroke-zinc-400 dark:fill-zinc-100/10 dark:stroke-zinc-500" />
+        <LightBulbIcon className="flex-none w-6 h-6 fill-zinc-100 stroke-zinc-400 dark:fill-zinc-100/10 dark:stroke-zinc-500" />
         <span className="ml-3">Nuevos cambios</span>
       </h2>
       <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
         Poco a poco se irán agregando nuevas ideas a este portafolio.
       </p>
-      {/* <div className="mt-6 flex">
+      {/* <div className="flex mt-6">
         <input
           type="email"
           placeholder="Email address"
@@ -128,7 +136,7 @@ function Newsletter() {
           required
           className="min-w-0 flex-auto appearance-none rounded-md border border-zinc-900/10 bg-white px-3 py-[calc(theme(spacing.2)-1px)] shadow-md shadow-zinc-800/5 placeholder:text-zinc-400 focus:border-teal-500 focus:outline-none focus:ring-4 focus:ring-teal-500/10 dark:border-zinc-700 dark:bg-zinc-700/[0.15] dark:text-zinc-200 dark:placeholder:text-zinc-500 dark:focus:border-teal-400 dark:focus:ring-teal-400/10 sm:text-sm"
         />
-        <Button type="submit" className="ml-4 flex-none">
+        <Button type="submit" className="flex-none ml-4">
           Join
         </Button>
       </div> */}
@@ -165,25 +173,25 @@ function Resume() {
   ]
 
   return (
-    <div className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
+    <div className="p-6 border rounded-2xl border-zinc-100 dark:border-zinc-700/40">
       <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-        <BriefcaseIcon className="h-6 w-6 flex-none" />
+        <BriefcaseIcon className="flex-none w-6 h-6" />
         <span className="ml-3">Trabajo</span>
       </h2>
       <ol className="mt-6 space-y-4">
         {resume.map((role, roleIndex) => (
           <li key={roleIndex} className="flex gap-4">
-            <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
+            <div className="relative flex items-center justify-center flex-none w-10 h-10 mt-1 rounded-full shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
               <img
                 src={role.logo}
                 alt=""
-                className="h-7 w-7 rounded-full"
+                className="rounded-full h-7 w-7"
                 unoptimized
               />
             </div>
-            <dl className="flex flex-auto flex-wrap gap-x-2">
+            <dl className="flex flex-wrap flex-auto gap-x-2">
               <dt className="sr-only">Company</dt>
-              <dd className="w-full flex-none text-sm font-medium text-zinc-900 dark:text-zinc-100">
+              <dd className="flex-none w-full text-sm font-medium text-zinc-900 dark:text-zinc-100">
                 {role.company}
               </dd>
               <dt className="sr-only">Role</dt>
@@ -213,10 +221,10 @@ function Resume() {
         target="_blank"
         href="/documents/CV.pdf"
         variant="secondary"
-        className="group mt-6 w-full"
+        className="w-full mt-6 group"
       >
         Descargar CV
-        <ArrowDownIcon className="h-4 w-4 stroke-zinc-400 transition group-active:stroke-zinc-600 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50" />
+        <ArrowDownIcon className="w-4 h-4 transition stroke-zinc-400 group-active:stroke-zinc-600 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50" />
       </Button>
     </div>
   )
@@ -227,20 +235,21 @@ function Photos() {
 
   return (
     <div className="mt-16 sm:mt-20">
-      <div className="-my-4 flex justify-start gap-5  overflow-scroll py-4 sm:gap-8 md:justify-center md:overflow-hidden">
+      <div className="flex justify-start gap-5 py-4 -my-4 overflow-hidden sm:gap-8 md:justify-center">
         {[image1, image2, image3, image4, image5].map((image, imageIndex) => (
           <div
             key={image.src}
             className={clsx(
               'relative aspect-[9/10] w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-72 sm:rounded-2xl',
-              rotations[imageIndex % rotations.length]
+              rotations[imageIndex % rotations.length],
+              'photo-card translate-y-4 opacity-0'
             )}
           >
             <img
               src={image.src}
               alt=""
               sizes="(min-width: 640px) 18rem, 11rem"
-              className="absolute inset-0 h-full w-full object-cover"
+              className="absolute inset-0 object-cover w-full h-full"
             />
           </div>
         ))}
@@ -250,6 +259,41 @@ function Photos() {
 }
 
 export default function Home({ articles }) {
+  const heroRef = useRef(null)
+  const gameRef = useRef(null)
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        '.hero-text',
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 1, stagger: 0.2, ease: 'power3.out' }
+      )
+
+      gsap.fromTo(
+        '.photo-card',
+        { opacity: 0, y: 50, rotation: 0 },
+        {
+          opacity: 1,
+          y: 0,
+          rotation: (i) => [2, -2, 2, 2, -2][i % 5],
+          duration: 1,
+          stagger: 0.1,
+          ease: 'back.out(1.7)',
+          delay: 0.5,
+        }
+      )
+
+      gsap.fromTo(
+        gameRef.current,
+        { opacity: 0, scale: 0.9 },
+        { opacity: 1, scale: 1, duration: 1, delay: 1, ease: 'power2.out' }
+      )
+    }, heroRef)
+
+    return () => ctx.revert()
+  }, [])
+
   return (
     <>
       <Head>
@@ -260,17 +304,17 @@ export default function Home({ articles }) {
           director de tecnología en Medu."
         />
       </Head>
-      <Container className="mt-9">
+      <Container className="mt-9" ref={heroRef}>
         <div className="max-w-2xl">
-          <h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
+          <h1 className="font-serif text-4xl font-bold tracking-tight hero-text text-zinc-800 dark:text-zinc-100 sm:text-5xl">
             Ingeniero, corredor y emprendedor.
           </h1>
-          <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
+          <p className="mt-6 font-sans text-lg leading-relaxed hero-text text-zinc-600 dark:text-zinc-400">
             Soy Mauricio Peón, ingeniero en tecnologías computacionales,
             director de tecnología en Medu y amante del deporte más bonito del
             mundo (fútbol). Por las mañanas, corro un poco, por las noches, leo.
           </p>
-          <div className="mt-6 flex gap-6">
+          <div className="flex gap-6 mt-6 hero-text">
             <SocialLink
               href="https://twitter.com/agapaudi"
               aria-label="Follow on Twitter"
@@ -293,10 +337,17 @@ export default function Home({ articles }) {
             />
           </div>
         </div>
+
+        <div ref={gameRef} className="mt-12 opacity-0">
+          <h2 className="mb-4 font-serif text-2xl font-semibold text-zinc-800 dark:text-zinc-100">
+            Infinite Run
+          </h2>
+          <RunnerGame />
+        </div>
       </Container>
       <Photos />
       <Container className="mt-24 md:mt-28">
-        <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
+        <div className="grid max-w-xl grid-cols-1 mx-auto gap-y-20 lg:max-w-none lg:grid-cols-2">
           <div className="flex flex-col gap-16">
             {/* {articles.map((article) => (
               <Article key={article.slug} article={article} />
