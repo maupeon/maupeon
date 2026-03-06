@@ -34,7 +34,13 @@ export default async function handler(req, res) {
   const url = `https://www.vaticannews.va/es/evangelio-de-hoy/${year}/${month}/${day}.html`
 
   try {
-    const response = await fetch(url)
+    const response = await fetch(url, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (compatible; LecturasDelDia/1.0)',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+        'Accept-Language': 'es-ES,es;q=0.9',
+      },
+    })
     if (!response.ok) throw new Error(`Vatican News respondio ${response.status}`)
 
     const html = await response.text()
