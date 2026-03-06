@@ -20,6 +20,13 @@ module.exports = {
           cream: '#faf7f0',
           'cream-dark': '#0d0c0a',
         },
+        guardia: {
+          green: '#1B7340',
+          'green-dark': '#145A32',
+          cream: '#F5F5F0',
+          text: '#1A1A1A',
+          'text-light': '#4A4A4A',
+        },
       },
       fontFamily: {
         sans: ['Lato', 'sans-serif'],

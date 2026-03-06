@@ -1,0 +1,128 @@
+{
+  "nav": {
+    "religion": "Religión",
+    "projects": "Proyectos",
+    "inspirations": "Inspiraciones",
+    "exercise": "Ejercicio",
+    "navigation": "Navegación",
+    "menu": "Menú"
+  },
+  "home": {
+    "title": "Mauricio Peón - Ingeniero, emprendedor y corredor.",
+    "description": "Soy Mauricio Peón, ingeniero en tecnologías computacionales, director de tecnología en Medu.",
+    "hero": "Ingeniero, corredor y emprendedor.",
+    "intro": "Soy Mauricio Peón, ingeniero en tecnologías computacionales, director de tecnología en Medu y amante del deporte más bonito del mundo (fútbol). Por las mañanas, corro un poco, por las noches, leo.",
+    "newsletter": {
+      "title": "Nuevos cambios",
+      "description": "Poco a poco se irán agregando nuevas ideas a este portafolio."
+    },
+    "resume": {
+      "title": "Trabajo",
+      "downloadCV": "Descargar CV"
+    },
+    "readArticle": "Leer artículo"
+  },
+  "projects": {
+    "title": "Proyectos - Mauricio Peón",
+    "metaDescription": "Algunos proyectos en los que he tenido la oportunidad de colaborar.",
+    "heading": "Algunos proyectos en los que he tenido la oportunidad de colaborar.",
+    "intro": "En esta sección, te invito a explorar una colección cuidadosamente seleccionada de mis proyectos más significativos. Cada uno de ellos es un reflejo de mi pasión, dedicación y evolución como profesional.",
+    "descriptions": {
+      "medu": "Somos una plataforma de educación médica en español especializada en contenido audiovisual de Ciencias de la Salud.",
+      "meduApp": "Aplicación móvil de educación médica en español especializada en contenido audiovisual de Ciencias de la Salud.",
+      "teTocoApp": "¿Atrapado entre opciones? ¿No sabes qué comer, a dónde ir, o qué película ver? Deja que ¿Te tocó? tome la decisión por ti. ¿Te tocó? es la forma más divertida y elegante de tomar decisiones aleatorias. Con dados 3D interactivos y animaciones fluidas, convierte la indecisión en un momento entretenido.",
+      "ppaa": "PPAA es impulsado por una arquitectura de ideas sobre una de formas.",
+      "a911": "a|911 es una oficina multidisciplinaria que abarca proyectos de arquitectura, urbanismo, movilidad y paisaje.",
+      "domingo": "Tienda en línea de sábanas suaves, 100% de algodón basada en la Ciudad de México.",
+      "xolo": "Este proyecto ofrece una experiencia única de alojamiento en Ciudad de México.",
+      "zamme": "Zamme es una plataforma de comunicación visual con el objetivo de construir comunidad a través del intercambio de conocimiento y colaboraciones.",
+      "macondo": "Este proyecto es un compendio cuidadosamente curado de más de 200 variedades de plantas y accesorios esenciales de jardinería.",
+      "camsam": "Esta herramienta innovadora está diseñada para simplificar y agilizar el cálculo de aranceles para arquitectos en la Ciudad de México.",
+      "presidentes": "Es una página sátira de las hazañas que han logrado los presidentes de México."
+    }
+  },
+  "inspirations": {
+    "title": "Inspiraciones",
+    "heading": "Galería de Inspiraciones",
+    "intro": "Bienvenidos a la Galería de Inspiraciones, un espacio único donde comparto las obras y experiencias que han moldeado mi visión y enriquecido mi creatividad. Aquí encontrarás una ecléctica colección de libros, películas, canciones y más, cada uno con su propia historia y significado especial en mi trayectoria personal y profesional. Esta galería es un reflejo de las diversas influencias que han contribuido a mi desarrollo, ofreciendo una ventana a las fuentes de mi inspiración. Disfruta explorando y descubriendo los diversos elementos que alimentan mi creatividad.",
+    "books": "Libros",
+    "movies": "Películas",
+    "songs": "Canciones",
+    "series": "Series"
+  },
+  "exercise": {
+    "title": "Ejercicio - Mauricio Peón",
+    "metaDescription": "Actividades recientes de Strava.",
+    "heading": "Ejercicio"
+  },
+  "religion": {
+    "pageTitle": "Evangelio de hoy - Lecturas del Día",
+    "metaDescription": "Evangelio y lecturas del día",
+    "loading": "Cargando la Palabra...",
+    "errorDefault": "No se pudieron cargar las lecturas",
+    "errorNoReadings": "No hay lecturas disponibles",
+    "retry": "Intentar de nuevo",
+    "heading": "Lecturas de Hoy",
+    "gospel": "EVANGELIO",
+    "wordOfTheLord": "Palabra del Señor"
+  },
+  "strava": {
+    "runs": "Carreras",
+    "distance": "Distancia",
+    "time": "Tiempo",
+    "pace": "Ritmo",
+    "personalRecords": "Records Personales",
+    "errorLoading": "Error al cargar datos"
+  },
+  "footer": {
+    "copyright": "Todos los derechos reservados."
+  },
+  "guardia": {
+    "downloadFree": "Descargar gratis",
+    "availableBadge": "Disponible en iOS y Android",
+    "heroTitle1": "Tu check-in",
+    "heroTitle2": "diario",
+    "heroTitle3": "de seguridad",
+    "heroDescription": "Si un día no puedes pulsar el botón, tu contacto de emergencia recibirá un aviso automático. Así de simple.",
+    "noSubscriptions": "Sin suscripciones",
+    "setupTime": "1 min de configuración",
+    "appStoreButton": "Descargar en App Store",
+    "playStoreButton": "Disponible en Google Play",
+    "problemLabel": "El problema",
+    "problemHeading": "¿Qué pasa si un día no puedes llamar?",
+    "problem1Title": "La soledad es invisible",
+    "problem1Text": "Vives solo y nadie sabría si algo te pasa.",
+    "problem2Title": "Los accidentes no avisan",
+    "problem2Text": "Los accidentes en casa son más comunes de lo que crees.",
+    "problem3Title": "Merecen saber",
+    "problem3Text": "Tus seres queridos merecen tranquilidad.",
+    "howItWorksLabel": "Cómo funciona",
+    "howItWorksHeading": "Tan simple como un toque",
+    "step1Title": "Toca el botón cada día",
+    "step1Description": "Confirma que estás bien en segundos. Un solo toque.",
+    "step2Title": "Guardia vigila por ti",
+    "step2Description": "Si no haces check-in en 3 días, actúa automáticamente.",
+    "step3Title": "Tu contacto recibe el aviso",
+    "step3Description": "Por email y WhatsApp, sin que tú hagas nada.",
+    "featuresLabel": "Funcionalidades",
+    "featuresHeading1": "Todo lo que necesitas,",
+    "featuresHeading2": "nada que no",
+    "feature1Title": "Botón de check-in grande",
+    "feature1Description": "Pensado para ser fácil de usar a cualquier edad.",
+    "feature2Title": "Racha diaria",
+    "feature2Description": "Lleva la cuenta de tus días consecutivos.",
+    "feature3Title": "Alerta automática",
+    "feature3Description": "Email y WhatsApp sin configuración compleja.",
+    "feature4Title": "Sin suscripciones",
+    "feature4Description": "Gratuita, siempre. Sin letra pequeña.",
+    "imagePlaceholder1": "Imagen: persona usando",
+    "imagePlaceholder2": "el teléfono con calma",
+    "emotionalQuote1": "No se trata de miedo.",
+    "emotionalQuote2": "Se trata de saber que, pase lo que pase,",
+    "emotionalQuote3": "alguien estará al tanto.",
+    "ctaHeading": "Descárgala gratis hoy",
+    "ctaDescription": "Un minuto de configuración. Una vida de tranquilidad.",
+    "ctaFooter": "Hecho con 💚 para quienes viven solos",
+    "footerTagline": "Tu compañero de seguridad."
+  }
+}

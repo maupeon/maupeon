@@ -9,6 +9,10 @@ const nextConfig = {
   experimental: {
     scrollRestoration: true,
   },
+  i18n: {
+    locales: ['es', 'en'],
+    defaultLocale: 'es',
+  },
 }
 
 const withMDX = nextMDX({

@@ -18,6 +18,11 @@ function usePrevious(value) {
 
 export default function App({ Component, pageProps, router }) {
   let previousPathname = usePrevious(router.pathname)
+  let isStandalonePage = router.pathname.startsWith('/app/')
+
+  if (isStandalonePage) {
+    return <Component previousPathname={previousPathname} {...pageProps} />
+  }
 
   return (
     <>

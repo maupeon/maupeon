@@ -4,8 +4,6 @@ import Link from 'next/link'
 import clsx from 'clsx'
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
-import dynamic from 'next/dynamic'
-
 import { Button } from '@/components/Button'
 import { Card } from '@/components/Card'
 import { Container } from '@/components/Container'
@@ -28,11 +26,8 @@ import { generateRssFeed } from '@/lib/generateRssFeed'
 import { getAllArticles } from '@/lib/getAllArticles'
 import { formatDate } from '@/lib/formatDate'
 import { LightBulbIcon } from '@heroicons/react/24/outline'
+import { useTranslation } from '@/lib/useTranslation'
 
-const RunnerGame = dynamic(
-  () => import('@/components/RunnerGame').then((mod) => mod.RunnerGame),
-  { ssr: false }
-)
 function MailIcon(props) {
   return (
     <svg
@@ -93,6 +88,7 @@ function ArrowDownIcon(props) {
 }
 
 function Article({ article }) {
+  const { t } = useTranslation()
   return (
     <Card as="article">
       <Card.Title href={`/articles/${article.slug}`}>
@@ -102,31 +98,32 @@ function Article({ article }) {
         {formatDate(article.date)}
       </Card.Eyebrow>
       <Card.Description>{article.description}</Card.Description>
-      <Card.Cta>Read article</Card.Cta>
+      <Card.Cta>{t('home.readArticle')}</Card.Cta>
     </Card>
   )
 }
 
 function SocialLink({ icon: Icon, ...props }) {
   return (
-    <Link className="p-1 -m-1 group" {...props}>
-      <Icon className="w-6 h-6 transition fill-zinc-500 group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300" />
+    <Link className="group -m-1 p-1" {...props}>
+      <Icon className="h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300" />
     </Link>
   )
 }
 
 function Newsletter() {
+  const { t } = useTranslation()
   return (
     <form
       action="/thank-you"
-      className="p-6 border rounded-2xl border-zinc-100 dark:border-zinc-700/40"
+      className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40"
     >
       <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-        <LightBulbIcon className="flex-none w-6 h-6 fill-zinc-100 stroke-zinc-400 dark:fill-zinc-100/10 dark:stroke-zinc-500" />
-        <span className="ml-3">Nuevos cambios</span>
+        <LightBulbIcon className="h-6 w-6 flex-none fill-zinc-100 stroke-zinc-400 dark:fill-zinc-100/10 dark:stroke-zinc-500" />
+        <span className="ml-3">{t('home.newsletter.title')}</span>
       </h2>
       <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
-        Poco a poco se irán agregando nuevas ideas a este portafolio.
+        {t('home.newsletter.description')}
       </p>
       {/* <div className="flex mt-6">
         <input
@@ -145,6 +142,7 @@ function Newsletter() {
 }
 
 function Resume() {
+  const { t } = useTranslation()
   let resume = [
     {
       company: 'Medu',
@@ -173,25 +171,25 @@ function Resume() {
   ]
 
   return (
-    <div className="p-6 border rounded-2xl border-zinc-100 dark:border-zinc-700/40">
+    <div className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
       <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-        <BriefcaseIcon className="flex-none w-6 h-6" />
-        <span className="ml-3">Trabajo</span>
+        <BriefcaseIcon className="h-6 w-6 flex-none" />
+        <span className="ml-3">{t('home.resume.title')}</span>
       </h2>
       <ol className="mt-6 space-y-4">
         {resume.map((role, roleIndex) => (
           <li key={roleIndex} className="flex gap-4">
-            <div className="relative flex items-center justify-center flex-none w-10 h-10 mt-1 rounded-full shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
+            <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
               <img
                 src={role.logo}
                 alt=""
-                className="rounded-full h-7 w-7"
+                className="h-7 w-7 rounded-full"
                 unoptimized
               />
             </div>
-            <dl className="flex flex-wrap flex-auto gap-x-2">
+            <dl className="flex flex-auto flex-wrap gap-x-2">
               <dt className="sr-only">Company</dt>
-              <dd className="flex-none w-full text-sm font-medium text-zinc-900 dark:text-zinc-100">
+              <dd className="w-full flex-none text-sm font-medium text-zinc-900 dark:text-zinc-100">
                 {role.company}
               </dd>
               <dt className="sr-only">Role</dt>
@@ -221,10 +219,10 @@ function Resume() {
         target="_blank"
         href="/documents/CV.pdf"
         variant="secondary"
-        className="w-full mt-6 group"
+        className="group mt-6 w-full"
       >
-        Descargar CV
-        <ArrowDownIcon className="w-4 h-4 transition stroke-zinc-400 group-active:stroke-zinc-600 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50" />
+        {t('home.resume.downloadCV')}
+        <ArrowDownIcon className="h-4 w-4 stroke-zinc-400 transition group-active:stroke-zinc-600 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50" />
       </Button>
     </div>
   )
@@ -235,7 +233,7 @@ function Photos() {
 
   return (
     <div className="mt-16 sm:mt-20">
-      <div className="flex justify-start gap-5 py-4 -my-4 overflow-hidden sm:gap-8 md:justify-center">
+      <div className="-my-4 flex justify-start gap-5 overflow-hidden py-4 sm:gap-8 md:justify-center">
         {[image1, image2, image3, image4, image5].map((image, imageIndex) => (
           <div
             key={image.src}
@@ -249,7 +247,7 @@ function Photos() {
               src={image.src}
               alt=""
               sizes="(min-width: 640px) 18rem, 11rem"
-              className="absolute inset-0 object-cover w-full h-full"
+              className="absolute inset-0 h-full w-full object-cover"
             />
           </div>
         ))}
@@ -259,9 +257,8 @@ function Photos() {
 }
 
 export default function Home({ articles }) {
+  const { t } = useTranslation()
   const heroRef = useRef(null)
-  const gameRef = useRef(null)
-
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.fromTo(
@@ -283,12 +280,6 @@ export default function Home({ articles }) {
           delay: 0.5,
         }
       )
-
-      gsap.fromTo(
-        gameRef.current,
-        { opacity: 0, scale: 0.9 },
-        { opacity: 1, scale: 1, duration: 1, delay: 1, ease: 'power2.out' }
-      )
     }, heroRef)
 
     return () => ctx.revert()
@@ -297,24 +288,21 @@ export default function Home({ articles }) {
   return (
     <>
       <Head>
-        <title>Mauricio Peón - Ingeniero, emprendedor y corredor.</title>
+        <title>{t('home.title')}</title>
         <meta
           name="description"
-          content="Soy Mauricio Peón, ingeniero en tecnologías computacionales,
-          director de tecnología en Medu."
+          content={t('home.description')}
         />
       </Head>
       <Container className="mt-9" ref={heroRef}>
         <div className="max-w-2xl">
-          <h1 className="font-serif text-4xl font-bold tracking-tight hero-text text-zinc-800 dark:text-zinc-100 sm:text-5xl">
-            Ingeniero, corredor y emprendedor.
+          <h1 className="hero-text font-serif text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
+            {t('home.hero')}
           </h1>
-          <p className="mt-6 font-sans text-lg leading-relaxed hero-text text-zinc-600 dark:text-zinc-400">
-            Soy Mauricio Peón, ingeniero en tecnologías computacionales,
-            director de tecnología en Medu y amante del deporte más bonito del
-            mundo (fútbol). Por las mañanas, corro un poco, por las noches, leo.
+          <p className="hero-text mt-6 font-sans text-lg leading-relaxed text-zinc-600 dark:text-zinc-400">
+            {t('home.intro')}
           </p>
-          <div className="flex gap-6 mt-6 hero-text">
+          <div className="hero-text mt-6 flex gap-6">
             <SocialLink
               href="https://twitter.com/agapaudi"
               aria-label="Follow on Twitter"
@@ -338,16 +326,10 @@ export default function Home({ articles }) {
           </div>
         </div>
 
-        <div ref={gameRef} className="mt-12 opacity-0">
-          <h2 className="mb-4 font-serif text-2xl font-semibold text-zinc-800 dark:text-zinc-100">
-            Infinite Run
-          </h2>
-          <RunnerGame />
-        </div>
+        <Photos />
       </Container>
-      <Photos />
       <Container className="mt-24 md:mt-28">
-        <div className="grid max-w-xl grid-cols-1 mx-auto gap-y-20 lg:max-w-none lg:grid-cols-2">
+        <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
           <div className="flex flex-col gap-16">
             {/* {articles.map((article) => (
               <Article key={article.slug} article={article} />

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useTranslation } from '@/lib/useTranslation'
 
 function RunIcon(props) {
   return (
@@ -142,7 +143,7 @@ function StatCard({ stat, index }) {
   )
 }
 
-function PRCard({ pr, index }) {
+function PRCard({ pr, index, locale }) {
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
@@ -171,7 +172,7 @@ function PRCard({ pr, index }) {
               <ExternalLinkIcon className="w-4 h-4 text-zinc-400 opacity-0 -translate-x-2 transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-0 flex-shrink-0" />
             </div>
             <p className="text-sm text-zinc-500 dark:text-zinc-400">
-              {new Date(pr.date).toLocaleDateString('es-ES', {
+              {new Date(pr.date).toLocaleDateString(locale === 'en' ? 'en-US' : 'es-ES', {
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric',
@@ -194,6 +195,7 @@ function PRCard({ pr, index }) {
 }
 
 export default function StravaStats() {
+  const { t, locale } = useTranslation()
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -248,7 +250,7 @@ export default function StravaStats() {
             </svg>
           </div>
           <div>
-            <h3 className="font-semibold text-red-800 dark:text-red-200">Error al cargar datos</h3>
+            <h3 className="font-semibold text-red-800 dark:text-red-200">{t('strava.errorLoading')}</h3>
             <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
           </div>
         </div>
@@ -260,14 +262,14 @@ export default function StravaStats() {
 
   const stats = [
     {
-      label: 'Carreras',
+      label: t('strava.runs'),
       value: data.stats.totalRuns,
       icon: RunIcon,
       color: 'text-blue-500 dark:text-blue-400',
       bgColor: 'bg-blue-500/10 dark:bg-blue-400/10',
     },
     {
-      label: 'Distancia',
+      label: t('strava.distance'),
       value: data.stats.totalDistanceKm,
       suffix: 'km',
       icon: DistanceIcon,
@@ -275,7 +277,7 @@ export default function StravaStats() {
       bgColor: 'bg-emerald-500/10 dark:bg-emerald-400/10',
     },
     {
-      label: 'Tiempo',
+      label: t('strava.time'),
       value: data.stats.totalTimeHours,
       suffix: 'hrs',
       icon: ClockIcon,
@@ -283,9 +285,9 @@ export default function StravaStats() {
       bgColor: 'bg-purple-500/10 dark:bg-purple-400/10',
     },
     {
-      label: 'Ritmo',
+      label: t('strava.pace'),
       value: data.stats.averagePace,
-      suffix: '/km',
+      suffix: '',
       icon: SpeedIcon,
       color: 'text-orange-500 dark:text-orange-400',
       bgColor: 'bg-orange-500/10 dark:bg-orange-400/10',
@@ -308,13 +310,13 @@ export default function StravaStats() {
             <TrophyIcon className="w-5 h-5 text-amber-500 dark:text-amber-400" />
           </div>
           <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">
-            Records Personales
+            {t('strava.personalRecords')}
           </h3>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {data.personalRecords?.map((pr, index) => (
-            <PRCard key={pr.name} pr={pr} index={index} />
+            <PRCard key={pr.name} pr={pr} index={index} locale={locale} />
           ))}
         </div>
       </div>

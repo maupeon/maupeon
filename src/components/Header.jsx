@@ -6,6 +6,7 @@ import clsx from 'clsx'
 import { Container } from '@/components/Container'
 import avatarImage from '@/images/avatar.jpg'
 import { Fragment, useEffect, useRef } from 'react'
+import { useTranslation } from '@/lib/useTranslation'
 
 function CloseIcon(props) {
   return (
@@ -79,10 +80,11 @@ function MobileNavItem({ href, children }) {
 }
 
 function MobileNavigation(props) {
+  const { t } = useTranslation()
   return (
     <Popover {...props}>
       <Popover.Button className="group flex items-center rounded-full bg-white/90 px-4 py-2 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10 dark:hover:ring-white/20">
-        Menu
+        {t('nav.menu')}
         <ChevronDownIcon className="ml-3 h-auto w-2 stroke-zinc-500 group-hover:stroke-zinc-700 dark:group-hover:stroke-zinc-400" />
       </Popover.Button>
       <Transition.Root>
@@ -115,23 +117,15 @@ function MobileNavigation(props) {
                 <CloseIcon className="h-6 w-6 text-zinc-500 dark:text-zinc-400" />
               </Popover.Button>
               <h2 className="text-sm font-medium text-zinc-600 dark:text-zinc-400">
-                Navigation
+                {t('nav.navigation')}
               </h2>
             </div>
             <nav className="mt-6">
               <ul className="-my-2 divide-y divide-zinc-100 text-base text-zinc-800 dark:divide-zinc-100/5 dark:text-zinc-300">
-                <MobileNavItem href="/religion">Religión</MobileNavItem>
-                <MobileNavItem href="/proyectos">Proyectos</MobileNavItem>
-                <MobileNavItem href="/inspiraciones">
-                  Inspiraciones
-                </MobileNavItem>
-                <MobileNavItem href="/ejercicio">Ejercicio</MobileNavItem>
-
-                {/* <MobileNavItem href="/about">About</MobileNavItem>
-                <MobileNavItem href="/articles">Articles</MobileNavItem>
-                <MobileNavItem href="/projects">Projects</MobileNavItem>
-                <MobileNavItem href="/speaking">Speaking</MobileNavItem>
-                <MobileNavItem href="/uses">Uses</MobileNavItem> */}
+                <MobileNavItem href="/religion">{t('nav.religion')}</MobileNavItem>
+                <MobileNavItem href="/proyectos">{t('nav.projects')}</MobileNavItem>
+                <MobileNavItem href="/inspiraciones">{t('nav.inspirations')}</MobileNavItem>
+                <MobileNavItem href="/ejercicio">{t('nav.exercise')}</MobileNavItem>
               </ul>
             </nav>
           </Popover.Panel>
@@ -165,21 +159,44 @@ function NavItem({ href, children }) {
 }
 
 function DesktopNavigation(props) {
+  const { t } = useTranslation()
   return (
     <nav {...props}>
       <ul className="flex rounded-full bg-white/90 px-3 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10">
-        <NavItem href="/religion">Religón</NavItem>
-        <NavItem href="/proyectos">Proyectos</NavItem>
-        <NavItem href="/inspiraciones">Inspiraciones</NavItem>
-        <NavItem href="/ejercicio">Ejercicio</NavItem>
-
-        {/* <NavItem href="/about">About</NavItem>
-        <NavItem href="/articles">Articles</NavItem>
-        <NavItem href="/projects">Projects</NavItem>
-        <NavItem href="/speaking">Speaking</NavItem>
-        <NavItem href="/uses">Uses</NavItem> */}
+        <NavItem href="/religion">{t('nav.religion')}</NavItem>
+        <NavItem href="/proyectos">{t('nav.projects')}</NavItem>
+        <NavItem href="/inspiraciones">{t('nav.inspirations')}</NavItem>
+        <NavItem href="/ejercicio">{t('nav.exercise')}</NavItem>
       </ul>
     </nav>
+  )
+}
+
+function LanguageToggle() {
+  const router = useRouter()
+  const { locale } = router
+
+  function switchLocale() {
+    const nextLocale = locale === 'es' ? 'en' : 'es'
+    router.push(router.asPath, router.asPath, { locale: nextLocale })
+  }
+
+  return (
+    <button
+      type="button"
+      aria-label="Switch language"
+      className="group rounded-full bg-white/90 px-3 py-2 text-sm font-medium shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur transition dark:bg-zinc-800/90 dark:ring-white/10 dark:hover:ring-white/20"
+      onClick={switchLocale}
+    >
+      <span className={clsx(
+        'transition',
+        locale === 'es'
+          ? 'text-purple-500 dark:text-purple-400'
+          : 'text-zinc-500 dark:text-zinc-400'
+      )}>
+        {locale === 'es' ? 'EN' : 'ES'}
+      </span>
+    </button>
   )
 }
 
@@ -425,7 +442,10 @@ export function Header() {
                 <MobileNavigation className="pointer-events-auto md:hidden" />
                 <DesktopNavigation className="pointer-events-auto hidden md:block" />
               </div>
-              <div className="flex justify-end md:flex-1">
+              <div className="flex justify-end gap-3 md:flex-1">
+                <div className="pointer-events-auto">
+                  <LanguageToggle />
+                </div>
                 <div className="pointer-events-auto">
                   <ModeToggle />
                 </div>

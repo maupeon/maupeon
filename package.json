@@ -27,6 +27,7 @@
     "focus-visible": "^5.2.0",
     "gsap": "^3.14.2",
     "iron-session": "^6.3.1",
+    "jsdom": "^28.1.0",
     "next": "13.0.2",
     "postcss-focus-visible": "^6.0.4",
     "react": "18.2.0",

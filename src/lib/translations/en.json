@@ -1,0 +1,128 @@
+{
+  "nav": {
+    "religion": "Religion",
+    "projects": "Projects",
+    "inspirations": "Inspirations",
+    "exercise": "Exercise",
+    "navigation": "Navigation",
+    "menu": "Menu"
+  },
+  "home": {
+    "title": "Mauricio Peón - Engineer, entrepreneur and runner.",
+    "description": "I'm Mauricio Peón, a computer science engineer and CTO at Medu.",
+    "hero": "Engineer, runner and entrepreneur.",
+    "intro": "I'm Mauricio Peón, a computer science engineer, CTO at Medu, and a lover of the most beautiful sport in the world (football). In the mornings, I run a little; at night, I read.",
+    "newsletter": {
+      "title": "What's new",
+      "description": "New ideas will gradually be added to this portfolio."
+    },
+    "resume": {
+      "title": "Work",
+      "downloadCV": "Download CV"
+    },
+    "readArticle": "Read article"
+  },
+  "projects": {
+    "title": "Projects - Mauricio Peón",
+    "metaDescription": "Some projects I've had the opportunity to collaborate on.",
+    "heading": "Some projects I've had the opportunity to collaborate on.",
+    "intro": "In this section, I invite you to explore a carefully curated collection of my most significant projects. Each one reflects my passion, dedication, and growth as a professional.",
+    "descriptions": {
+      "medu": "We are a Spanish-language medical education platform specialized in audiovisual Health Sciences content.",
+            "teTocoApp": "Caught between options? Not sure what to eat, where to go, or which movie to watch? Let ¿Te tocó? make the decision for you. ¿Te tocó? is the most fun and elegant way to make random decisions. With interactive 3D dice and smooth animations, it turns indecision into a fun moment.",
+      "meduApp": "Mobile medical education app in Spanish specialized in audiovisual Health Sciences content.",
+      "ppaa": "PPAA is driven by an architecture of ideas over forms.",
+      "a911": "a|911 is a multidisciplinary firm covering architecture, urbanism, mobility, and landscape projects.",
+      "domingo": "Online store for soft, 100% cotton bedsheets based in Mexico City.",
+      "xolo": "This project offers a unique accommodation experience in Mexico City.",
+      "zamme": "Zamme is a visual communication platform aiming to build community through knowledge sharing and collaborations.",
+      "macondo": "This project is a carefully curated compendium of over 200 plant varieties and essential gardening accessories.",
+      "camsam": "This innovative tool is designed to simplify and streamline tariff calculations for architects in Mexico City.",
+      "presidentes": "A satirical page about the achievements of Mexico's presidents."
+    }
+  },
+  "inspirations": {
+    "title": "Inspirations",
+    "heading": "Inspirations Gallery",
+    "intro": "Welcome to the Inspirations Gallery, a unique space where I share the works and experiences that have shaped my vision and enriched my creativity. Here you'll find an eclectic collection of books, movies, songs, and more, each with its own story and special meaning in my personal and professional journey. This gallery reflects the diverse influences that have contributed to my growth, offering a window into the sources of my inspiration. Enjoy exploring and discovering the various elements that fuel my creativity.",
+    "books": "Books",
+    "movies": "Movies",
+    "songs": "Songs",
+    "series": "Series"
+  },
+  "exercise": {
+    "title": "Exercise - Mauricio Peón",
+    "metaDescription": "Recent Strava activities.",
+    "heading": "Exercise"
+  },
+  "religion": {
+    "pageTitle": "Today's Gospel - Daily Readings",
+    "metaDescription": "Today's Gospel and daily readings",
+    "loading": "Loading the Word...",
+    "errorDefault": "Could not load today's readings",
+    "errorNoReadings": "No readings available",
+    "retry": "Try again",
+    "heading": "Today's Lectures",
+    "gospel": "GOSPEL",
+    "wordOfTheLord": "Word of the Lord"
+  },
+  "strava": {
+    "runs": "Runs",
+    "distance": "Distance",
+    "time": "Time",
+    "pace": "Pace",
+    "personalRecords": "Personal Records",
+    "errorLoading": "Error loading data"
+  },
+  "footer": {
+    "copyright": "All rights reserved."
+  },
+  "guardia": {
+    "downloadFree": "Download free",
+    "availableBadge": "Available on iOS and Android",
+    "heroTitle1": "Your daily",
+    "heroTitle2": "safety",
+    "heroTitle3": "check-in",
+    "heroDescription": "If one day you can't press the button, your emergency contact will receive an automatic alert. It's that simple.",
+    "noSubscriptions": "No subscriptions",
+    "setupTime": "1 min setup",
+    "appStoreButton": "Download on App Store",
+    "playStoreButton": "Available on Google Play",
+    "problemLabel": "The problem",
+    "problemHeading": "What happens if one day you can't call?",
+    "problem1Title": "Loneliness is invisible",
+    "problem1Text": "You live alone and nobody would know if something happened.",
+    "problem2Title": "Accidents don't warn you",
+    "problem2Text": "Home accidents are more common than you think.",
+    "problem3Title": "They deserve to know",
+    "problem3Text": "Your loved ones deserve peace of mind.",
+    "howItWorksLabel": "How it works",
+    "howItWorksHeading": "As simple as a tap",
+    "step1Title": "Tap the button every day",
+    "step1Description": "Confirm you're okay in seconds. Just one tap.",
+    "step2Title": "Guardia watches over you",
+    "step2Description": "If you don't check in within 3 days, it acts automatically.",
+    "step3Title": "Your contact gets the alert",
+    "step3Description": "By email and WhatsApp, without you doing anything.",
+    "featuresLabel": "Features",
+    "featuresHeading1": "Everything you need,",
+    "featuresHeading2": "nothing you don't",
+    "feature1Title": "Large check-in button",
+    "feature1Description": "Designed to be easy to use at any age.",
+    "feature2Title": "Daily streak",
+    "feature2Description": "Keep track of your consecutive days.",
+    "feature3Title": "Automatic alert",
+    "feature3Description": "Email and WhatsApp without complex setup.",
+    "feature4Title": "No subscriptions",
+    "feature4Description": "Free, always. No fine print.",
+    "imagePlaceholder1": "Image: person calmly",
+    "imagePlaceholder2": "using their phone",
+    "emotionalQuote1": "It's not about fear.",
+    "emotionalQuote2": "It's about knowing that no matter what,",
+    "emotionalQuote3": "someone will be aware.",
+    "ctaHeading": "Download it free today",
+    "ctaDescription": "One minute to set up. A lifetime of peace of mind.",
+    "ctaFooter": "Made with 💚 for those who live alone",
+    "footerTagline": "Your safety companion."
+  }
+}

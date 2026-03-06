@@ -3,6 +3,7 @@ import Head from 'next/head'
 
 import { Card } from '@/components/Card'
 import { SimpleLayout } from '@/components/SimpleLayout'
+import { useTranslation } from '@/lib/useTranslation'
 import logoMedu from '@/images/logos/medu.png'
 import logoMedu2 from '@/images/logos/medu2.png'
 import ppaa from '@/images/logos/ppaa.jpg'
@@ -13,19 +14,17 @@ import zamme from '@/images/logos/zamme.png'
 import macondo from '@/images/logos/macondo.png'
 import camsam from '@/images/logos/camsam.png'
 import presidentes from '@/images/logos/presidentes.ico'
-
-const projects = [
+import teToco from '@/images/logos/logoTeToco.png'
+const projectsData = [
   {
     name: 'Medu',
-    description:
-      'Somos una plataforma de educación médica en español especializada en contenido audiovisual de Ciencias de la Salud.',
+    descriptionKey: 'medu',
     link: { href: 'http://medu.red', label: 'medu.red' },
     logo: logoMedu2,
   },
   {
     name: 'Medu App',
-    description:
-      'Aplicación móvil de educación médica en español especializada en contenido audiovisual de Ciencias de la Salud.',
+    descriptionKey: 'meduApp',
     link: {
       href: 'https://apps.apple.com/mx/app/medu/id1584009164',
       label: 'App Store',
@@ -33,51 +32,53 @@ const projects = [
     logo: logoMedu,
   },
   {
+    name: '¿Te tocó?',
+    descriptionKey: 'teTocoApp',
+    link: {
+      href: 'https://apps.apple.com/es/app/te-toc%C3%B3/id6756806727',
+      label: 'App Store',
+    },
+    logo: teToco,
+  },
+  {
     name: 'PPAA',
-    description:
-      'PPAA es impulsado por una arquitectura de ideas sobre una de formas.',
+    descriptionKey: 'ppaa',
     link: { href: 'https://www.ppaa.mx', label: 'ppaa.mx' },
     logo: ppaa,
   },
   {
     name: 'A911',
-    description:
-      'a|911 es una oficina multidisciplinaria que abarca proyectos de arquitectura, urbanismo, movilidad y paisaje.',
+    descriptionKey: 'a911',
     link: { href: 'https://www.arq911.com/', label: 'arq911.com' },
     logo: a911,
   },
   {
     name: 'Domingo',
-    description:
-      'Tienda en línea de sábanas suaves, 100% de algodón basada en la Ciudad de México.',
+    descriptionKey: 'domingo',
     link: { href: 'https://domingo-shop.com/', label: 'domingo-shop.com' },
     logo: domingo,
   },
   {
     name: 'Xolo',
-    description:
-      'Este proyecto ofrece una experiencia única de alojamiento en Ciudad de México.',
+    descriptionKey: 'xolo',
     link: { href: 'https://xolostays.mx/', label: 'xolostays.mx' },
     logo: xolo,
   },
   {
     name: 'Zamme',
-    description:
-      'Zamme es una plataforma de comunicación visual con el objetivo de construir comunidad a través del intercambio de conocimiento y colaboraciones.',
+    descriptionKey: 'zamme',
     link: { href: 'https://zamme.org/', label: 'zamme.org' },
     logo: zamme,
   },
   {
     name: 'Macondo',
-    description:
-      'Este proyecto es un compendio cuidadosamente curado de más de 200 variedades de plantas y accesorios esenciales de jardinería.',
+    descriptionKey: 'macondo',
     link: { href: 'https://macondo-shop.com/', label: 'macondo-shop.com' },
     logo: macondo,
   },
   {
     name: 'CAMSAM',
-    description:
-      'Esta herramienta innovadora está diseñada para simplificar y agilizar el cálculo de aranceles para arquitectos en la Ciudad de México.',
+    descriptionKey: 'camsam',
     link: {
       href: 'https://www.colegiodearquitectoscdmx.org/aranceles/',
       label: 'colegiodearquitectoscdmx.org',
@@ -86,8 +87,7 @@ const projects = [
   },
   {
     name: 'Presidentes de México',
-    description:
-      'Es una página sátira de las hazañas que han logrado los presidentes de México.',
+    descriptionKey: 'presidentes',
     link: {
       href: 'https://presidentesdemexico.vercel.app/',
       label: 'presidentesdemexico.vercel.app',
@@ -108,39 +108,36 @@ function LinkIcon(props) {
 }
 
 export default function Projects() {
+  const { t } = useTranslation()
   return (
     <>
       <Head>
-        <title>Proyectos - Mauricio Peón</title>
-        <meta
-          name="description"
-          content="Algunos proyectos en los que he tenido la oportunidad de colaborar."
-        />
+        <title>{t('projects.title')}</title>
+        <meta name="description" content={t('projects.metaDescription')} />
       </Head>
-      <SimpleLayout
-        title="Algunos proyectos en los que he tenido la oportunidad de colaborar."
-        intro="En esta sección, te invito a explorar una colección cuidadosamente seleccionada de mis proyectos más significativos. Cada uno de ellos es un reflejo de mi pasión, dedicación y evolución como profesional."
-      >
+      <SimpleLayout title={t('projects.heading')} intro={t('projects.intro')}>
         <ul
           role="list"
           className="grid grid-cols-1 gap-x-12 gap-y-16 sm:grid-cols-2 lg:grid-cols-3"
         >
-          {projects.map((project) => (
+          {projectsData.map((project) => (
             <Card as="li" key={project.name}>
-              <div className="relative z-10 flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
+              <div className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
                 <img
                   src={project.logo.src}
                   alt=""
-                  className="w-8 h-8 rounded-full"
+                  className="h-8 w-8 rounded-full"
                   unoptimized
                 />
               </div>
               <h2 className="mt-6 text-base font-semibold text-zinc-800 dark:text-zinc-100">
                 <Card.Link href={project.link.href}>{project.name}</Card.Link>
               </h2>
-              <Card.Description>{project.description}</Card.Description>
-              <p className="relative z-10 flex mt-6 text-sm font-medium transition text-zinc-400 group-hover:text-purple-500 dark:text-zinc-200">
-                <LinkIcon className="flex-none w-6 h-6" />
+              <Card.Description>
+                {t(`projects.descriptions.${project.descriptionKey}`)}
+              </Card.Description>
+              <p className="relative z-10 mt-6 flex text-sm font-medium text-zinc-400 transition group-hover:text-purple-500 dark:text-zinc-200">
+                <LinkIcon className="h-6 w-6 flex-none" />
                 <span className="ml-2">{project.link.label}</span>
               </p>
             </Card>
