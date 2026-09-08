@@ -11,38 +11,38 @@
       "height": 1.83,
       "bounds": {
         "min": [
-          -0.2828,
-          0.0031,
-          -0.2
+          -0.2864,
+          -0.0,
+          -0.1997
         ],
         "max": [
-          0.3448,
-          1.8331,
-          0.1789
+          0.3444,
+          1.83,
+          0.1787
         ]
       },
-      "triangles": 50038,
-      "drawPrimitives": 26,
-      "bytes": 1488952,
+      "triangles": 56142,
+      "drawPrimitives": 24,
+      "bytes": 1756964,
       "pivots": {
         "LeftArm": [
-          0.1814,
-          1.5012,
+          -0.1812,
+          1.4964,
           0.0031
         ],
         "LeftLeg": [
-          0.1013,
-          0.9894,
+          -0.1012,
+          0.9852,
           -0.0
         ],
         "RightArm": [
-          -0.1814,
-          1.5012,
+          0.1812,
+          1.4964,
           0.0031
         ],
         "RightLeg": [
-          -0.1013,
-          0.9894,
+          0.1012,
+          0.9852,
           -0.0
         ]
       },
@@ -52,161 +52,155 @@
         "Camera dark optical glass",
         "Khaki drill cotton",
         "Oiled brown leather",
-        "Roger grey eyes",
         "Roger_hair",
-        "Roger_lips",
         "Roger_skin",
         "Satchel chestnut leather",
         "Tobacco wool trousers",
-        "Warm ivory eyes",
         "Warm linen collar",
         "Weathered stitching",
-        "Worn boot soles"
+        "Worn boot soles",
+        "roger_photoreal_skin"
       ]
     },
     "witness-congo": {
       "file": "witness-congo.glb",
-      "height": 1.7467,
+      "height": 1.75,
       "bounds": {
         "min": [
-          -0.2733,
-          0.0062,
-          -0.1449
+          -0.2789,
+          -0.0,
+          -0.1459
         ],
         "max": [
-          0.2746,
-          1.753,
-          0.118
+          0.2742,
+          1.75,
+          0.127
         ]
       },
-      "triangles": 20764,
-      "drawPrimitives": 20,
-      "bytes": 638632,
+      "triangles": 22849,
+      "drawPrimitives": 18,
+      "bytes": 789348,
       "pivots": {
         "LeftArm": [
-          0.1735,
-          1.4356,
+          -0.1747,
+          1.4394,
           0.003
         ],
         "LeftLeg": [
-          0.0969,
-          0.9462,
+          -0.0976,
+          0.9465,
           -0.0
         ],
         "RightArm": [
-          -0.1735,
-          1.4356,
+          0.1747,
+          1.4394,
           0.003
         ],
         "RightLeg": [
-          -0.0969,
-          0.9462,
+          0.0976,
+          0.9465,
           -0.0
         ]
       },
       "animations": [],
       "materials": [
-        "Dark brown eyes",
         "Ecru cotton",
         "Faded umber trousers",
         "Indigo washed cotton",
         "Oiled brown leather",
-        "Warm ivory eyes",
         "WitnessCongo_hair",
-        "WitnessCongo_lips",
-        "WitnessCongo_skin"
+        "WitnessCongo_skin",
+        "congo_photoreal_skin"
       ]
     },
     "witness-amazonia": {
       "file": "witness-amazonia.glb",
-      "height": 1.637,
+      "height": 1.64,
       "bounds": {
         "min": [
-          -0.2567,
-          0.0058,
-          -0.1381
+          -0.2615,
+          -0.0,
+          -0.1391
         ],
         "max": [
-          0.2572,
-          1.6428,
-          0.1238
+          0.2587,
+          1.64,
+          0.1272
         ]
       },
-      "triangles": 20409,
-      "drawPrimitives": 18,
-      "bytes": 619712,
+      "triangles": 22848,
+      "drawPrimitives": 16,
+      "bytes": 781628,
       "pivots": {
         "LeftArm": [
-          0.1528,
-          1.3454,
+          -0.1539,
+          1.3489,
           0.0028
         ],
         "LeftLeg": [
-          0.0908,
-          0.8867,
+          -0.0914,
+          0.887,
           -0.0
         ],
         "RightArm": [
-          -0.1528,
-          1.3454,
+          0.1539,
+          1.3489,
           0.0028
         ],
         "RightLeg": [
-          -0.0908,
-          0.8867,
+          0.0914,
+          0.887,
           -0.0
         ]
       },
       "animations": [],
       "materials": [
-        "Dark brown eyes",
         "Madderrust woven wrap",
         "Oiled brown leather",
         "Unbleached woven blouse",
-        "Warm ivory eyes",
         "WitnessAmazonia_hair",
-        "WitnessAmazonia_lips",
         "WitnessAmazonia_skin",
-        "Woven ochre belt"
+        "Woven ochre belt",
+        "amazonia_photoreal_skin"
       ]
     },
     "contact-ireland": {
       "file": "contact-ireland.glb",
-      "height": 1.8045,
+      "height": 1.7892,
       "bounds": {
         "min": [
-          -0.2811,
-          0.0035,
-          -0.1956
+          -0.2849,
+          0.0008,
+          -0.1939
         ],
         "max": [
-          0.28,
-          1.8081,
-          0.1255
+          0.2829,
+          1.79,
+          0.1261
         ]
       },
-      "triangles": 26061,
-      "drawPrimitives": 23,
-      "bytes": 795760,
+      "triangles": 22848,
+      "drawPrimitives": 21,
+      "bytes": 843064,
       "pivots": {
         "LeftArm": [
-          0.1952,
-          1.4684,
+          -0.1935,
+          1.4532,
           0.003
         ],
         "LeftLeg": [
-          0.0991,
-          0.9678,
+          -0.0983,
+          0.9567,
           -0.0
         ],
         "RightArm": [
-          -0.1952,
-          1.4684,
+          0.1935,
+          1.4532,
           0.003
         ],
         "RightLeg": [
-          -0.0991,
-          0.9678,
+          0.0983,
+          0.9567,
           -0.0
         ]
       },
@@ -215,15 +209,13 @@
         "Aged brass",
         "Charcoal wool trousers",
         "ContactIreland_hair",
-        "ContactIreland_lips",
         "ContactIreland_skin",
-        "Dark brown eyes",
         "Heather moss wool scarf",
         "Oiled brown leather",
         "Slate Donegal wool",
-        "Warm ivory eyes",
         "Weathered stitching",
-        "Worn boot soles"
+        "Worn boot soles",
+        "ireland_photoreal_skin"
       ]
     }
   }

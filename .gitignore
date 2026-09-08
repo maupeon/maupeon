@@ -45,3 +45,4 @@ yarn-error.log*
 __pycache__/
 *.pyc
 *.blend1
+.env*
