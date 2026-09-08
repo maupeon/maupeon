@@ -33,3 +33,15 @@ yarn-error.log*
 
 # generated files
 /public/rss/
+
+# Visual iteration working files
+/.dream-loop/
+
+# Local tooling / asset-authoring sources (not needed at runtime)
+/tools/
+/.agents/
+/.impeccable.md
+/skills-lock.json
+__pycache__/
+*.pyc
+*.blend1
