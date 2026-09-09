@@ -37,8 +37,9 @@ yarn-error.log*
 # Visual iteration working files
 /.dream-loop/
 
-# Local tooling / asset-authoring sources (not needed at runtime)
-/tools/
+# Local tooling; keep the game's editable Blender sources in the project.
+/tools/*
+!/tools/celta/
 /.agents/
 /.impeccable.md
 /skills-lock.json

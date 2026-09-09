@@ -296,6 +296,7 @@ export const initialProgress = {
   chapter: 0,
   mission: 0,
   step: 0,
+  reflectionChoice: 0,
   entries: [],
   photos: [],
   completed: false,
@@ -328,7 +329,7 @@ export function normalizeProgress(value) {
     const source = allSteps.find(item => item.id === photo.id)
     photos.push({ id:photo.id, title:source?.title || 'Apunte del viaje', subject:source?.subject || 'Fotografía libre', image:photo.image })
   }
-  return { version:2, chapter:value.chapter, mission:value.mission, step, entries, photos, completed:entries.length===9 }
+  return { version:2, chapter:value.chapter, mission:value.mission, step, reflectionChoice:value.reflectionChoice===1?1:0, entries, photos, completed:entries.length===9 }
 }
 
 // Completion is tied to a verified activity result; opening and closing a panel
@@ -346,8 +347,8 @@ export function recordStep(progress, result = {}) {
     if (previous >= 0) photos[previous] = photo
     else photos.push(photo)
   }
-  if (progress.step + 1 < mission.steps.length) return { ...progress, step:progress.step+1, photos }
-  const choice = result.choice === 1 ? 1 : 0
+  const choice = result.choice===1 ? 1 : result.choice===0 ? 0 : progress.reflectionChoice || 0
+  if (progress.step + 1 < mission.steps.length) return { ...progress, step:progress.step+1, reflectionChoice:choice, photos }
   const entries = [...progress.entries, { id:mission.id, title:mission.evidence, note:mission.choices[choice].note, choice }]
-  return { ...progress, mission:progress.mission+1, step:0, entries, photos, completed:entries.length===9 }
+  return { ...progress, mission:progress.mission+1, step:0, reflectionChoice:0, entries, photos, completed:entries.length===9 }
 }

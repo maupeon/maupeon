@@ -1,0 +1,24 @@
+# Local builds, previews, and visual review artifacts.
+.git/
+.next/
+.vercel/
+node_modules/
+.dream-loop/
+.agents/
+.claude/
+.impeccable.md
+skills-lock.json
+coverage/
+
+# Editable Blender sources and authoring tools are not runtime assets.
+# Keep public/celta/ included: the game loads these files in production.
+tools/
+
+# Local configuration and temporary files.
+.env*
+.DS_Store
+*.log
+*.pem
+*.blend1
+__pycache__/
+*.pyc

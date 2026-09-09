@@ -1,0 +1,351 @@
+{
+  "sources": [
+    {
+      "asset": "pachira_aquatica_01",
+      "author": {
+        "Rob Tuytel": "scanning",
+        "Rico Cilliers": "modeling"
+      },
+      "source": "https://polyhaven.com/a/pachira_aquatica_01",
+      "download": "https://dl.polyhaven.org/file/ph-assets/Models/blend/1k/pachira_aquatica_01/pachira_aquatica_01_1k.blend",
+      "file": "tools/celta/assets/foliage-professional/pachira_aquatica_01/pachira_aquatica_01_1k.blend",
+      "bytes": 2127709,
+      "md5": "d3e68e40da9c5e9bcbd1ae792a90fd6b",
+      "sha256": "1b837fe024b5891d77d38425f715e7d7cb1126cf6cb5a08f17944128f2e24172",
+      "license": "CC0-1.0",
+      "licenseURL": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "licenseEvidence": "https://polyhaven.com/license",
+      "use": "mesh, photographic albedo/alpha, normal and roughness adapted for mobile foliage"
+    },
+    {
+      "asset": "pachira_aquatica_01",
+      "author": {
+        "Rob Tuytel": "scanning",
+        "Rico Cilliers": "modeling"
+      },
+      "source": "https://polyhaven.com/a/pachira_aquatica_01",
+      "download": "https://dl.polyhaven.org/file/ph-assets/Models/png/1k/pachira_aquatica_01/pachira_aquatica_01_leaves_rough_1k.png",
+      "file": "tools/celta/assets/foliage-professional/pachira_aquatica_01/textures/pachira_aquatica_01_leaves_rough_1k.png",
+      "bytes": 635400,
+      "md5": "1f570ca04797a0cfa514b08c116842c7",
+      "sha256": "2b56562d5fa240ac595017563ec79177f87205545971af5988f11a46f6bd48c5",
+      "license": "CC0-1.0",
+      "licenseURL": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "licenseEvidence": "https://polyhaven.com/license",
+      "use": "mesh, photographic albedo/alpha, normal and roughness adapted for mobile foliage"
+    },
+    {
+      "asset": "pachira_aquatica_01",
+      "author": {
+        "Rob Tuytel": "scanning",
+        "Rico Cilliers": "modeling"
+      },
+      "source": "https://polyhaven.com/a/pachira_aquatica_01",
+      "download": "https://dl.polyhaven.org/file/ph-assets/Models/png/1k/pachira_aquatica_01/pachira_aquatica_01_bark_diff_1k.png",
+      "file": "tools/celta/assets/foliage-professional/pachira_aquatica_01/textures/pachira_aquatica_01_bark_diff_1k.png",
+      "bytes": 3685483,
+      "md5": "742563c952dfc9516ea0948ebaa05ad8",
+      "sha256": "8e1ac0c6016719b00f77ff15b3db405c39f3c45f16f1b9333703c375785551ad",
+      "license": "CC0-1.0",
+      "licenseURL": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "licenseEvidence": "https://polyhaven.com/license",
+      "use": "mesh, photographic albedo/alpha, normal and roughness adapted for mobile foliage"
+    },
+    {
+      "asset": "pachira_aquatica_01",
+      "author": {
+        "Rob Tuytel": "scanning",
+        "Rico Cilliers": "modeling"
+      },
+      "source": "https://polyhaven.com/a/pachira_aquatica_01",
+      "download": "https://dl.polyhaven.org/file/ph-assets/Models/png/1k/pachira_aquatica_01/pachira_aquatica_01_bark_rough_1k.png",
+      "file": "tools/celta/assets/foliage-professional/pachira_aquatica_01/textures/pachira_aquatica_01_bark_rough_1k.png",
+      "bytes": 1198995,
+      "md5": "138a9ee54206fd509f2c8d25c526942d",
+      "sha256": "980a822f63eaca375fa2dd57ac0c650c1351d19e31f01ba9f52edba273e3296c",
+      "license": "CC0-1.0",
+      "licenseURL": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "licenseEvidence": "https://polyhaven.com/license",
+      "use": "mesh, photographic albedo/alpha, normal and roughness adapted for mobile foliage"
+    },
+    {
+      "asset": "pachira_aquatica_01",
+      "author": {
+        "Rob Tuytel": "scanning",
+        "Rico Cilliers": "modeling"
+      },
+      "source": "https://polyhaven.com/a/pachira_aquatica_01",
+      "download": "https://dl.polyhaven.org/file/ph-assets/Models/png/1k/pachira_aquatica_01/pachira_aquatica_01_leaves_nor_gl_1k.png",
+      "file": "tools/celta/assets/foliage-professional/pachira_aquatica_01/textures/pachira_aquatica_01_leaves_nor_gl_1k.png",
+      "bytes": 3250605,
+      "md5": "9ac24718d0b014cff0ef5d0cd0279dd7",
+      "sha256": "89e9b5258250b86d45ffc6326a2a06a5ff0022336118f45a5e9b3558955547bf",
+      "license": "CC0-1.0",
+      "licenseURL": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "licenseEvidence": "https://polyhaven.com/license",
+      "use": "mesh, photographic albedo/alpha, normal and roughness adapted for mobile foliage"
+    },
+    {
+      "asset": "pachira_aquatica_01",
+      "author": {
+        "Rob Tuytel": "scanning",
+        "Rico Cilliers": "modeling"
+      },
+      "source": "https://polyhaven.com/a/pachira_aquatica_01",
+      "download": "https://dl.polyhaven.org/file/ph-assets/Models/png/1k/pachira_aquatica_01/pachira_aquatica_01_bark_nor_gl_1k.png",
+      "file": "tools/celta/assets/foliage-professional/pachira_aquatica_01/textures/pachira_aquatica_01_bark_nor_gl_1k.png",
+      "bytes": 3764086,
+      "md5": "349c1f3140ba4722a84366e04eba4eb6",
+      "sha256": "dc38bf0955259d12bdd5a7d063bea9e8c28c9a3f8d3abd9a2d4ba4b29e3c1f21",
+      "license": "CC0-1.0",
+      "licenseURL": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "licenseEvidence": "https://polyhaven.com/license",
+      "use": "mesh, photographic albedo/alpha, normal and roughness adapted for mobile foliage"
+    },
+    {
+      "asset": "pachira_aquatica_01",
+      "author": {
+        "Rob Tuytel": "scanning",
+        "Rico Cilliers": "modeling"
+      },
+      "source": "https://polyhaven.com/a/pachira_aquatica_01",
+      "download": "https://dl.polyhaven.org/file/ph-assets/Models/png/1k/pachira_aquatica_01/pachira_aquatica_01_leaves_diff_1k.png",
+      "file": "tools/celta/assets/foliage-professional/pachira_aquatica_01/textures/pachira_aquatica_01_leaves_diff_1k.png",
+      "bytes": 2501917,
+      "md5": "678cd21e86eb2c3f3f13a8eb37144419",
+      "sha256": "2779f7c46abcc97649d290d61bde45ff8b9082b2ff09ba38e86df6bb1a9e4d17",
+      "license": "CC0-1.0",
+      "licenseURL": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "licenseEvidence": "https://polyhaven.com/license",
+      "use": "mesh, photographic albedo/alpha, normal and roughness adapted for mobile foliage"
+    },
+    {
+      "asset": "pachira_aquatica_01",
+      "author": {
+        "Rob Tuytel": "scanning",
+        "Rico Cilliers": "modeling"
+      },
+      "source": "https://polyhaven.com/a/pachira_aquatica_01",
+      "download": "https://dl.polyhaven.org/file/ph-assets/Models/png/1k/pachira_aquatica_01/pachira_aquatica_01_leaves_alpha_1k.png",
+      "file": "tools/celta/assets/foliage-professional/pachira_aquatica_01/textures/pachira_aquatica_01_leaves_alpha_1k.png",
+      "bytes": 68381,
+      "md5": "58b89500f300f56d5e68a63babbd15f7",
+      "sha256": "2021600eca558c0b38d342168f0086550143fc7f676113b3dc5b47f56f4e3a82",
+      "license": "CC0-1.0",
+      "licenseURL": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "licenseEvidence": "https://polyhaven.com/license",
+      "use": "mesh, photographic albedo/alpha, normal and roughness adapted for mobile foliage"
+    },
+    {
+      "asset": "anthurium_botany_01",
+      "author": {
+        "Rob Tuytel": "scanning",
+        "Rico Cilliers": "modeling"
+      },
+      "source": "https://polyhaven.com/a/anthurium_botany_01",
+      "download": "https://dl.polyhaven.org/file/ph-assets/Models/blend/1k/anthurium_botany_01/anthurium_botany_01_1k.blend",
+      "file": "tools/celta/assets/foliage-professional/anthurium_botany_01/anthurium_botany_01_1k.blend",
+      "bytes": 200837,
+      "md5": "698812763dfbf35f690a120ef17fbdc1",
+      "sha256": "2e70126162e542f600a183c2941acb551460c3d4bde5152da7d244507997269b",
+      "license": "CC0-1.0",
+      "licenseURL": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "licenseEvidence": "https://polyhaven.com/license",
+      "use": "mesh, photographic albedo/alpha, normal and roughness adapted for mobile foliage"
+    },
+    {
+      "asset": "anthurium_botany_01",
+      "author": {
+        "Rob Tuytel": "scanning",
+        "Rico Cilliers": "modeling"
+      },
+      "source": "https://polyhaven.com/a/anthurium_botany_01",
+      "download": "https://dl.polyhaven.org/file/ph-assets/Models/png/1k/anthurium_botany_01/anthurium_botany_01_alpha_1k.png",
+      "file": "tools/celta/assets/foliage-professional/anthurium_botany_01/textures/anthurium_botany_01_alpha_1k.png",
+      "bytes": 45560,
+      "md5": "2eeff7ab974784e30a9efa30abea8f3d",
+      "sha256": "74a7f17e6d9da6174a5bb0b28bc5effa1fdc07e7755ba39d8c62f79a2dfe0887",
+      "license": "CC0-1.0",
+      "licenseURL": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "licenseEvidence": "https://polyhaven.com/license",
+      "use": "mesh, photographic albedo/alpha, normal and roughness adapted for mobile foliage"
+    },
+    {
+      "asset": "anthurium_botany_01",
+      "author": {
+        "Rob Tuytel": "scanning",
+        "Rico Cilliers": "modeling"
+      },
+      "source": "https://polyhaven.com/a/anthurium_botany_01",
+      "download": "https://dl.polyhaven.org/file/ph-assets/Models/exr/1k/anthurium_botany_01/anthurium_botany_01_rough_1k.exr",
+      "file": "tools/celta/assets/foliage-professional/anthurium_botany_01/textures/anthurium_botany_01_rough_1k.exr",
+      "bytes": 937743,
+      "md5": "a26e6fefc2a5014fc9403b8d2739193b",
+      "sha256": "03983e43b8d48dd0847b0bc8531b7168bc1153183755c060e774e6da3cd18a04",
+      "license": "CC0-1.0",
+      "licenseURL": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "licenseEvidence": "https://polyhaven.com/license",
+      "use": "mesh, photographic albedo/alpha, normal and roughness adapted for mobile foliage"
+    },
+    {
+      "asset": "anthurium_botany_01",
+      "author": {
+        "Rob Tuytel": "scanning",
+        "Rico Cilliers": "modeling"
+      },
+      "source": "https://polyhaven.com/a/anthurium_botany_01",
+      "download": "https://dl.polyhaven.org/file/ph-assets/Models/exr/1k/anthurium_botany_01/anthurium_botany_01_nor_gl_1k.exr",
+      "file": "tools/celta/assets/foliage-professional/anthurium_botany_01/textures/anthurium_botany_01_nor_gl_1k.exr",
+      "bytes": 1115422,
+      "md5": "5b75c000945d89776c3614e7121f699c",
+      "sha256": "da12dfddab1db1bd4afc2abea191ab13f2ee38091dfdadc8dca2f5e0fc88d81f",
+      "license": "CC0-1.0",
+      "licenseURL": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "licenseEvidence": "https://polyhaven.com/license",
+      "use": "mesh, photographic albedo/alpha, normal and roughness adapted for mobile foliage"
+    },
+    {
+      "asset": "anthurium_botany_01",
+      "author": {
+        "Rob Tuytel": "scanning",
+        "Rico Cilliers": "modeling"
+      },
+      "source": "https://polyhaven.com/a/anthurium_botany_01",
+      "download": "https://dl.polyhaven.org/file/ph-assets/Models/png/1k/anthurium_botany_01/anthurium_botany_01_disp_1k.png",
+      "file": "tools/celta/assets/foliage-professional/anthurium_botany_01/textures/anthurium_botany_01_disp_1k.png",
+      "bytes": 866373,
+      "md5": "8bd45850e32b58b5963ef73a60423611",
+      "sha256": "a5cc3a83be59b8e00e0a3ff45b7a2362e599f412ffe034cc67736756aef10b76",
+      "license": "CC0-1.0",
+      "licenseURL": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "licenseEvidence": "https://polyhaven.com/license",
+      "use": "mesh, photographic albedo/alpha, normal and roughness adapted for mobile foliage"
+    },
+    {
+      "asset": "anthurium_botany_01",
+      "author": {
+        "Rob Tuytel": "scanning",
+        "Rico Cilliers": "modeling"
+      },
+      "source": "https://polyhaven.com/a/anthurium_botany_01",
+      "download": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/anthurium_botany_01/anthurium_botany_01_diff_1k.jpg",
+      "file": "tools/celta/assets/foliage-professional/anthurium_botany_01/textures/anthurium_botany_01_diff_1k.jpg",
+      "bytes": 448508,
+      "md5": "b78dfe5b3c265e5d9290c0f75a2801f3",
+      "sha256": "f759421f00e848d7d2915b409d98c6311cc601e4be17d4155e0852429fa4993e",
+      "license": "CC0-1.0",
+      "licenseURL": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "licenseEvidence": "https://polyhaven.com/license",
+      "use": "mesh, photographic albedo/alpha, normal and roughness adapted for mobile foliage"
+    },
+    {
+      "asset": "fern_02",
+      "author": {
+        "Rob Tuytel": "scanning",
+        "Rico Cilliers": "modeling"
+      },
+      "source": "https://polyhaven.com/a/fern_02",
+      "download": "https://dl.polyhaven.org/file/ph-assets/Models/blend/1k/fern_02/fern_02_1k.blend",
+      "file": "tools/celta/assets/foliage-professional/fern_02/fern_02_1k.blend",
+      "bytes": 261459,
+      "md5": "6ad31e08091b148241683d48486be258",
+      "sha256": "1bfb6e12d805cc97035c8cbd051187ca6db650e3157fd8884afcf66a6c4e78eb",
+      "license": "CC0-1.0",
+      "licenseURL": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "licenseEvidence": "https://polyhaven.com/license",
+      "use": "mesh, photographic albedo/alpha, normal and roughness adapted for mobile foliage"
+    },
+    {
+      "asset": "fern_02",
+      "author": {
+        "Rob Tuytel": "scanning",
+        "Rico Cilliers": "modeling"
+      },
+      "source": "https://polyhaven.com/a/fern_02",
+      "download": "https://dl.polyhaven.org/file/ph-assets/Models/exr/1k/fern_02/fern_02_rough_1k.exr",
+      "file": "tools/celta/assets/foliage-professional/fern_02/textures/fern_02_rough_1k.exr",
+      "bytes": 267009,
+      "md5": "1e937f3f3db87e520601f8e94363a5dc",
+      "sha256": "6bde0113a818f78ebcce524fe417b9617a8aadf2873a1948fdbb200cc27eaf3c",
+      "license": "CC0-1.0",
+      "licenseURL": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "licenseEvidence": "https://polyhaven.com/license",
+      "use": "mesh, photographic albedo/alpha, normal and roughness adapted for mobile foliage"
+    },
+    {
+      "asset": "fern_02",
+      "author": {
+        "Rob Tuytel": "scanning",
+        "Rico Cilliers": "modeling"
+      },
+      "source": "https://polyhaven.com/a/fern_02",
+      "download": "https://dl.polyhaven.org/file/ph-assets/Models/png/1k/fern_02/fern_02_alpha_1k.png",
+      "file": "tools/celta/assets/foliage-professional/fern_02/textures/fern_02_alpha_1k.png",
+      "bytes": 114589,
+      "md5": "1421e5e36946c23a7ddcc907de89025c",
+      "sha256": "ea3c64284c7ebdeedf484d2d816eae92825ec526140c3bb83859ddc7a64001f9",
+      "license": "CC0-1.0",
+      "licenseURL": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "licenseEvidence": "https://polyhaven.com/license",
+      "use": "mesh, photographic albedo/alpha, normal and roughness adapted for mobile foliage"
+    },
+    {
+      "asset": "fern_02",
+      "author": {
+        "Rob Tuytel": "scanning",
+        "Rico Cilliers": "modeling"
+      },
+      "source": "https://polyhaven.com/a/fern_02",
+      "download": "https://dl.polyhaven.org/file/ph-assets/Models/exr/1k/fern_02/fern_02_nor_gl_1k.exr",
+      "file": "tools/celta/assets/foliage-professional/fern_02/textures/fern_02_nor_gl_1k.exr",
+      "bytes": 801563,
+      "md5": "c4c2dc925e3ecdb86a6a123a21acfc5b",
+      "sha256": "318209d70836a9b078c395a2df26bcc732dae3df248ecd5d827005da7c8ff174",
+      "license": "CC0-1.0",
+      "licenseURL": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "licenseEvidence": "https://polyhaven.com/license",
+      "use": "mesh, photographic albedo/alpha, normal and roughness adapted for mobile foliage"
+    },
+    {
+      "asset": "fern_02",
+      "author": {
+        "Rob Tuytel": "scanning",
+        "Rico Cilliers": "modeling"
+      },
+      "source": "https://polyhaven.com/a/fern_02",
+      "download": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/fern_02/fern_02_diff_1k.jpg",
+      "file": "tools/celta/assets/foliage-professional/fern_02/textures/fern_02_diff_1k.jpg",
+      "bytes": 315705,
+      "md5": "82c18a6cfd5ae91c37c0e078f591181c",
+      "sha256": "a828a6e7b4c01c826911e2eac4b3afc7457dab7b3b392a31c681ed88b7d50029",
+      "license": "CC0-1.0",
+      "licenseURL": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "licenseEvidence": "https://polyhaven.com/license",
+      "use": "mesh, photographic albedo/alpha, normal and roughness adapted for mobile foliage"
+    }
+  ],
+  "assetLicense": "CC0-1.0",
+  "apiCredit": "Powered by Poly Haven",
+  "licenseNote": "Poly Haven CC0 explicitly permits commercial use, redistribution, modification. API used for download metadata. Game does not query API.",
+  "apiAttributionRequirement": "The current API terms apply credits only to live API usage. The game uses self-hosted CC0 files and makes no live API requests. Source attribution retained voluntarily.",
+  "apiLicenseEvidence": "https://github.com/Poly-Haven/Public-API/blob/master/ToS.md",
+  "adaptations": [
+    "Selected original authored Anthurium variants a,b,c, Fern 02 variants b,c,a, and Pachira variants c,b,d (excluded nursery-braided a).",
+    "Applied one original Anthurium subdivision/displacement pass; decimated only as needed for the mobile budget.",
+    "Baked original scene layout offsets into individually ground-centred metre-scale meshes.",
+    "Generated lower-detail meshes via collapse decimation, keeping UVs and professional photographic maps.",
+    "Converted source maps to web PNG alpha and JPEG normal/roughness formats during Blender glTF export. No photographic pixel repainting.",
+    "Set glTF foliage materials to alpha MASK=0.5 with double-sided leaves; bark remains opaque.",
+    "CanopySpray is a simplified professional Pachira b leaf cluster with its trunk excluded."
+  ],
+  "preservedOriginalAssets": [
+    {
+      "file": "tools/celta/assets/foliage-original-palms.blend",
+      "sha256": "450b190514d10b51c61ec9727885e2675258031a4895f0e9ddb0126727d139b8",
+      "bytes": 2674118,
+      "source": "Previous Celta original Blender foliage and generated palm atlas",
+      "usage": "LongPalmA/LongPalmALow, requested for two shoreline placements",
+      "license": "Project original; not a Poly Haven asset"
+    }
+  ]
+}

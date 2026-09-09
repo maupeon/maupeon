@@ -114,7 +114,7 @@ function foliageMaterial(map, color = '#c5d3aa') {
     vertexColors: true,
     emissive: '#708149',
     emissiveMap: map,
-    emissiveIntensity: 0.18,
+    emissiveIntensity: 0.035,
   })
 }
 
@@ -160,7 +160,7 @@ export function createMaterials(textures = {}) {
     leafDark: surface(textures.leaf ? '#6e865b' : '#263c25', textures.leaf, 1, {
       side: THREE.DoubleSide,
     }),
-    leafVein: surface('#71814b', null, 1),
+    leafVein: surface('#485339', null, 1),
     moss: surface('#58613c', textures.ground, 1),
     cloth: surface('#e0d9be', textures.cloth, 1, { bumpScale: 0.0006 }),
     clothLight: surface('#f0e6cc', textures.cloth, 1, { bumpScale: 0.0006 }),
@@ -1148,12 +1148,14 @@ function leafGeometry(
   width,
   droop = 0.12,
   twist = 0,
-  segments = 5
+  segments = 5,
+  worn = false
 ) {
   const a = new THREE.Vector3(...start),
     b = new THREE.Vector3(...end)
   const direction = b.clone().sub(a)
   const axis = direction.clone().normalize()
+  const variation=Math.sin(a.x*13.17+a.y*9.31+a.z*17.73+width*31.8)
   const side = new THREE.Vector3(-direction.z, 0, direction.x).normalize()
   if (side.lengthSq() < 0.01) side.set(1, 0, 0)
   const positions = [],
@@ -1163,15 +1165,17 @@ function leafGeometry(
     const t = i / segments
     const center = a.clone().addScaledVector(direction, t)
     center.y += Math.sin(t * Math.PI) * droop
-    center.addScaledVector(side, Math.sin(t * Math.PI) * Math.sin(twist + t * 2.3) * width * 0.07)
-    const across = side.clone().applyAxisAngle(axis, twist * (0.45 + t * 0.55))
+    center.addScaledVector(side, Math.sin(t * Math.PI) * Math.sin(twist + t * 2.3) * width * (0.18+variation*.06))
+    const across = side.clone().applyAxisAngle(axis, twist * (0.35 + t * 0.85)+Math.sin(t*Math.PI)*variation*.38)
     const normal = new THREE.Vector3().crossVectors(across, axis).normalize()
-    const profile = Math.pow(Math.sin(t * Math.PI), 0.79)
+    const profile = Math.pow(Math.sin(t * Math.PI), 0.79+variation*.19)
     const halfWidth = profile * width * 0.5
     for (let j = -2; j <= 2; j += 1) {
       const u = j / 2
       const asymmetry = 1 + Math.sign(u) * Math.sin(t * 3.1 + twist) * 0.11
-      const vertex = center.clone().addScaledVector(across, halfWidth * u * asymmetry)
+      const nick = worn && Math.abs(u) > .9 && Math.sin(variation*39+j*17)>.1
+        ? 1-.42*Math.exp(-Math.pow((t-(.35+variation*.2))/.09,2)) : 1
+      const vertex = center.clone().addScaledVector(across, halfWidth * u * asymmetry * nick)
       vertex.addScaledVector(normal,
         halfWidth * (0.1 - Math.pow(Math.abs(u), 0.72) * 0.29)
         + Math.pow(Math.abs(u), 3) * width * Math.sin(t * 9 + twist * 2 + j) * 0.033
@@ -1179,7 +1183,7 @@ function leafGeometry(
       positions.push(...vertex.toArray())
       // The generated source is a leaf on a pale background. Follow its outline
       // in UV space so the modeled edge never samples that background.
-      uvs.push(0.49 + u * Math.pow(Math.sin(t * Math.PI), 0.69) * 0.285, 0.065 + t * 0.895)
+      uvs.push(0.49 + u * Math.pow(Math.sin(t * Math.PI), 0.69) * 0.23, 0.085 + t * 0.85)
       if (i && j > -2) {
         const n = i * 5 + j + 2,
           previous = n - 5
@@ -1434,7 +1438,7 @@ export function createTree(m, { height = 9, seed = 1, palm = false } = {}) {
     }
     const addCrownCluster = (anchor, width, clusterSeed) => {
       if (!m.canopy) return
-      for (let c = 0; c < 3; c += 1) {
+      for (let c = 0; c < 5; c += 1) {
         const position = anchor
           .clone()
           .add(
@@ -1446,8 +1450,8 @@ export function createTree(m, { height = 9, seed = 1, palm = false } = {}) {
           )
         tree.add(
           foliageCard(
-            width * (0.9 + rand() * 0.32),
-            width * (0.72 + rand() * 0.3),
+            width * (0.76 + rand() * 0.28),
+            width * (0.67 + rand() * 0.26),
             clusterSeed + c,
             seed >= 200 && seed < 300 ? 4 : 3
           ),
@@ -1592,6 +1596,63 @@ export function createTree(m, { height = 9, seed = 1, palm = false } = {}) {
   }
   const result = tree.finish(palm ? 'Feather palm' : 'Buttress canopy tree')
   result.userData.height = height
+  return result
+}
+
+export function createBroadleafUnderstory(m, { scale = 1, seed = 1 } = {}) {
+  const rand=randomGenerator(seed),plant=new Assembly(),phase=rand()*TAU
+  for(let stem=0;stem<6;stem++) {
+    const angle=phase+stem*2.39996+(rand()-.5)*.4
+    const out=new THREE.Vector3(Math.cos(angle),0,Math.sin(angle))
+    const side=new THREE.Vector3(-out.z,0,out.x)
+    const height=.44+rand()*.55,reach=.4+rand()*.38
+    const at=t=>out.clone().multiplyScalar(reach*t*t).setY(.04+height*t)
+    const points=Array.from({length:6},(_,i)=>at(i/5).toArray())
+    plant.add(branchGeometry(points,points.map((_,i)=>.0085-i*.00115),4),m.leafVein)
+    for(let leaf=0;leaf<6;leaf++) {
+      const sign=leaf%2===0?1:-1,t=.38+leaf*.10
+      const base=at(t),length=.35+rand()*.39
+      const tip=base.clone().addScaledVector(out,length*(.48+rand()*.2))
+        .addScaledVector(side,sign*length*.63)
+      tip.y-=length*(.13+rand()*.28)
+      plant.add(leafGeometry(base.toArray(),tip.toArray(),length*(.35+rand()*.14),length*.16,sign*(.15+rand()*.5),6),leaf%4===0?m.leafDark:stem%3===0?m.leafLight:m.leaf)
+    }
+  }
+  const result=plant.finish('Curved broadleaf understory')
+  result.scale.setScalar(scale)
+  return result
+}
+
+export function createUnderstoryPalm(m, { scale = 1, seed = 1 } = {}) {
+  const rand=randomGenerator(seed),palm=new Assembly()
+  const count=6+Math.floor(rand()*3),phase=rand()*TAU
+  for(let f=0;f<count;f++) {
+    const angle=phase+f*2.39996+(rand()-.5)*.32
+    const direction=new THREE.Vector3(Math.cos(angle),0,Math.sin(angle))
+    const side=new THREE.Vector3(-direction.z,0,direction.x)
+    const length=1.2+rand()*.85,height=.48+rand()*.42,lean=(rand()-.5)*.26
+    const at=t=>direction.clone().multiplyScalar(length*t)
+      .addScaledVector(side,Math.sin(t*Math.PI)*lean)
+      .setY(.11+Math.sin(t*Math.PI*.79)*height-.15*t*t)
+    const points=Array.from({length:11},(_,i)=>at(i/10).toArray())
+    palm.add(branchGeometry(points,points.map((_,i)=>.010*(1-i/12)),5),m.leafVein)
+    const pairs=11+Math.floor(rand()*5)
+    for(let j=1;j<=pairs;j++) {
+      for(const sign of [-1,1]) {
+        if(rand()<.19)continue
+        const t=(j+(sign>0?.28:0)+(rand()-.5)*.4)/(pairs+1)
+        const base=at(t)
+        const reach=(.1+.38*Math.pow(Math.sin(t*Math.PI),.7))*(.6+rand()*.65)
+        const tip=base.clone().addScaledVector(side,sign*reach)
+          .addScaledVector(direction,.07+reach*.22)
+        tip.y-=.06+reach*(.18+rand()*.27)+t*t*.1
+        palm.add(leafGeometry(base.toArray(),tip.toArray(),reach*(.11+rand()*.10),.016+rand()*.065,sign*(.08+rand()*.85),9,true),f%4===0?m.leafDark:m.leaf)
+      }
+    }
+    palm.add(leafGeometry(at(.91).toArray(),at(1.07).toArray(),.023,.025,lean,4),m.leaf)
+  }
+  const result=palm.finish('Individually arcing understory palm')
+  result.scale.setScalar(scale)
   return result
 }
 

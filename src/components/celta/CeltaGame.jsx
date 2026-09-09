@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+/* eslint-disable @next/next/no-img-element -- The album uses local, user-created JPEG data URLs. */
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import {
   chapters,
   sources,
@@ -13,6 +14,7 @@ import { createSoundscape } from './audio'
 import styles from './CeltaGame.module.css'
 import Investigation from './Investigation'
 import { getStep } from '@/lib/celta/expeditions'
+import { artCredits } from '@/lib/celta/credits'
 
 function Icon({ name, size = 20, ...props }) {
   const paths = {
@@ -142,9 +144,10 @@ function Joystick({ engine, active }) {
   )
 }
 
-function MiniMap({ chapter, mission, position }) {
+function MiniMap({ chapter, mission, position, target, grid }) {
   const mapX = (x) => ((x + 24) / 36) * 112 + 5,
     mapY = (z) => ((z + 48) / 58) * 128 + 3
+  const terrainPath=useMemo(()=>grid?.values.map((value,i)=>value ? `M${((grid.origin[0]+i%grid.width*grid.step+24)/36)*112+5} ${((grid.origin[1]+Math.floor(i/grid.width)*grid.step+48)/58)*128+3}h3.2v2.3h-3.2z` : '').join(''),[grid])
   return (
     <svg
       className={styles.minimap}
@@ -157,6 +160,9 @@ function MiniMap({ chapter, mission, position }) {
           <stop stopColor="#172820" />
           <stop offset="1" stopColor="#101c17" />
         </linearGradient>
+        <filter id="map-terrain-softness" x="-5%" y="-5%" width="110%" height="110%">
+          <feGaussianBlur stdDeviation="1.1" />
+        </filter>
       </defs>
       <rect
         x="1"
@@ -167,26 +173,15 @@ function MiniMap({ chapter, mission, position }) {
         fill="url(#mapfade)"
         stroke="#d5bc7833"
       />
-      <path d="M90 2q-8 18 0 36t-3 35 4 30-6 38h46V2Z" fill="#9cb5a91c" />
-      <path
-        d="M90 2q-8 18 0 36t-3 35 4 30-6 38"
-        fill="none"
-        stroke="#b5c5b044"
-      />
-      <path
-        d="M88 125 75 108 71 75 69 43 82 28"
-        fill="none"
-        stroke="#dbc99544"
-        strokeDasharray="2 4"
-      />
+      {grid && <path fill="#9cb5a919" d={terrainPath} filter="url(#map-terrain-softness)" />}
       <text x="13" y="17" fill="#dbc995" fontSize="8" fontFamily="Georgia">
         N ↑
       </text>
       {chapters[chapter].missions.map((item, i) => (
         <g key={item.id} opacity={i > mission ? 0.3 : 1}>
           <circle
-            cx={mapX(item.position[0])}
-            cy={mapY(item.position[1])}
+            cx={mapX(i===mission && target ? target[0] : item.position[0])}
+            cy={mapY(i===mission && target ? target[1] : item.position[1])}
             r={i === mission ? 4 : 2.5}
             fill={
               i < mission ? '#9abca0' : i === mission ? '#e8cd8c' : '#697b6e'
@@ -194,8 +189,8 @@ function MiniMap({ chapter, mission, position }) {
           />
           {i === mission && (
             <circle
-              cx={mapX(item.position[0])}
-              cy={mapY(item.position[1])}
+              cx={mapX(target?.[0] ?? item.position[0])}
+              cy={mapY(target?.[1] ?? item.position[1])}
               r="8"
               fill="none"
               stroke="#e8cd8c55"
@@ -283,6 +278,7 @@ export default function CeltaGame() {
   const [ready, setReady] = useState(false),
     [loaded, setLoaded] = useState(false),
     [worldLoading,setWorldLoading] = useState(false),
+    [mapGrid,setMapGrid] = useState(null),
     [error, setError] = useState(''),
     [saveError, setSaveError] = useState(false)
   const [progress, setProgress] = useState({ ...initialProgress, entries: [] }),
@@ -357,6 +353,7 @@ export default function CeltaGame() {
       onError: setError,
       onPhoto: setPhotoState,
       onLoading: setWorldLoading,
+      onMap: setMapGrid,
     })
       .then((result) => {
         instance = result
@@ -445,6 +442,7 @@ export default function CeltaGame() {
     } catch {}
   }, [])
   const openCamera = useCallback(() => {
+    setToast('')
     setZoom(1)
     setFocus(5)
     setScreen('photo')
@@ -512,13 +510,13 @@ export default function CeltaGame() {
   useEffect(() => {
     if (screen !== 'investigate' || panel) return
     const dialog = rootRef.current?.querySelector('[data-celta-activity]')
-    const buttons = dialog?.querySelectorAll('button,input,select,a')
-    buttons?.[1]?.focus()
+    dialog?.querySelectorAll('button,input,select,a')?.[1]?.focus()
     const key = (event) => {
       if (event.key === 'Escape') {
         event.preventDefault()
         setScreen('play')
       }
+      const buttons=dialog?.querySelectorAll('button:not(:disabled),input:not(:disabled),select:not(:disabled),a')
       if (event.key !== 'Tab' || !buttons?.length) return
       const first = buttons[0],
         last = buttons[buttons.length - 1]
@@ -805,6 +803,8 @@ export default function CeltaGame() {
                 chapter={progress.chapter}
                 mission={progress.mission}
                 position={position}
+                target={activity?.position}
+                grid={mapGrid}
               />
             )}
             <button
@@ -1246,6 +1246,14 @@ export default function CeltaGame() {
                 Incluye referencias a explotación colonial, trabajo forzado,
                 discriminación y muerte. Se presentan sin violencia gráfica.
               </small>
+              <details className={styles.artCredits}>
+                <summary>Arte y recursos 3D</summary>
+                {artCredits.map(credit=><section key={credit.title}>
+                  <h3>{credit.title}</h3>
+                  <p><a href={credit.source} target="_blank" rel="noreferrer">{credit.author}</a>{' · '}<a href={credit.licenseUrl} target="_blank" rel="noreferrer">{credit.license}</a></p>
+                  <p>{credit.note}</p>
+                </section>)}
+              </details>
             </div>
           )}
           <div className={styles.journalFoot}>

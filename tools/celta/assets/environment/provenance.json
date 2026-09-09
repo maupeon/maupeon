@@ -1,0 +1,388 @@
+{
+  "downloadedAt": "2026-09-09",
+  "library": "Poly Haven",
+  "license": "CC0-1.0",
+  "licenseUrl": "https://polyhaven.com/license",
+  "assets": [
+    {
+      "asset": "red_dirt_mud_01",
+      "author": "Rob Tuytel",
+      "kind": "diff",
+      "resolution": "2K",
+      "sourcePage": "https://polyhaven.com/a/red_dirt_mud_01",
+      "downloadUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/red_dirt_mud_01/red_dirt_mud_01_diff_2k.jpg",
+      "sourcePath": "tools/celta/assets/environment/red_dirt_mud_01_diff_2k.jpg",
+      "bytes": 3246646,
+      "sha256": "d5367afb82bd4fc09ec234e0c09ec43a7f6fc14dbe0469fe5ed7045b7660631e",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license"
+    },
+    {
+      "asset": "red_dirt_mud_01",
+      "author": "Rob Tuytel",
+      "kind": "nor_gl",
+      "resolution": "2K",
+      "sourcePage": "https://polyhaven.com/a/red_dirt_mud_01",
+      "downloadUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/red_dirt_mud_01/red_dirt_mud_01_nor_gl_2k.jpg",
+      "sourcePath": "tools/celta/assets/environment/red_dirt_mud_01_nor_gl_2k.jpg",
+      "bytes": 3096204,
+      "sha256": "9b36e56a9f156897262f0c37487804cf30e8699cd4e633ef2457d33859c54077",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license"
+    },
+    {
+      "asset": "red_dirt_mud_01",
+      "author": "Rob Tuytel",
+      "kind": "rough",
+      "resolution": "2K",
+      "sourcePage": "https://polyhaven.com/a/red_dirt_mud_01",
+      "downloadUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/red_dirt_mud_01/red_dirt_mud_01_rough_2k.jpg",
+      "sourcePath": "tools/celta/assets/environment/red_dirt_mud_01_rough_2k.jpg",
+      "bytes": 2541902,
+      "sha256": "9dd71c89e67125f3ba1a4cfb9092cd5b8ade6cf693ae9fd3ac588f3ec36d4a23",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license"
+    },
+    {
+      "asset": "bark_brown_02",
+      "author": "Rob Tuytel",
+      "kind": "diff",
+      "resolution": "2K",
+      "sourcePage": "https://polyhaven.com/a/bark_brown_02",
+      "downloadUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/bark_brown_02/bark_brown_02_diff_2k.jpg",
+      "sourcePath": "tools/celta/assets/environment/bark_brown_02_diff_2k.jpg",
+      "bytes": 2356592,
+      "sha256": "285051e34826ace29f4ab438ad35cc1201b2aae0a6157a5f3c0bf6667bbc539e",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license"
+    },
+    {
+      "asset": "bark_brown_02",
+      "author": "Rob Tuytel",
+      "kind": "nor_gl",
+      "resolution": "2K",
+      "sourcePage": "https://polyhaven.com/a/bark_brown_02",
+      "downloadUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/bark_brown_02/bark_brown_02_nor_gl_2k.jpg",
+      "sourcePath": "tools/celta/assets/environment/bark_brown_02_nor_gl_2k.jpg",
+      "bytes": 3707907,
+      "sha256": "aaba4529c3167a7811b4dbf5b4327d054a166c2fc8ea08ebd249a2692adace41",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license"
+    },
+    {
+      "asset": "bark_brown_02",
+      "author": "Rob Tuytel",
+      "kind": "rough",
+      "resolution": "2K",
+      "sourcePage": "https://polyhaven.com/a/bark_brown_02",
+      "downloadUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/bark_brown_02/bark_brown_02_rough_2k.jpg",
+      "sourcePath": "tools/celta/assets/environment/bark_brown_02_rough_2k.jpg",
+      "bytes": 1236654,
+      "sha256": "adafcab150c1ca99150c77198329e251437dc00fa1f66019f75624366926996e",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license"
+    },
+    {
+      "asset": "thatch_roof_angled",
+      "author": "Dimitrios Savva (photography), Rob Tuytel (processing)",
+      "kind": "diff",
+      "resolution": "2K",
+      "sourcePage": "https://polyhaven.com/a/thatch_roof_angled",
+      "downloadUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/thatch_roof_angled/thatch_roof_angled_diff_2k.jpg",
+      "sourcePath": "tools/celta/assets/environment/thatch_roof_angled_diff_2k.jpg",
+      "bytes": 3225496,
+      "sha256": "dd544436986e9be6ae80996fbd132c67b38c81e8ed1b7c4384a961efe87460b7",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license"
+    },
+    {
+      "asset": "thatch_roof_angled",
+      "author": "Dimitrios Savva (photography), Rob Tuytel (processing)",
+      "kind": "nor_gl",
+      "resolution": "2K",
+      "sourcePage": "https://polyhaven.com/a/thatch_roof_angled",
+      "downloadUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/thatch_roof_angled/thatch_roof_angled_nor_gl_2k.jpg",
+      "sourcePath": "tools/celta/assets/environment/thatch_roof_angled_nor_gl_2k.jpg",
+      "bytes": 5097746,
+      "sha256": "e7b71772b830fb1a45f82cb796ace9233e5c331f4c3410aba142d8c69a8710e0",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license"
+    },
+    {
+      "asset": "thatch_roof_angled",
+      "author": "Dimitrios Savva (photography), Rob Tuytel (processing)",
+      "kind": "rough",
+      "resolution": "2K",
+      "sourcePage": "https://polyhaven.com/a/thatch_roof_angled",
+      "downloadUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/thatch_roof_angled/thatch_roof_angled_rough_2k.jpg",
+      "sourcePath": "tools/celta/assets/environment/thatch_roof_angled_rough_2k.jpg",
+      "bytes": 2202771,
+      "sha256": "511d4d0369fe1676bc31587390a3d5823664ef516efd5bef7d9a4f809bd55382",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license"
+    },
+    {
+      "asset": "wood_planks_grey",
+      "author": "Rob Tuytel",
+      "kind": "diff",
+      "resolution": "1K",
+      "sourcePage": "https://polyhaven.com/a/wood_planks_grey",
+      "downloadUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/wood_planks_grey/wood_planks_grey_diff_1k.jpg",
+      "sourcePath": "tools/celta/assets/environment/wood_planks_grey_diff_1k.jpg",
+      "bytes": 228279,
+      "sha256": "d758be23e8fe7bfbd73bc4ab257cfd59406e1835f6557c12a67cd4fdb15de0d8",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license"
+    },
+    {
+      "asset": "wood_planks_grey",
+      "author": "Rob Tuytel",
+      "kind": "nor_gl",
+      "resolution": "1K",
+      "sourcePage": "https://polyhaven.com/a/wood_planks_grey",
+      "downloadUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/wood_planks_grey/wood_planks_grey_nor_gl_1k.jpg",
+      "sourcePath": "tools/celta/assets/environment/wood_planks_grey_nor_gl_1k.jpg",
+      "bytes": 157419,
+      "sha256": "5e570e57d688b016b217b9e8e0592f9a8b3364406e22bf6cd775da990452bdb6",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license"
+    },
+    {
+      "asset": "wood_planks_grey",
+      "author": "Rob Tuytel",
+      "kind": "rough",
+      "resolution": "1K",
+      "sourcePage": "https://polyhaven.com/a/wood_planks_grey",
+      "downloadUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/wood_planks_grey/wood_planks_grey_rough_1k.jpg",
+      "sourcePath": "tools/celta/assets/environment/wood_planks_grey_rough_1k.jpg",
+      "bytes": 186804,
+      "sha256": "ef640502cec94bd2b6500e252891a778a7a721be16b5536d4efc9fe4d99b12aa",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license"
+    },
+    {
+      "asset": "wood_planks_dirt",
+      "author": "Rob Tuytel",
+      "kind": "diff",
+      "resolution": "1K",
+      "sourcePage": "https://polyhaven.com/a/wood_planks_dirt",
+      "downloadUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/wood_planks_dirt/wood_planks_dirt_diff_1k.jpg",
+      "sourcePath": "tools/celta/assets/environment/wood_planks_dirt_diff_1k.jpg",
+      "bytes": 918123,
+      "sha256": "230bb4aabaebde24ead3ae593a48f8f45e93705aaf3cfdc438589bb49c2a7af3",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license"
+    },
+    {
+      "asset": "wood_planks_dirt",
+      "author": "Rob Tuytel",
+      "kind": "nor_gl",
+      "resolution": "1K",
+      "sourcePage": "https://polyhaven.com/a/wood_planks_dirt",
+      "downloadUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/wood_planks_dirt/wood_planks_dirt_nor_gl_1k.jpg",
+      "sourcePath": "tools/celta/assets/environment/wood_planks_dirt_nor_gl_1k.jpg",
+      "bytes": 515002,
+      "sha256": "877bf561c0bc83a583238c5133c221026ff25052f8f567174c6b285af4b74f0e",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license"
+    },
+    {
+      "asset": "wood_planks_dirt",
+      "author": "Rob Tuytel",
+      "kind": "rough",
+      "resolution": "1K",
+      "sourcePage": "https://polyhaven.com/a/wood_planks_dirt",
+      "downloadUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/wood_planks_dirt/wood_planks_dirt_rough_1k.jpg",
+      "sourcePath": "tools/celta/assets/environment/wood_planks_dirt_rough_1k.jpg",
+      "bytes": 523014,
+      "sha256": "f9b706729bb727d3eeab4794f18d3c4df43760d580342bf28fe8f3f09a68c5e9",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license"
+    },
+    {
+      "asset": "red_dirt_mud_01",
+      "author": "Rob Tuytel",
+      "kind": "disp",
+      "resolution": "1K",
+      "sourcePage": "https://polyhaven.com/a/red_dirt_mud_01",
+      "downloadUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/red_dirt_mud_01/red_dirt_mud_01_disp_1k.jpg",
+      "sourcePath": "tools/celta/assets/environment/red_dirt_mud_01_disp_1k.jpg",
+      "bytes": 267806,
+      "sha256": "87776a74ef0fed833efafdc6db8d7927f3f6ca60d066820c2ff3de64bed2d527",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license"
+    }
+  ],
+  "processing": "Original CC0 JPEG source pixels packed in editable blend; standard baseColorFactor/normal intensity/roughness factor, UV scale and authored mesh vertex AO. Runtime normal/roughness maps resized to1K, color retained2K (wood1K); WebP86 then meshopt16bit position/10bit normal/14bit UV where eligible. Roof fringe and pale boat paint remain original generated project textures.",
+  "usage": {
+    "red_dirt_mud_01": [
+      "PH_BankMud",
+      "PH_EmbeddedStones",
+      "PH_Laterite",
+      "PH_WornLaterite"
+    ],
+    "bark_brown_02": [
+      "PH_Bark",
+      "PH_BarkSculpt",
+      "PH_RootWood"
+    ],
+    "thatch_roof_angled": [
+      "PH_RoofThatch",
+      "PH_RoofThatchDark"
+    ],
+    "wood_planks_dirt": [
+      "PH_DarkTimber",
+      "PH_LeafLitter",
+      "PH_Timber"
+    ],
+    "wood_planks_grey": [
+      "PH_WallBoards"
+    ]
+  },
+  "sourceGenerator": "tools/celta/professional_environments.py",
+  "runtimeGenerator": "tools/celta/professional_environment_runtime.py",
+  "licenseEvidence": {
+    "file": "tools/celta/assets/environment/LICENSE-REFERENCE.txt",
+    "sha256": "2d0294740591f9a6333a38dfd9cc9adbe523aa28f42159a9fdf477b5f4d4934c",
+    "kind": "Reference notice, not a copy of legal code",
+    "verifiedPrimaryPages": "https://polyhaven.com/license and per-asset pages"
+  },
+  "usageByRegion": {
+    "congo": [
+      "red_dirt_mud_01 (albedo,GL normal,roughness,geometry displacement)",
+      "bark_brown_02",
+      "thatch_roof_angled",
+      "wood_planks_grey",
+      "wood_planks_dirt"
+    ],
+    "amazonia": [
+      "bark_brown_02",
+      "thatch_roof_angled",
+      "wood_planks_dirt"
+    ],
+    "ireland": [
+      "wood_planks_grey",
+      "wood_planks_dirt"
+    ]
+  },
+  "finalExports": {
+    "congo": {
+      "bytes": 12357584,
+      "triangles": 605945,
+      "batches": 23,
+      "sha256": "28f9ec1646a9c042dfbd21c820202af41647b19a3be36e1b6a7022e8eebf4663",
+      "fixedNavAttributesUnchanged": [
+        "spawn",
+        "bounds",
+        "heightGrid",
+        "walkableGrid",
+        "colliders",
+        "landmarks",
+        "heroTrees",
+        "walkSurfaces",
+        "missionPads",
+        "reachableCellCount"
+      ],
+      "missingColorFactor": [],
+      "extraUVChannels": [],
+      "noLightsOrCameras": true,
+      "sourceBlendSHA256": "60456b048288cbf2237e75e9726599691abb088f34cd594235d2666676bfd4db"
+    },
+    "amazonia": {
+      "bytes": 5658952,
+      "triangles": 166434,
+      "batches": 10,
+      "sha256": "a85fd64c36367848ce0fab7b612ff4dba2899d3de9bacb72dbaba706a1644c15",
+      "fixedNavAttributesUnchanged": [
+        "spawn",
+        "bounds",
+        "heightGrid",
+        "walkableGrid",
+        "colliders",
+        "landmarks",
+        "heroTrees",
+        "walkSurfaces",
+        "missionPads",
+        "reachableCellCount"
+      ],
+      "missingColorFactor": [],
+      "extraUVChannels": [],
+      "noLightsOrCameras": true,
+      "sourceBlendSHA256": "9e3424165663af4e9f0238c0e6a2325c7c7fe9b0ec2baaf01de34e405fb2e336"
+    },
+    "ireland": {
+      "bytes": 2876640,
+      "triangles": 142377,
+      "batches": 9,
+      "sha256": "04b32ab8bc9c734e8d46fd4457c2722477660b5f38a8a8dcf0abdcaec2dafdc0",
+      "fixedNavAttributesUnchanged": [
+        "spawn",
+        "bounds",
+        "heightGrid",
+        "walkableGrid",
+        "colliders",
+        "landmarks",
+        "heroTrees",
+        "walkSurfaces",
+        "missionPads",
+        "reachableCellCount"
+      ],
+      "missingColorFactor": [],
+      "extraUVChannels": [],
+      "noLightsOrCameras": true,
+      "sourceBlendSHA256": "2c28bda78b639247ac3970d9a1c47fca4496c61bed1a39eec5cc45726c3e653e"
+    }
+  },
+  "bankModelling": "Only Congo BankMud mesh: close soil volume0.085m inside bank, voxel union0.04m, smooth2iterations.38, real scan displacement0.11m amplitude factor around source mean, decimate48,000triangle target. Final fine contacts regenerated from quantized triangles.",
+  "roofAndWoodPass": {
+    "newIndividualReedBundles": 485,
+    "roofPlanes": 4,
+    "bundleWidthMetres": [
+      0.35,
+      0.62
+    ],
+    "bundleLengthMetres": [
+      0.85,
+      1.55
+    ],
+    "endCapThicknessMetres": 0,
+    "eaveFibreMesh": "Exact original vertex geometry and UV",
+    "wallBoardExtrusionScale": 0.65,
+    "wallBoardGapsReducedMetres": 0.008,
+    "cabinPaintedBoardReliefScale": 0.67,
+    "wallAndWoodUV": "One scanned plank selected per authored board; continuous physical grain; original source image pixels unchanged",
+    "navAndFineContacts": "All non-mesh metadata and 100,497 fine contact values exactly preserved from round 14",
+    "individualLongitudinalFibres": 4426,
+    "wideRaisedSheets": 0
+  },
+  "groundAndBarkPass": {
+    "shortCurvedSoilRidges": 9,
+    "ridgeHeightMetres": 0.06,
+    "scannedHeightFactorMetres": 0.135,
+    "stones": 190,
+    "bentLeafPieces": 48,
+    "branchingRootNetworks": 6,
+    "branchesPerRoot": 3,
+    "bankClodsIncludingFiveLowerShelves": 57,
+    "staggeredCentralTrunkBarkPlates": 63,
+    "newMaterials": [
+      "PH_EmbeddedStones",
+      "PH_LeafLitter",
+      "PH_RootWood"
+    ],
+    "existingProfessionalColorFactorsUnchanged": true,
+    "barkConstruction": "Two elongated near-planar faces, chipped partly embedded perimeter, short oblique fracture, maximum 0.029m protrusion; no raised central dome"
+  },
+  "round15Verification": {
+    "onlyChangedSourceSurfaces": [
+      "BarkSculpt",
+      "RoofThatch",
+      "RoofThatchDark"
+    ],
+    "allNavigationAndContactsExactlyRound14": true,
+    "sourceMapsAndFactorsUnchanged": true,
+    "finalSourceRebuildRawGLBSHA256": "7f05d14e4d8342a13f05e0318ba2f4836dc542763106a75f626a7da6e0ba9425",
+    "finalSourceRebuildByteIdentical": true,
+    "rebuildRecipe": "tools/celta/assets/environment/BUILD.md"
+  }
+}

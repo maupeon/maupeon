@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element -- JPEG data URLs are created locally by the in-game camera. */
 import { useState } from 'react'
 import styles from './CeltaGame.module.css'
 
@@ -61,6 +62,7 @@ export default function Investigation({step,photos,onComplete,onClose}) {
       </div>
     </div>}
     {step.type==='connect' && <div className={styles.caseBoard}>
+      {step.text && <p className={styles.caseReflection}>{step.text}</p>}
       {!!photos.length && <div className={styles.evidenceContactSheet}>{photos.slice(-3).map(photo=><figure key={photo.id}><img src={photo.image} alt={photo.subject} /><figcaption>{photo.title}</figcaption></figure>)}</div>}
       <div className={styles.boardColumns}>
         <div><span className={styles.eyebrow}>01 · AFIRMACIÓN</span>{pairs.map((pair,i)=><button key={pair.claim} className={`${styles.claimCard} ${selected===i?styles.claimSelected:''} ${linked.includes(i)?styles.claimLinked:''}`} onClick={()=>!linked.includes(i)&&setSelected(i)}><small>{linked.includes(i)?'✓ VINCULADA':`0${i+1}`}</small><strong>{pair.claim}</strong>{linked.includes(i)&&<span>{pair.evidence}</span>}</button>)}</div>

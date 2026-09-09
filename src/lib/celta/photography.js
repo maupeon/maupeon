@@ -1,7 +1,10 @@
+// The shutter and optical blur must agree about what counts as in focus.
+export const PHOTO_FOCUS_TOLERANCE = { minimum: .4, relative: .18 }
+
 export function assessPhotograph({distance,frameX,frameY,depth,focus,occluded,coverage}) {
   const inFrame = depth > -1 && depth < 1 && Math.abs(frameX) < .66 && Math.abs(frameY) < .66
   const range = distance >= 2 && distance <= 18 && coverage > .06 && coverage < .86
-  const sharp = Math.abs(focus-distance) <= Math.max(.8,distance*.22)
+  const sharp = Math.abs(focus-distance) <= Math.max(PHOTO_FOCUS_TOLERANCE.minimum,distance*PHOTO_FOCUS_TOLERANCE.relative)
   const ready = inFrame && range && sharp && !occluded
   let hint = 'Fotografía lista. Dispara cuando quieras.'
   if (!inFrame) hint = 'Arrastra la vista para colocar el sujeto en el encuadre.'

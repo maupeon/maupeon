@@ -1,0 +1,449 @@
+{
+  "source": "tools/celta/professional_foliage.py",
+  "blend": "tools/celta/blend/foliage.blend",
+  "file": "/celta/models/foliage.glb",
+  "bytes": 8404492,
+  "coordinateSystem": "Three.js Y-up; metres; every named root at local ground origin",
+  "triangles": 54172,
+  "detailTriangles": 42915,
+  "mobileTriangles": 11257,
+  "mobileTriangleReduction": 0.7377,
+  "variants": {
+    "BroadleafA": {
+      "triangles": 3400,
+      "meshes": 1,
+      "bounds": [
+        [
+          -0.7981,
+          0.015,
+          -0.9308
+        ],
+        [
+          0.9049,
+          0.9627,
+          1.2384
+        ]
+      ],
+      "radius": 1.2405,
+      "botanicalSource": "Anthurium Botany 01"
+    },
+    "BroadleafB": {
+      "triangles": 3399,
+      "meshes": 1,
+      "bounds": [
+        [
+          -0.8576,
+          0.015,
+          -0.7873
+        ],
+        [
+          0.7434,
+          0.9815,
+          0.7243
+        ]
+      ],
+      "radius": 0.8577,
+      "botanicalSource": "Anthurium Botany 01"
+    },
+    "BroadleafC": {
+      "triangles": 2268,
+      "meshes": 1,
+      "bounds": [
+        [
+          -0.8511,
+          0.015,
+          -1.056
+        ],
+        [
+          0.6544,
+          0.9629,
+          0.8842
+        ]
+      ],
+      "radius": 1.0988,
+      "botanicalSource": "Anthurium Botany 01"
+    },
+    "PalmA": {
+      "triangles": 2384,
+      "meshes": 1,
+      "bounds": [
+        [
+          -1.6108,
+          0.015,
+          -1.2867
+        ],
+        [
+          1.4079,
+          0.9559,
+          1.439
+        ]
+      ],
+      "radius": 1.8713,
+      "botanicalSource": "Fern 02"
+    },
+    "PalmB": {
+      "triangles": 2248,
+      "meshes": 1,
+      "bounds": [
+        [
+          -1.2085,
+          0.015,
+          -1.5313
+        ],
+        [
+          1.1716,
+          0.9923,
+          1.0493
+        ]
+      ],
+      "radius": 1.6935,
+      "botanicalSource": "Fern 02"
+    },
+    "PalmC": {
+      "triangles": 784,
+      "meshes": 1,
+      "bounds": [
+        [
+          -1.1697,
+          0.015,
+          -1.1232
+        ],
+        [
+          1.345,
+          0.9471,
+          1.1848
+        ]
+      ],
+      "radius": 1.5458,
+      "botanicalSource": "Fern 02"
+    },
+    "ShrubA": {
+      "triangles": 5250,
+      "meshes": 2,
+      "bounds": [
+        [
+          -0.4294,
+          0.015,
+          -0.6689
+        ],
+        [
+          0.7412,
+          1.027,
+          0.4396
+        ]
+      ],
+      "radius": 0.7864,
+      "botanicalSource": "Pachira Aquatica 01"
+    },
+    "ShrubB": {
+      "triangles": 4957,
+      "meshes": 2,
+      "bounds": [
+        [
+          -0.433,
+          0.015,
+          -0.342
+        ],
+        [
+          0.721,
+          1.1029,
+          0.5887
+        ]
+      ],
+      "radius": 0.8037,
+      "botanicalSource": "Pachira Aquatica 01"
+    },
+    "ShrubC": {
+      "triangles": 5249,
+      "meshes": 2,
+      "bounds": [
+        [
+          -0.6276,
+          0.015,
+          -0.8248
+        ],
+        [
+          0.828,
+          1.0615,
+          0.4995
+        ]
+      ],
+      "radius": 0.8431,
+      "botanicalSource": "Pachira Aquatica 01"
+    },
+    "CanopySpray": {
+      "triangles": 950,
+      "meshes": 1,
+      "bounds": [
+        [
+          -0.5937,
+          0.015,
+          -0.5407
+        ],
+        [
+          0.6645,
+          0.7864,
+          0.9807
+        ]
+      ],
+      "radius": 1.1007,
+      "botanicalSource": "Pachira Aquatica 01"
+    },
+    "BroadleafALow": {
+      "triangles": 700,
+      "meshes": 1,
+      "bounds": [
+        [
+          -0.7983,
+          0.015,
+          -0.9308
+        ],
+        [
+          0.9052,
+          0.9624,
+          1.2384
+        ]
+      ],
+      "radius": 1.2405,
+      "botanicalSource": "Anthurium Botany 01",
+      "lodOf": "BroadleafA",
+      "triangleReduction": 0.7941
+    },
+    "BroadleafBLow": {
+      "triangles": 699,
+      "meshes": 1,
+      "bounds": [
+        [
+          -0.8574,
+          0.015,
+          -0.7884
+        ],
+        [
+          0.7435,
+          0.9793,
+          0.7246
+        ]
+      ],
+      "radius": 0.8576,
+      "botanicalSource": "Anthurium Botany 01",
+      "lodOf": "BroadleafB",
+      "triangleReduction": 0.7944
+    },
+    "BroadleafCLow": {
+      "triangles": 700,
+      "meshes": 1,
+      "bounds": [
+        [
+          -0.8508,
+          0.015,
+          -1.0562
+        ],
+        [
+          0.6544,
+          0.9618,
+          0.885
+        ]
+      ],
+      "radius": 1.0996,
+      "botanicalSource": "Anthurium Botany 01",
+      "lodOf": "BroadleafC",
+      "triangleReduction": 0.6914
+    },
+    "PalmALow": {
+      "triangles": 450,
+      "meshes": 1,
+      "bounds": [
+        [
+          -1.6093,
+          0.015,
+          -1.2928
+        ],
+        [
+          1.4092,
+          0.9876,
+          1.4435
+        ]
+      ],
+      "radius": 1.8713,
+      "botanicalSource": "Fern 02",
+      "lodOf": "PalmA",
+      "triangleReduction": 0.8112
+    },
+    "PalmBLow": {
+      "triangles": 450,
+      "meshes": 1,
+      "bounds": [
+        [
+          -1.2143,
+          0.015,
+          -1.5347
+        ],
+        [
+          1.1729,
+          0.9942,
+          1.0493
+        ]
+      ],
+      "radius": 1.6952,
+      "botanicalSource": "Fern 02",
+      "lodOf": "PalmB",
+      "triangleReduction": 0.7998
+    },
+    "PalmCLow": {
+      "triangles": 240,
+      "meshes": 1,
+      "bounds": [
+        [
+          -1.1704,
+          0.015,
+          -1.1232
+        ],
+        [
+          1.3479,
+          0.9521,
+          1.1787
+        ]
+      ],
+      "radius": 1.5552,
+      "botanicalSource": "Fern 02",
+      "lodOf": "PalmC",
+      "triangleReduction": 0.6939
+    },
+    "ShrubALow": {
+      "triangles": 1317,
+      "meshes": 2,
+      "bounds": [
+        [
+          -0.4297,
+          0.015,
+          -0.6732
+        ],
+        [
+          0.7416,
+          1.0349,
+          0.4387
+        ]
+      ],
+      "radius": 0.7913,
+      "botanicalSource": "Pachira Aquatica 01",
+      "lodOf": "ShrubA",
+      "triangleReduction": 0.7491
+    },
+    "ShrubBLow": {
+      "triangles": 1318,
+      "meshes": 2,
+      "bounds": [
+        [
+          -0.433,
+          0.015,
+          -0.342
+        ],
+        [
+          0.7219,
+          1.1027,
+          0.5887
+        ]
+      ],
+      "radius": 0.8061,
+      "botanicalSource": "Pachira Aquatica 01",
+      "lodOf": "ShrubB",
+      "triangleReduction": 0.7341
+    },
+    "ShrubCLow": {
+      "triangles": 1318,
+      "meshes": 2,
+      "bounds": [
+        [
+          -0.6107,
+          0.015,
+          -0.823
+        ],
+        [
+          0.824,
+          1.0713,
+          0.519
+        ]
+      ],
+      "radius": 0.8315,
+      "botanicalSource": "Pachira Aquatica 01",
+      "lodOf": "ShrubC",
+      "triangleReduction": 0.7489
+    },
+    "CanopySprayLow": {
+      "triangles": 250,
+      "meshes": 1,
+      "bounds": [
+        [
+          -0.5945,
+          0.015,
+          -0.5401
+        ],
+        [
+          0.6645,
+          0.7914,
+          0.9846
+        ]
+      ],
+      "radius": 1.1453,
+      "botanicalSource": "Pachira Aquatica 01",
+      "lodOf": "CanopySpray",
+      "triangleReduction": 0.7368
+    },
+    "LongPalmALow": {
+      "triangles": 3815,
+      "meshes": 2,
+      "bounds": [
+        [
+          -1.3968,
+          0.0206,
+          -1.6013
+        ],
+        [
+          1.5045,
+          0.9305,
+          1.1842
+        ]
+      ],
+      "radius": 1.7123,
+      "botanicalSource": "Original Celta long palm",
+      "lodOf": "LongPalmA",
+      "triangleReduction": 0.6828
+    },
+    "LongPalmA": {
+      "triangles": 12026,
+      "meshes": 2,
+      "bounds": [
+        [
+          -1.3968,
+          0.0206,
+          -1.6013
+        ],
+        [
+          1.5045,
+          0.9305,
+          1.1842
+        ]
+      ],
+      "radius": 1.7125,
+      "botanicalSource": "Original Celta long palm"
+    }
+  },
+  "materials": [
+    "Foliage_broadleaf_anthurium",
+    "Foliage_broadleaf_pachira",
+    "Foliage_rachis_pachira",
+    "Foliage_fern_scan",
+    "Foliage_palm",
+    "Foliage_rachis"
+  ],
+  "alphaMode": "MASK",
+  "alphaCutoff": 0.5,
+  "doubleSided": true,
+  "originalLongPalms": [
+    "LongPalmA",
+    "LongPalmALow"
+  ],
+  "compatibilityNames": "Palm* are legacy pinnate placement slots now occupied by professional Fern 02; Broadleaf* are Anthurium; Shrub* and CanopySpray* are Pachira. LongPalmA/Low preserves the original Celta long-frond asset for two composed shoreline plants. These names are placement contracts, not botanical claims.",
+  "provenance": "tools/celta/assets/foliage-professional/provenance.json",
+  "credits": "Pachira Aquatica 01, Anthurium Botany 01 and Fern 02: Rob Tuytel (scanning), Rico Cilliers (modeling), Poly Haven, CC0-1.0."
+}

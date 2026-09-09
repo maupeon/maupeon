@@ -1,4 +1,7 @@
 {
+  "sourceScript": "tools/celta/characters.py",
+  "sourceBlend": "tools/celta/blend/characters.blend",
+  "textureProvenance": "Roger: Julien Kaspar / Blender Studio anatomy CC BY 4.0; ambientCG Fabric030 and Leather030 CC0 1.0; MakeHuman Short02 hair CC0 1.0, original generated face/other maps. NPCs: Blender Studio anatomy CC BY 4.0; ambientCG Fabric030 CC0 1.0; original generated face and skin maps. All maps packed. See tools/celta/assets/characters/provenance.json.",
   "coordinateSystem": {
     "units": "metres",
     "up": "+Y",
@@ -8,58 +11,146 @@
   "characters": {
     "roger": {
       "file": "roger.glb",
-      "height": 1.83,
+      "height": 1.9243,
       "bounds": {
         "min": [
-          -0.2864,
-          -0.0,
+          -0.3057,
+          0.0005,
           -0.1997
         ],
         "max": [
           0.3444,
-          1.83,
-          0.1787
+          1.9247,
+          0.1827
         ]
       },
-      "triangles": 56142,
-      "drawPrimitives": 24,
-      "bytes": 1756964,
+      "triangles": 76829,
+      "drawPrimitives": 28,
+      "bytes": 11586180,
       "pivots": {
+        "Hips": [
+          0.0,
+          0.9852,
+          -0.0
+        ],
+        "Spine": [
+          0.0,
+          1.1329,
+          -0.0
+        ],
+        "Chest": [
+          0.0,
+          1.356,
+          -0.0
+        ],
+        "Neck": [
+          0.0,
+          1.5815,
+          -0.0
+        ],
+        "Head": [
+          0.0,
+          1.6668,
+          -0.0
+        ],
         "LeftArm": [
           -0.1812,
-          1.4964,
+          1.5815,
           0.0031
+        ],
+        "LeftForeArm": [
+          -0.2324,
+          1.2568,
+          -0.0103
+        ],
+        "LeftHand": [
+          -0.2448,
+          1.0069,
+          -0.0299
+        ],
+        "RightArm": [
+          0.1812,
+          1.5815,
+          0.0031
+        ],
+        "RightForeArm": [
+          0.2324,
+          1.2568,
+          -0.0103
+        ],
+        "RightHand": [
+          0.2448,
+          1.0069,
+          -0.0299
         ],
         "LeftLeg": [
           -0.1012,
           0.9852,
           -0.0
         ],
-        "RightArm": [
-          0.1812,
-          1.4964,
-          0.0031
+        "LeftShin": [
+          -0.1012,
+          0.5649,
+          -0.0
+        ],
+        "LeftFoot": [
+          -0.1012,
+          0.1105,
+          -0.0
         ],
         "RightLeg": [
           0.1012,
           0.9852,
           -0.0
+        ],
+        "RightShin": [
+          0.1012,
+          0.5649,
+          -0.0
+        ],
+        "RightFoot": [
+          0.1012,
+          0.1105,
+          -0.0
         ]
       },
-      "animations": [],
+      "animations": [
+        {
+          "name": "Idle",
+          "duration": 4.0,
+          "loop": true,
+          "rootMotion": false
+        },
+        {
+          "name": "Walk",
+          "duration": 1.0,
+          "loop": true,
+          "rootMotion": false,
+          "distancePerCycle": 1.2,
+          "nominalSpeed": 1.2
+        }
+      ],
+      "skin": {
+        "bones": 17,
+        "maxInfluences": 4
+      },
       "materials": [
+        "ACG_Fabric030_Roger_khaki_cotton",
+        "ACG_Leather030_Roger_satchel",
         "Aged brass",
+        "BS_Roger_photoreal_skin",
         "Camera dark optical glass",
-        "Khaki drill cotton",
+        "MH_Short02_Roger_hair",
         "Oiled brown leather",
-        "Roger_hair",
         "Roger_skin",
-        "Satchel chestnut leather",
+        "Satchel abraded edge leather",
+        "Studio_Roger_grey_iris",
+        "Studio_Roger_pupil",
+        "Studio_Roger_sclera",
         "Tobacco wool trousers",
         "Warm linen collar",
         "Weathered stitching",
-        "Worn boot soles",
-        "roger_photoreal_skin"
+        "Worn boot soles"
       ]
     },
     "witness-congo": {
@@ -67,50 +158,129 @@
       "height": 1.75,
       "bounds": {
         "min": [
-          -0.2789,
-          -0.0,
+          -0.2769,
+          0.0,
           -0.1459
         ],
         "max": [
-          0.2742,
+          0.2731,
           1.75,
-          0.127
+          0.1308
         ]
       },
-      "triangles": 22849,
-      "drawPrimitives": 18,
-      "bytes": 789348,
+      "triangles": 22845,
+      "drawPrimitives": 21,
+      "bytes": 4120952,
       "pivots": {
+        "Hips": [
+          0.0,
+          0.9465,
+          -0.0
+        ],
+        "Spine": [
+          0.0,
+          1.079,
+          -0.0
+        ],
+        "Chest": [
+          0.0,
+          1.2582,
+          -0.0
+        ],
+        "Neck": [
+          0.0,
+          1.4394,
+          -0.0
+        ],
+        "Head": [
+          0.0,
+          1.514,
+          -0.0
+        ],
         "LeftArm": [
           -0.1747,
           1.4394,
           0.003
         ],
-        "LeftLeg": [
-          -0.0976,
-          0.9465,
-          -0.0
+        "LeftForeArm": [
+          -0.224,
+          1.1785,
+          -0.01
+        ],
+        "LeftHand": [
+          -0.236,
+          0.9674,
+          -0.0289
         ],
         "RightArm": [
           0.1747,
           1.4394,
           0.003
         ],
+        "RightForeArm": [
+          0.224,
+          1.1785,
+          -0.01
+        ],
+        "RightHand": [
+          0.236,
+          0.9674,
+          -0.0289
+        ],
+        "LeftLeg": [
+          -0.0976,
+          0.9465,
+          -0.0
+        ],
+        "LeftShin": [
+          -0.0976,
+          0.5413,
+          -0.0
+        ],
+        "LeftFoot": [
+          -0.0976,
+          0.1032,
+          -0.0
+        ],
         "RightLeg": [
           0.0976,
           0.9465,
           -0.0
+        ],
+        "RightShin": [
+          0.0976,
+          0.5413,
+          -0.0
+        ],
+        "RightFoot": [
+          0.0976,
+          0.1032,
+          -0.0
         ]
       },
-      "animations": [],
+      "animations": [
+        {
+          "name": "Idle",
+          "duration": 4.0,
+          "loop": true,
+          "rootMotion": false
+        }
+      ],
+      "skin": {
+        "bones": 17,
+        "maxInfluences": 4
+      },
       "materials": [
-        "Ecru cotton",
-        "Faded umber trousers",
-        "Indigo washed cotton",
+        "ACG_Fabric030_congo_ecru_cotton",
+        "ACG_Fabric030_congo_faded_umber_trousers",
+        "ACG_Fabric030_congo_indigo_washed_cotton",
+        "BS_congo_iris",
+        "BS_congo_photoreal_skin",
+        "BS_congo_pupil",
+        "BS_congo_sclera",
         "Oiled brown leather",
         "WitnessCongo_hair",
-        "WitnessCongo_skin",
-        "congo_photoreal_skin"
+        "WitnessCongo_skin"
       ]
     },
     "witness-amazonia": {
@@ -118,104 +288,262 @@
       "height": 1.64,
       "bounds": {
         "min": [
-          -0.2615,
+          -0.258,
           -0.0,
           -0.1391
         ],
         "max": [
-          0.2587,
+          0.2582,
           1.64,
           0.1272
         ]
       },
-      "triangles": 22848,
-      "drawPrimitives": 16,
-      "bytes": 781628,
+      "triangles": 22845,
+      "drawPrimitives": 19,
+      "bytes": 4058116,
       "pivots": {
+        "Hips": [
+          0.0,
+          0.887,
+          -0.0
+        ],
+        "Spine": [
+          0.0,
+          1.0111,
+          -0.0
+        ],
+        "Chest": [
+          0.0,
+          1.1791,
+          -0.0
+        ],
+        "Neck": [
+          0.0,
+          1.3489,
+          -0.0
+        ],
+        "Head": [
+          0.0,
+          1.4189,
+          -0.0
+        ],
         "LeftArm": [
           -0.1539,
           1.3489,
           0.0028
         ],
-        "LeftLeg": [
-          -0.0914,
-          0.887,
-          -0.0
+        "LeftForeArm": [
+          -0.2099,
+          1.1044,
+          -0.0093
+        ],
+        "LeftHand": [
+          -0.2211,
+          0.9066,
+          -0.0271
         ],
         "RightArm": [
           0.1539,
           1.3489,
           0.0028
         ],
+        "RightForeArm": [
+          0.2099,
+          1.1044,
+          -0.0093
+        ],
+        "RightHand": [
+          0.2211,
+          0.9066,
+          -0.0271
+        ],
+        "LeftLeg": [
+          -0.0914,
+          0.887,
+          -0.0
+        ],
+        "LeftShin": [
+          -0.0914,
+          0.5073,
+          -0.0
+        ],
+        "LeftFoot": [
+          -0.0914,
+          0.0968,
+          -0.0
+        ],
         "RightLeg": [
           0.0914,
           0.887,
           -0.0
+        ],
+        "RightShin": [
+          0.0914,
+          0.5073,
+          -0.0
+        ],
+        "RightFoot": [
+          0.0914,
+          0.0968,
+          -0.0
         ]
       },
-      "animations": [],
+      "animations": [
+        {
+          "name": "Idle",
+          "duration": 4.0,
+          "loop": true,
+          "rootMotion": false
+        }
+      ],
+      "skin": {
+        "bones": 17,
+        "maxInfluences": 4
+      },
       "materials": [
-        "Madderrust woven wrap",
+        "ACG_Fabric030_amazonia_madderrust_woven_wrap",
+        "ACG_Fabric030_amazonia_unbleached_woven_blouse",
+        "ACG_Fabric030_amazonia_woven_ochre_belt",
+        "BS_amazonia_iris",
+        "BS_amazonia_photoreal_skin",
+        "BS_amazonia_pupil",
+        "BS_amazonia_sclera",
         "Oiled brown leather",
-        "Unbleached woven blouse",
         "WitnessAmazonia_hair",
-        "WitnessAmazonia_skin",
-        "Woven ochre belt",
-        "amazonia_photoreal_skin"
+        "WitnessAmazonia_skin"
       ]
     },
     "contact-ireland": {
       "file": "contact-ireland.glb",
-      "height": 1.7892,
+      "height": 1.7895,
       "bounds": {
         "min": [
-          -0.2849,
-          0.0008,
+          -0.2818,
+          0.0005,
           -0.1939
         ],
         "max": [
-          0.2829,
+          0.2813,
           1.79,
-          0.1261
+          0.1336
         ]
       },
-      "triangles": 22848,
-      "drawPrimitives": 21,
-      "bytes": 843064,
+      "triangles": 22845,
+      "drawPrimitives": 24,
+      "bytes": 4432580,
       "pivots": {
+        "Hips": [
+          0.0,
+          0.9567,
+          -0.0
+        ],
+        "Spine": [
+          0.0,
+          1.0901,
+          -0.0
+        ],
+        "Chest": [
+          0.0,
+          1.2706,
+          -0.0
+        ],
+        "Neck": [
+          0.0,
+          1.4532,
+          -0.0
+        ],
+        "Head": [
+          0.0,
+          1.5284,
+          -0.0
+        ],
         "LeftArm": [
           -0.1935,
           1.4532,
           0.003
         ],
-        "LeftLeg": [
-          -0.0983,
-          0.9567,
-          -0.0
+        "LeftForeArm": [
+          -0.2256,
+          1.1904,
+          -0.01
+        ],
+        "LeftHand": [
+          -0.2377,
+          0.9778,
+          -0.0291
         ],
         "RightArm": [
           0.1935,
           1.4532,
           0.003
         ],
+        "RightForeArm": [
+          0.2256,
+          1.1904,
+          -0.01
+        ],
+        "RightHand": [
+          0.2377,
+          0.9778,
+          -0.0291
+        ],
+        "LeftLeg": [
+          -0.0983,
+          0.9567,
+          -0.0
+        ],
+        "LeftShin": [
+          -0.0983,
+          0.5486,
+          -0.0
+        ],
+        "LeftFoot": [
+          -0.0983,
+          0.1073,
+          -0.0
+        ],
         "RightLeg": [
           0.0983,
           0.9567,
           -0.0
+        ],
+        "RightShin": [
+          0.0983,
+          0.5486,
+          -0.0
+        ],
+        "RightFoot": [
+          0.0983,
+          0.1073,
+          -0.0
         ]
       },
-      "animations": [],
+      "animations": [
+        {
+          "name": "Idle",
+          "duration": 4.0,
+          "loop": true,
+          "rootMotion": false
+        }
+      ],
+      "skin": {
+        "bones": 17,
+        "maxInfluences": 4
+      },
       "materials": [
+        "ACG_Fabric030_ireland_charcoal_wool_trousers",
+        "ACG_Fabric030_ireland_heather_moss_wool_scarf",
+        "ACG_Fabric030_ireland_slate_donegal_wool",
         "Aged brass",
-        "Charcoal wool trousers",
+        "BS_ireland_iris",
+        "BS_ireland_photoreal_skin",
+        "BS_ireland_pupil",
+        "BS_ireland_sclera",
         "ContactIreland_hair",
         "ContactIreland_skin",
-        "Heather moss wool scarf",
         "Oiled brown leather",
-        "Slate Donegal wool",
         "Weathered stitching",
-        "Worn boot soles",
-        "ireland_photoreal_skin"
+        "Worn boot soles"
       ]
     }
   }

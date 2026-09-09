@@ -46,6 +46,14 @@ test('photographic objective cannot be completed without an actual photo payload
   assert.equal(recordStep(progress,{id:steps[1].id,complete:true,photo:{image}}).mission,1)
 })
 
+test('the selected testimony reflection survives reload and a following photograph',()=>{
+  let progress=recordStep(fresh(),{id:'congo-consent',complete:true,choice:1})
+  progress=normalizeProgress(JSON.parse(JSON.stringify(progress)))
+  progress=recordStep(progress,{id:'congo-portrait',complete:true,photo:{image}})
+  assert.equal(progress.entries[0].choice,1)
+  assert.equal(progress.entries[0].note,chapters[0].missions[0].choices[1].note)
+})
+
 test('closing, incomplete or out-of-order activity results do not advance the story',()=>{
   const p=fresh()
   for(const result of [{},{id:'congo-consent'},{id:'congo-portrait',complete:true,photo:{image}},{id:'congo-case',complete:true}])assert.equal(recordStep(p,result),p)
@@ -72,6 +80,10 @@ test('photographs require visible subject, proper distance, framing and focus',(
   const input={distance:5,frameX:.1,frameY:.1,depth:.6,focus:5,occluded:false,coverage:.3}
   assert.equal(assessPhotograph(input).ready,true)
   for(const change of [{distance:1},{frameX:1},{depth:1.1},{focus:13},{occluded:true},{coverage:.01},{coverage:1.2}])assert.equal(assessPhotograph({...input,...change}).ready,false)
+  // At the guide's portrait distance, the old 0.8 m tolerance enabled the
+  // shutter while the lens still visibly blurred the witness's face.
+  assert.equal(assessPhotograph({...input,distance:2.55,focus:1.8}).ready,false)
+  assert.equal(assessPhotograph({...input,distance:2.55,focus:2.55}).ready,true)
 })
 
 test('all Blender mission and intermediate locations are reachable with player clearance',async()=>{

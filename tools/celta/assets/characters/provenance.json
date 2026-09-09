@@ -1,0 +1,98 @@
+{
+  "retrieved": "2026-09-09",
+  "assets": [
+    {
+      "title": "Realistic Human Base Mesh",
+      "author": "Julien Kaspar / Blender Studio",
+      "source": "https://studio.blender.org/training/realistic-human-research/use-of-base-meshes/",
+      "download": "https://studio.blender.org/download-source/files/eb/ebd2128a8f2d5c7e625f6ed6ffb32ebf/ebd2128a8f2d5c7e625f6ed6ffb32ebf.blend",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "files": [
+        {
+          "path": "realistic_human_base.blend",
+          "sha256": "1d9d2a6070acd6a3d0d9b676af816001310fb0f6128d07a3ab3e0318c7fdd981"
+        }
+      ],
+      "modifications": "Head, neck and continuous hands extracted from multires level 1; axis conversion, proportions adapted to Roger, original generated facial projection, scalp fitting, native 17-bone rig and mobile decimation. Eyes adapted from same source. Original donor file retained unchanged."
+    },
+    {
+      "title": "Fabric030",
+      "author": "Lennart Demes / ambientCG",
+      "source": "https://ambientcg.com/view?id=Fabric030",
+      "download": "https://ambientcg.com/get?file=Fabric030_1K-JPG.zip",
+      "license": "CC0 1.0 Universal",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "licenseEvidence": "https://docs.ambientcg.com/license/",
+      "downloadSha256": "82d4d00ccf901cf4707c5489005945ab8574933fc60437e26c6737f0436699e0",
+      "files": [
+        {
+          "path": "Fabric030/Fabric030_1K-JPG_Color.jpg",
+          "sha256": "6388762708722de48cdbdfb4878b9ae6d8012de5948d564006067b629f0b84ef"
+        },
+        {
+          "path": "Fabric030/Fabric030_1K-JPG_NormalGL.jpg",
+          "sha256": "c9a8f4ff15527af0b226b8a8840405f944c45a32c2e4462864d3b0136827e6e2"
+        },
+        {
+          "path": "Fabric030/Fabric030_1K-JPG_Roughness.jpg",
+          "sha256": "221bf708cb614b01ae83b856376fa79fff22dc249d8a397ab0f89dd3b7fe6da6"
+        }
+      ],
+      "modifications": "Original color, tangent-space normal and roughness pixels retained as source. UV physical scale, material tint, normal strength and JPEG web encoding adapted for Roger. No painted changes to maps."
+    },
+    {
+      "title": "Leather030",
+      "author": "Lennart Demes / ambientCG",
+      "source": "https://ambientcg.com/view?id=Leather030",
+      "download": "https://ambientcg.com/get?file=Leather030_1K-JPG.zip",
+      "license": "CC0 1.0 Universal",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "licenseEvidence": "https://docs.ambientcg.com/license/",
+      "downloadSha256": "0cdd772843bcaefb15fcec99b49c8d6436ab2f1535f39bf3a00ae65bc1e2aa06",
+      "files": [
+        {
+          "path": "Leather030/Leather030_1K-JPG_Color.jpg",
+          "sha256": "f9c37a23f64152c404d0ca33e84e6537e5ad7db3af0022b20d5aef559b865e8e"
+        },
+        {
+          "path": "Leather030/Leather030_1K-JPG_NormalGL.jpg",
+          "sha256": "6c90ae49dd269d5fe87ce06e14bf0050e753de7225e6b18238d46b91a44fe8c8"
+        },
+        {
+          "path": "Leather030/Leather030_1K-JPG_Roughness.jpg",
+          "sha256": "c16587efdcab6c8288a26ba20577a17822bb90b78c3cd9cc663cb8dd04d8f0d1"
+        }
+      ],
+      "modifications": "Original color, tangent-space normal and roughness pixels retained as source. UV physical scale, material tint, normal strength and JPEG web encoding adapted for Roger. No painted changes to maps."
+    },
+    {
+      "title": "Short02 hair",
+      "author": "MakeHuman system assets (Data Collection AB, Joel Palmius, Jonas Hauquier)",
+      "source": "https://static.makehumancommunity.org/assets/assetpacks/makehuman_system_assets.html",
+      "download": "https://files2.makehumancommunity.org/asset_packs/makehuman_system_assets/makehuman_system_assets_cc0.zip",
+      "license": "CC0 1.0 Universal",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "licenseEvidence": "Explicit September 2020 CC0 release statement in the retained OBJ/MHMAT headers and official system-asset list.",
+      "files": [
+        {
+          "path": "MakeHumanShort02/short02.mhmat",
+          "sha256": "2ed04c8aad9c1a35d858ca72091525d32b1da3b61b5a031634dd528fd8530f6d"
+        },
+        {
+          "path": "MakeHumanShort02/short02.obj",
+          "sha256": "48f979114adfa712165a69cc55c45a70831af1fb3cba8e2a89120f0c87407b64"
+        },
+        {
+          "path": "MakeHumanShort02/short02_diffuse.png",
+          "sha256": "47fe33831a3929567c733356dd66243116e05df2ace1f884ddca0080b728229f"
+        },
+        {
+          "path": "MakeHumanShort02/short02_normal.png",
+          "sha256": "2cfac7619f8eec77dd90df979d912415058f4f0fc16940cba40a8eb1ae6d74b5"
+        }
+      ],
+      "modifications": "Axis/unit conversion, cranial fitting, Head bone binding, one subdivision level of existing topology, five original shingled locks fitted 2\u20135 mm above the groom and sampling its original UVs, alpha masking at .42, roughness/specular calibration and web normal-map encoding. Original UV and RGBA diffuse atlas retained; original source files unchanged."
+    }
+  ]
+}

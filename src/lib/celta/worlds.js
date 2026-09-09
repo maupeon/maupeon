@@ -10,11 +10,30 @@ export function sampleGrid(grid, x, z, interpolate = true) {
   return (read(ix,iz)*(1-fx)+read(ix+1,iz)*fx)*(1-fz)+(read(ix,iz+1)*(1-fx)+read(ix+1,iz+1)*fx)*fz
 }
 
+export function surfaceContains(surface, x, z, margin = 0) {
+  if (surface.type === 'rect') {
+    const [left,right,back,front] = surface.bounds
+    return x >= left-margin && x <= right+margin && z >= back-margin && z <= front+margin
+  }
+  if (surface.type === 'ellipse') return ((x-surface.center[0])/(surface.radii[0]+margin))**2+((z-surface.center[1])/(surface.radii[1]+margin))**2 <= 1
+  if (surface.type !== 'path') return false
+  return surface.points.slice(1).some((b,i)=>{
+    const a=surface.points[i],dx=b[0]-a[0],dz=b[1]-a[1]
+    const t=Math.max(0,Math.min(1,((x-a[0])*dx+(z-a[1])*dz)/(dx*dx+dz*dz || 1)))
+    return Math.hypot(x-a[0]-dx*t,z-a[1]-dz*t) <= surface.width/2+margin
+  })
+}
+
 export function groundHeight(world, x, z) {
-  return sampleGrid(world?.heightGrid, x, z) ?? 0
+  const detail = world?.detailHeightGrid ? sampleGrid(world.detailHeightGrid, x, z) : null
+  const ground = detail ?? sampleGrid(world?.heightGrid, x, z) ?? 0
+  // Exact deck surfaces avoid interpolating feet into gaps beside narrow planks.
+  const deck = world?.walkSurfaces?.find(surface => surfaceContains(surface,x,z) && Math.abs(surface.height-ground)<.5)
+  return deck?.height ?? ground
 }
 
 export function traversable(world, x, z, obstacles = []) {
   if (!world || sampleGrid(world.walkableGrid,x,z,false) !== 1) return false
-  return ![...(world.colliders || []),...obstacles].some(o => Math.hypot(x-o.x,z-o.z) < o.r+.22)
+  const blocks = o => Math.hypot(x-o.x,z-o.z) < o.r+.22
+  return !(world.colliders || []).some(blocks) && !obstacles.some(blocks)
 }

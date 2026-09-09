@@ -1,0 +1,7 @@
+# Third-party resources adapted for the witnesses
+
+The three fictional witness characters in Congo, Amazonía and Ireland incorporate head, neck, eye and hand anatomy adapted from **Realistic Human Base Mesh** by **Julien Kaspar / Blender Studio**, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). [Original source](https://studio.blender.org/training/realistic-human-research/use-of-base-meshes/). The professional anatomy was individually reshaped and fitted to the project's existing character identities, original face maps and garments, then bound to its native 17-bone Idle animation. Source attribution and this license link must remain in the game's credits. No endorsement is implied.
+
+Their garments use **Fabric030** by **Lennart Demes / ambientCG**, [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/). [Original source](https://ambientcg.com/view?id=Fabric030). Source color, normal and roughness maps are retained; physical UV scale, garment tint, normal strength and delivery encoding were adapted. The wool garment labels identify the original costume design; the scan provides fine woven surface detail rather than claiming a specific historical textile reconstruction.
+
+Original source files and their SHA-256 values are recorded in the shared `provenance.json`. No new third-party file was downloaded for these NPC adaptations. Existing original face atlas pixels were not edited.

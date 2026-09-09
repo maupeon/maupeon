@@ -1,0 +1,7 @@
+Poly Haven source textures
+
+License: CC0 1.0 Universal (CC0-1.0).
+Asset license declaration: https://polyhaven.com/license
+Legal code: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+
+Each asset page independently labels the download CC0. See provenance.json for asset-page URLs, authors, exact download URLs and SHA-256 source checksums. The game layout and geometry are separately authored; only the listed image maps originate from Poly Haven.

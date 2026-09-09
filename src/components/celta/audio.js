@@ -67,6 +67,19 @@ export function createSoundscape() {
         )
       )
     },
+    shutter() {
+      if (!enabled) return
+      const source=context.createBufferSource(), click=context.createBiquadFilter(), gain=context.createGain()
+      source.buffer=buffer
+      click.type='highpass';click.frequency.value=1800
+      gain.gain.setValueAtTime(.5,context.currentTime)
+      gain.gain.exponentialRampToValueAtTime(.001,context.currentTime+.09)
+      gain.gain.setValueAtTime(.22,context.currentTime+.12)
+      gain.gain.exponentialRampToValueAtTime(.001,context.currentTime+.2)
+      source.connect(click);click.connect(gain);gain.connect(master)
+      source.start();source.stop(context.currentTime+.21)
+      source.onended=()=>{source.disconnect();click.disconnect();gain.disconnect()}
+    },
     chime() {
       if (!enabled) return
       const oscillator = context.createOscillator(),

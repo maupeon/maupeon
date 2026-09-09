@@ -1,7 +1,7 @@
 // Original interactive scenes. Documents and encounters are dramatized; dates
 // and the historical outcome are explained separately in the notebook.
 const talk = (id, title, position, speaker, text, replies) => ({ id, type: 'talk', title, position, speaker, text, replies, instruction: `Acércate y conversa: ${title.toLowerCase()}.` })
-const photo = (id, title, position, subject, height = 1.25, radius = .55) => ({ id, type: 'photo', title, position, subject, height, radius, instruction: `Abre la cámara con C. Encuadra ${subject.toLowerCase()}, ajusta el enfoque y toma la fotografía.`, verb: 'Abrir cámara' })
+const photo = (id, title, position, subject, height = 1.25, radius = .55) => ({ id, type: 'photo', title, position, subject, height, radius, instruction: `Abre la cámara. Encuadra ${subject.toLowerCase()}, ajusta el enfoque y toma la fotografía.`, verb: 'Abrir cámara' })
 const inspect = (id, title, position, document) => ({ id, type: 'inspect', title, position, document, instruction: `Examina ${title.toLowerCase()}. Encuentra las anotaciones y contrasta lo que dicen.`, verb: 'Examinar' })
 const collect = (id, title, position, text) => ({ id, type: 'collect', title, position, text, instruction: `Busca ${title.toLowerCase()} y guarda una copia en tu expediente.`, verb: 'Recoger copia' })
 const connect = (id, title, position, pairs) => ({ id, type: 'connect', title, position, pairs, instruction: 'Relaciona cada afirmación con la prueba que permite sostenerla.', verb: 'Construir el informe' })
@@ -28,7 +28,7 @@ export const missionDesign = {
         answers: ['El registro de entregas por aldea','La custodia de familiares por incumplimiento','La ausencia de un precio del transporte'],correct:1,
         explanation: 'La amenaza contra las familias convierte la entrega en coacción. Ya puedes vincular el documento al testimonio, sin confundir una cifra con una prueba suficiente.',
       }),
-      photo('congo-depot', 'El lugar de las cifras', [-15,-22], 'El depósito y sus cargamentos', 1.1, 1.5),
+      {...photo('congo-depot', 'El lugar de las cifras', [-15,-22], 'El depósito y sus cargamentos', 1.1, 2), subjectPosition:[-19,3.2,-22]},
     ],
   },
   'congo-report': {
@@ -42,7 +42,7 @@ export const missionDesign = {
   'amazon-witness': {
     title: 'El camino del caucho', position: [-12,-9], target: 'Los árboles del sendero',
     steps: [
-      photo('amazon-rubber', 'Las marcas en la corteza', [-12,-9], 'El árbol sangrado y el recipiente de caucho', 1.0, .8),
+      {...photo('amazon-rubber', 'Las marcas en la corteza', [-12,-9], 'El árbol sangrado y el recipiente de caucho', 1.0, .8), subjectPosition:[-13.25,2.134,-8.65]},
       talk('amazon-voice', 'Lo que una fotografía no cuenta', [-16,-25], 'Testimonio recogido con un intérprete', 'El árbol puede fotografiarse. La deuda no se ve. Nos cobran herramientas, comida y el viaje, y al terminar la temporada seguimos debiendo más que antes. Mi familia no puede salir de la estación.', [
         ['Preguntar quién decide que la deuda está saldada', 'El mismo puesto que fija los precios decide cuánto vale el caucho. No existe una salida que el trabajador pueda controlar.'],
         ['Preguntar por la posibilidad de abandonar el trabajo', 'Los permisos de salida se niegan. Anotas esta restricción para contrastarla con los contratos de la compañía.'],
@@ -102,11 +102,11 @@ export const missionDesign = {
   },
   'ireland-last-page': {
     title:'Lo que queda', position:[-1.5,-2],target:'El cuaderno de Pentonville',
-    steps:[connect('last-memory','Las páginas de una conciencia',[-1.5,-2],[
+    steps:[{...connect('last-memory','Las páginas de una conciencia',[-1.5,-2],[
       {claim:'El Congo deshace la promesa de la misión civilizadora',evidence:'Un testimonio frente al libro de cuotas',context:'La admiración juvenil por el imperio cede ante lo que has documentado.'},
       {claim:'El Putumayo revela que el abuso no es una excepción',evidence:'La deuda y las voces de la estación cauchera',context:'El mismo sistema aparece bajo otra bandera comercial.'},
       {claim:'La convicción política no elimina los errores ni las dudas',evidence:'El regreso a Irlanda para advertir del peligro',context:'En la celda quedan el deseo de libertad, las contradicciones y una sentencia que no puedes cambiar.'},
-    ])],
+    ]),text:'La petición de clemencia no ha prosperado. Tus diarios privados circulan como arma de descrédito; la intimidad se convierte en otro juicio. Desde la celda vuelves a las pruebas que sí querías dejar al mundo. No borran tus contradicciones, pero conservan las voces que escuchaste.'}],
   },
 }
 
