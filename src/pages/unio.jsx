@@ -2,10 +2,18 @@ import Head from 'next/head'
 import { useEffect, useRef, useState } from 'react'
 
 import s from '@/components/unio/Unio.module.css'
+import { DustMotes } from '@/components/unio/DustMotes'
+import { StainedWindow } from '@/components/unio/StainedWindow'
 
 const APP_STORE_URL = 'https://apps.apple.com/app/id6820168371'
 const LEGAL = 'https://maupeon-unio.expo.app'
 const COVERS = Array.from({ length: 18 }, (_, i) => `/unio/covers/${String(i).padStart(2, '0')}.webp`)
+
+const PHRASES = ['para empezar el día.', 'para rezar el Rosario.', 'para leer la Palabra.', 'para la misa de hoy.', 'para dormir en paz.']
+
+const MANIFESTO = 'Unos minutos al día | cambian | el día entero. | Para empezar con gratitud, | para una noche difícil, | para rezar por los tuyos.'
+  .split(' | ')
+  .flatMap((chunk, ci) => chunk.split(' ').map((t) => ({ t, em: ci === 1 || ci === 2 })))
 
 const CHAPTERS = [
   {
@@ -103,6 +111,32 @@ function AppStoreButton({ tone = 'dark', label = 'Descargar en App Store' }) {
   )
 }
 
+/** Rotating italic line under the title; static (first phrase) with reduced motion. */
+function Cycle({ phrases }) {
+  const [i, setI] = useState(0)
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined
+    let id = 0
+    const start = setTimeout(() => {
+      id = setInterval(() => setI((n) => (n + 1) % phrases.length), 2600)
+    }, 2400)
+    return () => {
+      clearTimeout(start)
+      clearInterval(id)
+    }
+  }, [phrases.length])
+  return (
+    <span className={`${s.cycle} ${s.load}`} style={{ '--d': '560ms' }}>
+      <span className={s.srOnly}>cada día.</span>
+      {phrases.map((p, n) => (
+        <em key={p} aria-hidden="true" className={n === i ? s.cycleOn : n === (i - 1 + phrases.length) % phrases.length ? s.cycleOff : ''}>
+          {p}
+        </em>
+      ))}
+    </span>
+  )
+}
+
 function Phone({ src, alt, className = '', priority = false }) {
   return (
     <div className={`${s.phone} ${className}`}>
@@ -169,12 +203,37 @@ function CoverRow({ covers, reverse }) {
 export default function UnioLanding() {
   const [scrolled, setScrolled] = useState(false)
   const [mounted, setMounted] = useState(false)
+  const heroRef = useRef(null)
+  const manifestoRef = useRef(null)
   useEffect(() => setMounted(true), [])
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24)
-    onScroll()
+    // Scroll-linked motion: --p (0→1) on the hero and the manifesto, set once per frame.
+    let raf = 0
+    const clamp = (v) => Math.min(1, Math.max(0, v))
+    const update = () => {
+      raf = 0
+      const y = window.scrollY
+      setScrolled(y > 24)
+      const hero = heroRef.current
+      if (hero) hero.style.setProperty('--p', clamp(y / hero.offsetHeight).toFixed(4))
+      const m = manifestoRef.current
+      if (m) {
+        const r = m.getBoundingClientRect()
+        const vh = window.innerHeight
+        m.style.setProperty('--p', clamp((vh * 0.8 - r.top) / (r.height + vh * 0.2)).toFixed(4))
+      }
+    }
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(update)
+    }
+    update()
     window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    window.addEventListener('resize', onScroll)
+    return () => {
+      cancelAnimationFrame(raf)
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+    }
   }, [])
 
   return (
@@ -223,41 +282,70 @@ export default function UnioLanding() {
         </header>
 
         <main id="contenido">
-          {/* ---------- Hero ---------- */}
-          <section id="inicio" className={s.hero}>
+          {/* ---------- Hero: dawn in a cathedral ---------- */}
+          <section id="inicio" ref={heroRef} className={s.hero} aria-labelledby="hero-title">
+            <div className={s.beams} aria-hidden="true">
+              <span className={s.beam} style={{ '--c': 'rgba(242, 184, 70, 0.55)', '--x': '18%', '--r': '29deg', '--w': '15%', '--t': '0s' }} />
+              <span className={s.beam} style={{ '--c': 'rgba(74, 118, 190, 0.42)', '--x': '27%', '--r': '33deg', '--w': '11%', '--t': '-3s' }} />
+              <span className={s.beam} style={{ '--c': 'rgba(206, 104, 128, 0.36)', '--x': '35%', '--r': '27deg', '--w': '9%', '--t': '-6s' }} />
+              <span className={s.beam} style={{ '--c': 'rgba(108, 160, 96, 0.36)', '--x': '41%', '--r': '35deg', '--w': '12%', '--t': '-2s' }} />
+            </div>
+            <DustMotes className={s.dust} />
+
             <div className={s.heroCopy}>
-              <p className={`${s.eyebrow} ${s.load}`} style={{ '--d': '0ms' }}>
-                App católica para iPhone
+              <p className={`${s.eyebrow} ${s.load}`} style={{ '--d': '200ms' }}>
+                Unio · App católica para iPhone
               </p>
-              <h1 className={`${s.display} ${s.load}`} style={{ '--d': '90ms' }}>
-                Un momento con Dios, <em>cada día.</em>
+              <h1 id="hero-title" className={s.display}>
+                <span className={s.load} style={{ '--d': '320ms' }}>
+                  Un momento
+                </span>{' '}
+                <span className={s.load} style={{ '--d': '440ms' }}>
+                  con Dios,
+                </span>
+                <Cycle phrases={PHRASES} />
               </h1>
-              <p className={`${s.lede} ${s.load}`} style={{ '--d': '180ms' }}>
-                El Rosario y oraciones guiadas en audio, la Biblia completa sin conexión y las lecturas de la misa de hoy. A tu ritmo, aunque solo tengas unos minutos.
+              <p className={`${s.lede} ${s.load}`} style={{ '--d': '700ms' }}>
+                Oración guiada en audio, el Rosario, la Biblia y las lecturas de la misa de hoy. Unos minutos al día, a tu ritmo.
               </p>
-              <div className={`${s.heroActions} ${s.load}`} style={{ '--d': '270ms' }}>
+              <div className={`${s.heroActions} ${s.load}`} style={{ '--d': '820ms' }}>
                 <AppStoreButton />
-                <a href="#palabra" className={s.textLink}>
+                <a href="#manifiesto" className={s.textLink}>
                   Ver cómo funciona
                 </a>
               </div>
-              <ul className={`${s.promises} ${s.load}`} style={{ '--d': '360ms' }}>
+              <ul className={`${s.promises} ${s.load}`} style={{ '--d': '940ms' }}>
                 <li>Sin anuncios</li>
                 <li>Sin rastreo</li>
                 <li>El 10 % de Unio+ a la caridad</li>
               </ul>
             </div>
 
-            <div className={s.heroArt}>
-              <div className={s.arch} aria-hidden="true" />
-              <Phone src="/unio/03-orar.webp" alt="El Rosario del día en Unio" className={`${s.heroPhoneBack} ${s.loadPhone}`} />
+            <div className={s.stage}>
+              <StainedWindow className={s.heroWindow} />
               <Phone
                 src="/unio/01-inicio.webp"
                 alt="Pantalla de inicio de Unio con la oración del día"
-                className={`${s.heroPhoneFront} ${s.loadPhone}`}
+                className={s.heroPhone}
                 priority
               />
             </div>
+
+            <a href="#manifiesto" className={s.scrollCue} aria-label="Bajar a la siguiente sección">
+              <span>Desliza</span>
+              <i aria-hidden="true" />
+            </a>
+          </section>
+
+          {/* ---------- Manifesto: words light up as you scroll ---------- */}
+          <section id="manifiesto" ref={manifestoRef} className={s.manifesto} aria-label="Para qué es Unio">
+            <p className={s.manifestoText} style={{ '--n': MANIFESTO.length }}>
+              {MANIFESTO.map((w, i) => (
+                <span key={i} style={{ '--i': i }} className={w.em ? s.manifestoEm : undefined}>
+                  {w.t}{' '}
+                </span>
+              ))}
+            </p>
           </section>
 
           {/* ---------- Wall of stained glass ---------- */}
@@ -266,7 +354,7 @@ export default function UnioLanding() {
               <h2 id="wall-title" className={s.wallTitle}>
                 Cada oración, <em>su propio vitral.</em>
               </h2>
-              <p>Para empezar el día, para una noche difícil, para rezar por los tuyos.</p>
+              <p>Oraciones guiadas, el Rosario y novenas: cada una con su propio arte.</p>
             </div>
             <div className={s.wallRows}>
               <CoverRow covers={COVERS.slice(0, 9)} />
