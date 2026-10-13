@@ -173,8 +173,58 @@
   },
   "exercise": {
     "title": "Exercise - Mauricio Peón",
-    "metaDescription": "Recent Strava activities.",
-    "heading": "Exercise"
+    "metaDescription": "My Valencia Marathon 2025, my personal records and the kilometers of every month, straight from Strava.",
+    "eyebrow": "Exercise",
+    "heading": "I run in the *mornings*.",
+    "intro": "I keep count on Strava and this page updates itself: my marathon, my personal records and the kilometers of every month.",
+    "marathon": {
+      "eyebrow": "Milestone",
+      "title": "Valencia Marathon 2025",
+      "pace": "Pace",
+      "distance": "Distance",
+      "date": "Date",
+      "note": "Time of the best 42.195 km effort in my Strava recording.",
+      "noteOffline": "Time recorded at the finish.",
+      "also": "I also swam 5 km in open water.",
+      "viewOnStrava": "View on Strava"
+    },
+    "totals": {
+      "eyebrow": "Since I started tracking",
+      "runs": "runs",
+      "km": "kilometers",
+      "hours": "hours running",
+      "pace": "average pace",
+      "thisYear": "this year"
+    },
+    "monthly": {
+      "eyebrow": "Last 12 months",
+      "title": "Kilometers per month",
+      "summary": "{km} km over the last twelve months.",
+      "aria": "Kilometers run per month over the last twelve months"
+    },
+    "records": {
+      "eyebrow": "Personal records",
+      "title": "My best *times*",
+      "valencia": "Valencia 2025",
+      "names": {
+        "1K": "1 km",
+        "1 mile": "1 mile",
+        "5K": "5 km",
+        "10K": "10 km",
+        "Half-Marathon": "Half marathon",
+        "Marathon": "Marathon"
+      }
+    },
+    "game": {
+      "eyebrow": "Meanwhile",
+      "title": "Run the *Valencia Marathon*",
+      "description": "A game I made: dodge obstacles and collect oranges through the streets of Valencia until you complete the 42.195 km. Space or tap to jump; arrow keys or swipe to change lanes."
+    },
+    "status": {
+      "updated": "Strava data · updated on",
+      "snapshot": "saved copy",
+      "error": "I couldn't load my Strava data right now. Check back in a bit."
+    }
   },
   "religion": {
     "pageTitle": "Today's Gospel - Daily Readings",
@@ -186,14 +236,6 @@
     "heading": "Today's Lectures",
     "gospel": "GOSPEL",
     "wordOfTheLord": "Word of the Lord"
-  },
-  "strava": {
-    "runs": "Runs",
-    "distance": "Distance",
-    "time": "Time",
-    "pace": "Pace",
-    "personalRecords": "Personal Records",
-    "errorLoading": "Error loading data"
   },
   "footer": {
     "copyright": "All rights reserved."

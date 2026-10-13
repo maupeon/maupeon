@@ -391,3 +391,23 @@
     transform: none;
   }
 }
+
+/* Monthly chart: bars grow from the baseline once the card scrolls into view. */
+.chart-bar {
+  transform-origin: bottom;
+  transition: transform 1100ms cubic-bezier(0.32, 0.72, 0, 1) var(--bar-delay, 0ms);
+}
+
+.reveal-hidden .chart-bar {
+  transform: scaleY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chart-bar {
+    transition: none;
+  }
+
+  .reveal-hidden .chart-bar {
+    transform: none;
+  }
+}

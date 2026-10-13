@@ -1,0 +1,22 @@
+{
+  "provisional": true,
+  "updatedAt": "2026-10-13T12:00:00.000Z",
+  "processedThrough": "2026-10-09T12:31:23Z",
+  "records": {
+    "1K": { "key": "1K", "time": 192, "date": "2026-03-22", "activityId": 1, "isPublic": false },
+    "1 mile": { "key": "1 mile", "time": 370, "date": "2026-03-22", "activityId": 1, "isPublic": false },
+    "5K": { "key": "5K", "time": 1389, "date": "2026-03-22", "activityId": 1, "isPublic": false },
+    "10K": { "key": "10K", "time": 2858, "date": "2026-03-22", "activityId": 1, "isPublic": true },
+    "Half-Marathon": { "key": "Half-Marathon", "time": 6245, "date": "2026-03-22", "activityId": 1, "isPublic": false },
+    "Marathon": { "key": "Marathon", "time": 13880, "date": "2025-12-07", "activityId": 16675132150, "isPublic": false }
+  },
+  "totals": { "runs": 124, "km": 1188, "hours": 120, "paceSecondsPerKm": 364, "ytdRuns": 76, "ytdKm": 563 },
+  "monthly": [
+    { "month": "2025-11", "km": 0, "runs": 0 }, { "month": "2025-12", "km": 0, "runs": 0 },
+    { "month": "2026-01", "km": 0, "runs": 0 }, { "month": "2026-02", "km": 0, "runs": 0 },
+    { "month": "2026-03", "km": 0, "runs": 0 }, { "month": "2026-04", "km": 0, "runs": 0 },
+    { "month": "2026-05", "km": 0, "runs": 0 }, { "month": "2026-06", "km": 0, "runs": 0 },
+    { "month": "2026-07", "km": 0, "runs": 0 }, { "month": "2026-08", "km": 0, "runs": 0 },
+    { "month": "2026-09", "km": 0, "runs": 0 }, { "month": "2026-10", "km": 0, "runs": 0 }
+  ]
+}

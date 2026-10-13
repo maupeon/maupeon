@@ -1109,7 +1109,7 @@ export function RunnerGame() {
     : '--'
 
   return (
-    <div className="relative w-full overflow-hidden border shadow-2xl h-96 rounded-xl border-zinc-200 dark:border-zinc-700">
+    <div className="relative h-96 w-full overflow-hidden sm:h-[28rem]">
       <Canvas
         shadows
         camera={{ position: [1.5, 2, 3.5], fov: MIN_FOV }}

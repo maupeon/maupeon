@@ -173,8 +173,58 @@
   },
   "exercise": {
     "title": "Ejercicio - Mauricio Peón",
-    "metaDescription": "Actividades recientes de Strava.",
-    "heading": "Ejercicio"
+    "metaDescription": "Mi Maratón de Valencia 2025, mis marcas personales y los kilómetros de cada mes, directo de Strava.",
+    "eyebrow": "Ejercicio",
+    "heading": "Corro por las *mañanas*.",
+    "intro": "Llevo la cuenta en Strava y esta página se actualiza sola: mi maratón, mis marcas personales y los kilómetros de cada mes.",
+    "marathon": {
+      "eyebrow": "Hito",
+      "title": "Maratón de Valencia 2025",
+      "pace": "Ritmo",
+      "distance": "Distancia",
+      "date": "Fecha",
+      "note": "Tiempo del mejor esfuerzo de 42.195 km en mi grabación de Strava.",
+      "noteOffline": "Tiempo registrado en mi llegada.",
+      "also": "Además, nadé 5 km en aguas abiertas.",
+      "viewOnStrava": "Ver en Strava"
+    },
+    "totals": {
+      "eyebrow": "Desde que registro",
+      "runs": "carreras",
+      "km": "kilómetros",
+      "hours": "horas corriendo",
+      "pace": "ritmo promedio",
+      "thisYear": "este año"
+    },
+    "monthly": {
+      "eyebrow": "Últimos 12 meses",
+      "title": "Kilómetros por mes",
+      "summary": "{km} km en los últimos doce meses.",
+      "aria": "Kilómetros recorridos por mes durante los últimos doce meses"
+    },
+    "records": {
+      "eyebrow": "Marcas personales",
+      "title": "Mis mejores *tiempos*",
+      "valencia": "Valencia 2025",
+      "names": {
+        "1K": "1 km",
+        "1 mile": "1 milla",
+        "5K": "5 km",
+        "10K": "10 km",
+        "Half-Marathon": "Media maratón",
+        "Marathon": "Maratón"
+      }
+    },
+    "game": {
+      "eyebrow": "Mientras tanto",
+      "title": "Corre el *Maratón de Valencia*",
+      "description": "Un juego que hice: esquiva obstáculos y recoge naranjas por las calles de Valencia hasta completar los 42.195 km. Espacio o toque para saltar; flechas o deslizar para cambiar de carril."
+    },
+    "status": {
+      "updated": "Datos de Strava · actualizados el",
+      "snapshot": "copia guardada",
+      "error": "No pude cargar mis datos de Strava en este momento. Vuelve en un rato."
+    }
   },
   "religion": {
     "pageTitle": "Evangelio de hoy - Lecturas del Día",
@@ -186,14 +236,6 @@
     "heading": "Lecturas de Hoy",
     "gospel": "EVANGELIO",
     "wordOfTheLord": "Palabra del Señor"
-  },
-  "strava": {
-    "runs": "Carreras",
-    "distance": "Distancia",
-    "time": "Tiempo",
-    "pace": "Ritmo",
-    "personalRecords": "Records Personales",
-    "errorLoading": "Error al cargar datos"
   },
   "footer": {
     "copyright": "Todos los derechos reservados."
