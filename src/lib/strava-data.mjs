@@ -36,14 +36,10 @@ class StravaError extends Error {
   }
 }
 
-// Strava's limits reset on 15-minute clock boundaries.
-function msUntilNextWindow(now = Date.now()) {
-  const window = 15 * 60 * 1000
-  return window - (now % window) + 5000
-}
-
-// `wait` is for the snapshot script: on a 429 it sleeps until the window resets
-// and retries. The page itself never waits; it falls back to the snapshot.
+// `wait` is for the snapshot script. Strava's 15-minute window does not reset on
+// a predictable clock tick, so on a 429 it simply retries every minute (up to
+// ~40 minutes) until Strava lets requests through. The page itself never waits;
+// it falls back to the snapshot.
 async function stravaGet(path, token, { wait = false, log = () => {} } = {}) {
   let response
 
@@ -52,11 +48,12 @@ async function stravaGet(path, token, { wait = false, log = () => {} } = {}) {
       headers: { Authorization: `Bearer ${token}` },
     })
 
-    if (response.status !== 429 || !wait || attempt >= 4) break
+    if (response.status !== 429 || !wait || attempt >= 40) break
 
-    const delay = msUntilNextWindow()
-    log(`Rate limited; waiting ${Math.ceil(delay / 60000)} min for the window to reset`)
-    await new Promise((resolve) => setTimeout(resolve, delay))
+    if (attempt % 5 === 0) {
+      log(`Rate limited (${response.headers.get('x-readratelimit-usage')}); retrying every minute`)
+    }
+    await new Promise((resolve) => setTimeout(resolve, 60 * 1000))
   }
 
   if (!response.ok) {

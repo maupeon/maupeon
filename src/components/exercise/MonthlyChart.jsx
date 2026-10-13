@@ -13,6 +13,10 @@ export function MonthlyChart({ monthly }) {
   const total = Math.round(monthly.reduce((sum, month) => sum + month.km, 0))
   const peak = monthly.reduce((best, month) => (month.km > best.km ? month : best))
 
+  // No kilometres at all means no data, not a year of rest: show nothing
+  // rather than a chart of zeros that reads as "0 km".
+  if (total === 0) return null
+
   const summary = monthly
     .map((month) => `${formatMonth(month.month, locale, 'long')}: ${Math.round(month.km)} km`)
     .join(', ')
