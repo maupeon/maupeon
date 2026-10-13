@@ -18,7 +18,8 @@ function usePrevious(value) {
 
 export default function App({ Component, pageProps, router }) {
   let previousPathname = usePrevious(router.pathname)
-  let isStandalonePage = router.pathname.startsWith('/app/')
+  // /app/* and /unio bring their own layout (no site header/footer).
+  let isStandalonePage = router.pathname.startsWith('/app/') || router.pathname === '/unio'
 
   if (isStandalonePage) {
     return <Component previousPathname={previousPathname} {...pageProps} />
