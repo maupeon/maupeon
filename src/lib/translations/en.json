@@ -218,7 +218,8 @@
     "game": {
       "eyebrow": "Meanwhile",
       "title": "Run the *Valencia Marathon*",
-      "description": "A game I made: dodge obstacles and collect oranges through the streets of Valencia until you complete the 42.195 km. Space or tap to jump; arrow keys or swipe to change lanes."
+      "description": "A game I made: dodge obstacles and collect oranges through the streets of Valencia until you complete the 42.195 km. Space or tap to jump; arrow keys or swipe to change lanes.",
+      "unavailable": "Your browser couldn't start the 3D game (it needs WebGL). Try another browser or device."
     },
     "status": {
       "updated": "Strava data · updated on",

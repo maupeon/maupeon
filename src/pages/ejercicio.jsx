@@ -2,6 +2,7 @@ import Head from 'next/head'
 import dynamic from 'next/dynamic'
 
 import { Container } from '@/components/Container'
+import { GameBoundary } from '@/components/exercise/GameBoundary'
 import { MarathonFeature } from '@/components/exercise/MarathonFeature'
 import { MonthlyChart } from '@/components/exercise/MonthlyChart'
 import { Records } from '@/components/exercise/Records'
@@ -73,7 +74,9 @@ export default function Ejercicio({ strava }) {
           </Reveal>
           <Reveal className="mt-12" delay={100}>
             <Bezel innerClassName="p-0">
-              <RunnerGame />
+              <GameBoundary>
+                <RunnerGame />
+              </GameBoundary>
             </Bezel>
           </Reveal>
         </Container>

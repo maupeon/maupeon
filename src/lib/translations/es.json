@@ -218,7 +218,8 @@
     "game": {
       "eyebrow": "Mientras tanto",
       "title": "Corre el *Maratón de Valencia*",
-      "description": "Un juego que hice: esquiva obstáculos y recoge naranjas por las calles de Valencia hasta completar los 42.195 km. Espacio o toque para saltar; flechas o deslizar para cambiar de carril."
+      "description": "Un juego que hice: esquiva obstáculos y recoge naranjas por las calles de Valencia hasta completar los 42.195 km. Espacio o toque para saltar; flechas o deslizar para cambiar de carril.",
+      "unavailable": "Tu navegador no pudo iniciar el juego 3D (necesita WebGL). Prueba en otro navegador o dispositivo."
     },
     "status": {
       "updated": "Datos de Strava · actualizados el",
