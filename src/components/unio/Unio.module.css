@@ -151,9 +151,7 @@
 .navScrolled {
   padding-top: 12px;
   padding-bottom: 12px;
-  background: rgba(245, 241, 231, 0.86);
-  backdrop-filter: saturate(1.4) blur(14px);
-  -webkit-backdrop-filter: saturate(1.4) blur(14px);
+  background: rgba(245, 241, 231, 0.97);
   box-shadow: 0 1px 0 var(--line);
 }
 .brand {
@@ -314,8 +312,9 @@
   position: relative;
   z-index: 3;
   align-self: center;
-  transform: translateY(calc(var(--p) * -48px));
+  transform: translate3d(0, calc(var(--p) * -48px), 0);
   opacity: calc(1 - var(--p) * 0.9);
+  will-change: transform, opacity;
 }
 .heroActions {
   display: flex;
@@ -361,21 +360,17 @@
   top: 0;
   opacity: 0;
   transform: translateY(70%);
-  filter: blur(6px);
   transition:
     opacity 0.9s var(--ease),
-    transform 1s var(--ease),
-    filter 0.9s var(--ease);
+    transform 1s var(--ease);
 }
 .cycle .cycleOn {
   opacity: 1;
   transform: none;
-  filter: none;
 }
 .cycle .cycleOff {
   opacity: 0;
   transform: translateY(-60%);
-  filter: blur(6px);
 }
 .srOnly {
   position: absolute;
@@ -392,8 +387,17 @@
   z-index: 2;
   height: min(74svh, 640px);
   min-height: 420px;
-  transform: translateY(calc(var(--p) * -70px)) scale(calc(1 + var(--p) * 0.08));
-  transform-origin: 50% 30%;
+  /* translate only: scaling the SVG while scrolling forces it to re-raster */
+  transform: translate3d(0, calc(var(--p) * -80px), 0);
+  will-change: transform;
+}
+/* Warm halo behind the window (replaces a costly drop-shadow filter) */
+.stage::before {
+  content: '';
+  position: absolute;
+  inset: 6% 8% 0;
+  background: radial-gradient(50% 50% at 50% 55%, rgba(226, 178, 96, 0.28), transparent 70%);
+  pointer-events: none;
 }
 .heroWindow {
   position: absolute;
@@ -405,7 +409,6 @@
   width: auto;
   max-width: 100%;
   overflow: visible;
-  filter: drop-shadow(0 40px 60px rgba(120, 90, 40, 0.18));
 }
 .window {
   opacity: 0;
@@ -418,10 +421,7 @@
 }
 .sun {
   opacity: 0;
-  mix-blend-mode: screen;
-  animation:
-    sunIn 2s ease 1.6s forwards,
-    sunDrift 14s ease-in-out 1.6s infinite alternate;
+  animation: sunIn 2s ease 1.6s forwards;
 }
 .heroPhone {
   position: absolute;
@@ -450,9 +450,11 @@
   height: 135%;
   transform-origin: 50% 0;
   transform: rotate(var(--r));
-  background: linear-gradient(180deg, var(--c), transparent 78%);
-  filter: blur(26px);
-  mix-blend-mode: multiply;
+  /* Soft edges come from gradients and a mask, not blur(): no per-frame filtering. */
+  background: linear-gradient(180deg, var(--c), transparent 80%);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 38%, #000 62%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 38%, #000 62%, transparent);
+  will-change: transform;
   opacity: 0;
   animation:
     beamIn 2.4s ease 1.7s forwards,
@@ -629,14 +631,6 @@
 @keyframes sunIn {
   to {
     opacity: 0.75;
-  }
-}
-@keyframes sunDrift {
-  from {
-    transform: translate(-40px, -10px);
-  }
-  to {
-    transform: translate(46px, 150px);
   }
 }
 @keyframes phoneUp {

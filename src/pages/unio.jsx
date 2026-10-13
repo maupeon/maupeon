@@ -147,8 +147,7 @@ function Phone({ src, alt, className = '', priority = false }) {
 
 /**
  * Fades its children in when they scroll into view. Content is visible without
- * JavaScript: the page only hides `.reveal` once it has mounted (see `.js`), and
- * a scroll check backs up IntersectionObserver so nothing can stay hidden.
+ * JavaScript: the page only hides `.reveal` once it has mounted (see `.js`).
  */
 function Reveal({ as: Tag = 'div', className = '', delay = 0, children, ...rest }) {
   const ref = useRef(null)
@@ -156,32 +155,23 @@ function Reveal({ as: Tag = 'div', className = '', delay = 0, children, ...rest 
   useEffect(() => {
     const el = ref.current
     if (!el) return
-    let done = false
-    const show = () => {
-      if (done) return
-      done = true
+    if (typeof IntersectionObserver === 'undefined') {
       setShown(true)
-      cleanup()
-    }
-    const inView = () => el.getBoundingClientRect().top < window.innerHeight * 0.9
-    const onScroll = () => inView() && show()
-    const io =
-      typeof IntersectionObserver === 'undefined'
-        ? null
-        : new IntersectionObserver(([entry]) => entry.isIntersecting && show(), { rootMargin: '0px 0px -10% 0px' })
-    function cleanup() {
-      io?.disconnect()
-      window.removeEventListener('scroll', onScroll)
-      window.removeEventListener('resize', onScroll)
-    }
-    if (inView() || !io) {
-      show()
       return undefined
     }
+    // IntersectionObserver only: no scroll listeners (they forced a layout per
+    // element on every scroll event and made phones stutter).
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShown(true)
+          io.disconnect()
+        }
+      },
+      { rootMargin: '0px 0px -10% 0px' }
+    )
     io.observe(el)
-    window.addEventListener('scroll', onScroll, { passive: true })
-    window.addEventListener('resize', onScroll)
-    return cleanup
+    return () => io.disconnect()
   }, [])
   return (
     <Tag ref={ref} className={`${s.reveal} ${shown ? s.revealIn : ''} ${className}`} style={{ '--d': `${delay}ms` }} {...rest}>
@@ -212,16 +202,16 @@ export default function UnioLanding() {
     const clamp = (v) => Math.min(1, Math.max(0, v))
     const update = () => {
       raf = 0
+      // Read everything first, then write: one layout per frame at most.
       const y = window.scrollY
-      setScrolled(y > 24)
+      const vh = window.innerHeight
       const hero = heroRef.current
-      if (hero) hero.style.setProperty('--p', clamp(y / hero.offsetHeight).toFixed(4))
       const m = manifestoRef.current
-      if (m) {
-        const r = m.getBoundingClientRect()
-        const vh = window.innerHeight
-        m.style.setProperty('--p', clamp((vh * 0.8 - r.top) / (r.height + vh * 0.2)).toFixed(4))
-      }
+      const heroH = hero ? hero.offsetHeight : 1
+      const r = m ? m.getBoundingClientRect() : null
+      setScrolled(y > 24)
+      if (hero && y < heroH * 1.2) hero.style.setProperty('--p', clamp(y / heroH).toFixed(3))
+      if (m && r.top < vh && r.bottom > 0) m.style.setProperty('--p', clamp((vh * 0.8 - r.top) / (r.height + vh * 0.2)).toFixed(3))
     }
     const onScroll = () => {
       if (!raf) raf = requestAnimationFrame(update)

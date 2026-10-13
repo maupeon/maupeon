@@ -117,11 +117,7 @@ export function StainedWindow({ className = '' }) {
           <stop offset="0.45" stopColor="#fff3cf" stopOpacity="0.35" />
           <stop offset="1" stopColor="#fff3cf" stopOpacity="0" />
         </radialGradient>
-        {/* Blown-glass texture and a darker rim, like real cathedral glass */}
-        <filter id="unio-grain" x="0" y="0" width="100%" height="100%">
-          <feTurbulence type="fractalNoise" baseFrequency="0.035 0.09" numOctaves="3" seed="4" />
-          <feColorMatrix values="0 0 0 0 0.16  0 0 0 0 0.12  0 0 0 0 0.08  0 0 0 0.9 0" />
-        </filter>
+        {/* Darker rim, like real cathedral glass (static: no filters, cheap on phones) */}
         <radialGradient id="unio-rim" cx="0.5" cy="0.42" r="0.62">
           <stop offset="0.55" stopColor="#1e1a14" stopOpacity="0" />
           <stop offset="1" stopColor="#1e1a14" stopOpacity="0.45" />
@@ -154,10 +150,10 @@ export function StainedWindow({ className = '' }) {
             style={{ '--d': `${p.delay}ms` }}
           />
         ))}
-        <rect x="0" y="0" width={W} height={H} filter="url(#unio-grain)" opacity="0.28" style={{ mixBlendMode: 'multiply' }} />
         <rect x="0" y="0" width={W} height={H} fill="url(#unio-rim)" />
-        {/* Light moving across the glass */}
-        <circle className={s.sun} cx={SUN.x} cy={SUN.y} r="210" fill="url(#unio-sun)" />
+        {/* Sunlight on the glass. Static after it fades in: anything that keeps
+            moving inside the SVG would repaint every pane on every frame. */}
+        <circle className={s.sun} cx={SUN.x + 20} cy={SUN.y + 40} r="230" fill="url(#unio-sun)" />
       </g>
 
       {/* Stone tracery */}

@@ -15,7 +15,7 @@ export function DustMotes({ className = '', count = 46 }) {
     let raf = 0
     let w = 0
     let h = 0
-    const dpr = Math.min(window.devicePixelRatio || 1, 2)
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5)
 
     const resize = () => {
       const r = canvas.getBoundingClientRect()
@@ -27,7 +27,9 @@ export function DustMotes({ className = '', count = 46 }) {
     }
     resize()
 
-    const motes = Array.from({ length: count }, () => ({
+    // Fewer motes on small screens.
+    const n = window.innerWidth < 760 ? Math.round(count / 2) : count
+    const motes = Array.from({ length: n }, () => ({
       x: Math.random() * w,
       y: Math.random() * h,
       r: 0.6 + Math.random() * 1.8,
@@ -36,6 +38,14 @@ export function DustMotes({ className = '', count = 46 }) {
       phase: Math.random() * Math.PI * 2,
       a: 0.25 + Math.random() * 0.5,
     }))
+
+    // Stop drawing while the hero is off screen.
+    let visible = true
+    const io = new IntersectionObserver(([e]) => {
+      visible = e.isIntersecting
+      if (visible && !raf) raf = requestAnimationFrame(tick)
+    })
+    io.observe(canvas)
 
     let last = performance.now()
     const tick = (now) => {
@@ -54,12 +64,13 @@ export function DustMotes({ className = '', count = 46 }) {
         ctx.arc(m.x, m.y, m.r, 0, Math.PI * 2)
         ctx.fill()
       }
-      raf = requestAnimationFrame(tick)
+      raf = visible ? requestAnimationFrame(tick) : 0
     }
     raf = requestAnimationFrame(tick)
     window.addEventListener('resize', resize)
     return () => {
       cancelAnimationFrame(raf)
+      io.disconnect()
       window.removeEventListener('resize', resize)
     }
   }, [count])
