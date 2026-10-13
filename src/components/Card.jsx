@@ -24,11 +24,18 @@ export function Card({ as: Component = 'div', className, children }) {
   )
 }
 
-Card.Link = function CardLink({ children, ...props }) {
+Card.Link = function CardLink({ children, href, ...props }) {
+  // Only off-site links open in a new tab; internal pages keep the same tab.
+  const isExternal = /^https?:\/\//.test(href)
+
   return (
     <>
       <div className="absolute -inset-y-6 -inset-x-4 z-0 scale-95 bg-zinc-50 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 dark:bg-zinc-800/50 sm:-inset-x-6 sm:rounded-2xl" />
-      <Link {...props} target="_blank" rel="noopener noreferrer">
+      <Link
+        href={href}
+        {...props}
+        {...(isExternal && { target: '_blank', rel: 'noopener noreferrer' })}
+      >
         <span className="absolute -inset-y-6 -inset-x-4 z-20 sm:-inset-x-6 sm:rounded-2xl" />
         <span className="relative z-10">{children}</span>
       </Link>

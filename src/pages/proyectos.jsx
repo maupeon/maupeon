@@ -1,9 +1,13 @@
-import Image from 'next/image'
 import Head from 'next/head'
 
 import { Card } from '@/components/Card'
 import { SimpleLayout } from '@/components/SimpleLayout'
 import { useTranslation } from '@/lib/useTranslation'
+import {
+  MoonIcon,
+  ShieldCheckIcon,
+  SparklesIcon,
+} from '@heroicons/react/24/outline'
 import logoMedu from '@/images/logos/medu.png'
 import logoMedu2 from '@/images/logos/medu2.png'
 import ppaa from '@/images/logos/ppaa.jpg'
@@ -15,84 +19,121 @@ import macondo from '@/images/logos/macondo.png'
 import camsam from '@/images/logos/camsam.png'
 import presidentes from '@/images/logos/presidentes.ico'
 import teToco from '@/images/logos/logoTeToco.png'
-const projectsData = [
+// Products first (they mirror the "Shipped projects" section of the CV), then
+// the rest. `icon` replaces the logo circle for projects without a logo file.
+const projectGroups = [
   {
-    name: 'Medu',
-    descriptionKey: 'medu',
-    link: { href: 'http://medu.red', label: 'medu.red' },
-    logo: logoMedu2,
+    key: 'built',
+    projects: [
+      {
+        name: 'Medu',
+        descriptionKey: 'medu',
+        link: { href: 'https://medu.ai', label: 'medu.ai' },
+        logo: logoMedu2,
+      },
+      {
+        name: 'Medu IA',
+        descriptionKey: 'meduIA',
+        link: {
+          href: 'https://mexicobusiness.news/health/news/medu-ai-transforms-medical-learning-advanced-ai-tool',
+          labelKey: 'projects.links.meduIA',
+        },
+        icon: SparklesIcon,
+      },
+      {
+        name: 'Medu App',
+        descriptionKey: 'meduApp',
+        link: {
+          href: 'https://apps.apple.com/mx/app/medu/id1584009164',
+          label: 'App Store',
+        },
+        logo: logoMedu,
+      },
+      {
+        name: '¿Te tocó?',
+        descriptionKey: 'teTocoApp',
+        link: {
+          href: 'https://apps.apple.com/es/app/te-toc%C3%B3/id6756806727',
+          label: 'App Store',
+        },
+        logo: teToco,
+      },
+      {
+        name: 'Guardia',
+        descriptionKey: 'guardia',
+        link: { href: '/app/guardia', label: 'maupeon.com/app/guardia' },
+        icon: ShieldCheckIcon,
+      },
+      {
+        name: 'Meditation',
+        nameKey: 'projects.names.meditation',
+        descriptionKey: 'meditation',
+        inProgress: true,
+        icon: MoonIcon,
+      },
+    ],
   },
   {
-    name: 'Medu App',
-    descriptionKey: 'meduApp',
-    link: {
-      href: 'https://apps.apple.com/mx/app/medu/id1584009164',
-      label: 'App Store',
-    },
-    logo: logoMedu,
-  },
-  {
-    name: '¿Te tocó?',
-    descriptionKey: 'teTocoApp',
-    link: {
-      href: 'https://apps.apple.com/es/app/te-toc%C3%B3/id6756806727',
-      label: 'App Store',
-    },
-    logo: teToco,
-  },
-  {
-    name: 'PPAA',
-    descriptionKey: 'ppaa',
-    link: { href: 'https://www.ppaa.mx', label: 'ppaa.mx' },
-    logo: ppaa,
-  },
-  {
-    name: 'A911',
-    descriptionKey: 'a911',
-    link: { href: 'https://www.arq911.com/', label: 'arq911.com' },
-    logo: a911,
-  },
-  {
-    name: 'Domingo',
-    descriptionKey: 'domingo',
-    link: { href: 'https://domingo-shop.com/', label: 'domingo-shop.com' },
-    logo: domingo,
-  },
-  {
-    name: 'Xolo',
-    descriptionKey: 'xolo',
-    link: { href: 'https://xolostays.mx/', label: 'xolostays.mx' },
-    logo: xolo,
-  },
-  {
-    name: 'Zamme',
-    descriptionKey: 'zamme',
-    link: { href: 'https://zamme.org/', label: 'zamme.org' },
-    logo: zamme,
-  },
-  {
-    name: 'Macondo',
-    descriptionKey: 'macondo',
-    link: { href: 'https://macondo-shop.com/', label: 'macondo-shop.com' },
-    logo: macondo,
-  },
-  {
-    name: 'CAMSAM',
-    descriptionKey: 'camsam',
-    link: {
-      href: 'https://www.colegiodearquitectoscdmx.org/aranceles/',
-      label: 'colegiodearquitectoscdmx.org',
-    },
-    logo: camsam,
-  },
-  {
-    name: 'Presidentes de México',
-    descriptionKey: 'presidentes',
-    link: {
-      href: 'https://presidentesdemexico.vercel.app/',
-      label: 'presidentesdemexico.vercel.app',
-    },
-    logo: presidentes,
+    key: 'more',
+    projects: [
+      {
+        name: 'PPAA',
+        descriptionKey: 'ppaa',
+        link: { href: 'https://www.ppaa.mx', label: 'ppaa.mx' },
+        logo: ppaa,
+      },
+      {
+        name: 'A911',
+        descriptionKey: 'a911',
+        link: { href: 'https://www.arq911.com/', label: 'arq911.com' },
+        logo: a911,
+      },
+      {
+        name: 'Domingo',
+        descriptionKey: 'domingo',
+        link: { href: 'https://domingo-shop.com/', label: 'domingo-shop.com' },
+        logo: domingo,
+      },
+      {
+        name: 'Xolo',
+        descriptionKey: 'xolo',
+        link: { href: 'https://xolostays.mx/', label: 'xolostays.mx' },
+        logo: xolo,
+      },
+      {
+        name: 'Zamme',
+        descriptionKey: 'zamme',
+        link: { href: 'https://zamme.org/', label: 'zamme.org' },
+        logo: zamme,
+      },
+      {
+        name: 'Macondo',
+        descriptionKey: 'macondo',
+        link: {
+          href: 'https://macondo-shop.com/',
+          label: 'macondo-shop.com',
+        },
+        logo: macondo,
+      },
+      {
+        name: 'CAMSAM',
+        descriptionKey: 'camsam',
+        link: {
+          href: 'https://www.colegiodearquitectoscdmx.org/aranceles/',
+          label: 'colegiodearquitectoscdmx.org',
+        },
+        logo: camsam,
+      },
+      {
+        name: 'Presidentes de México',
+        descriptionKey: 'presidentes',
+        link: {
+          href: 'https://presidentesdemexico.vercel.app/',
+          label: 'presidentesdemexico.vercel.app',
+        },
+        logo: presidentes,
+      },
+    ],
   },
 ]
 
@@ -107,6 +148,51 @@ function LinkIcon(props) {
   )
 }
 
+function ProjectCard({ project }) {
+  const { t } = useTranslation()
+  const Icon = project.icon
+  const name = project.nameKey ? t(project.nameKey) : project.name
+  const linkLabel = project.link?.labelKey
+    ? t(project.link.labelKey)
+    : project.link?.label
+
+  return (
+    <Card as="li">
+      <div className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
+        {Icon ? (
+          <Icon className="h-6 w-6 text-purple-500 dark:text-purple-400" />
+        ) : (
+          <img
+            src={project.logo.src}
+            alt=""
+            className="h-8 w-8 rounded-full"
+          />
+        )}
+      </div>
+      <h3 className="mt-6 text-base font-semibold text-zinc-800 dark:text-zinc-100">
+        {project.link ? (
+          <Card.Link href={project.link.href}>{name}</Card.Link>
+        ) : (
+          name
+        )}
+      </h3>
+      <Card.Description>
+        {t(`projects.descriptions.${project.descriptionKey}`)}
+      </Card.Description>
+      {project.link ? (
+        <p className="relative z-10 mt-6 flex text-sm font-medium text-zinc-400 transition group-hover:text-purple-500 dark:text-zinc-200">
+          <LinkIcon className="h-6 w-6 flex-none" />
+          <span className="ml-2">{linkLabel}</span>
+        </p>
+      ) : (
+        <p className="relative z-10 mt-6 inline-flex items-center rounded-full bg-purple-50 px-3 py-1 text-xs font-medium text-purple-600 ring-1 ring-purple-500/20 dark:bg-purple-400/10 dark:text-purple-300 dark:ring-purple-400/20">
+          {t('projects.inProgress')}
+        </p>
+      )}
+    </Card>
+  )
+}
+
 export default function Projects() {
   const { t } = useTranslation()
   return (
@@ -116,33 +202,26 @@ export default function Projects() {
         <meta name="description" content={t('projects.metaDescription')} />
       </Head>
       <SimpleLayout title={t('projects.heading')} intro={t('projects.intro')}>
-        <ul
-          role="list"
-          className="grid grid-cols-1 gap-x-12 gap-y-16 sm:grid-cols-2 lg:grid-cols-3"
-        >
-          {projectsData.map((project) => (
-            <Card as="li" key={project.name}>
-              <div className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
-                <img
-                  src={project.logo.src}
-                  alt=""
-                  className="h-8 w-8 rounded-full"
-                  unoptimized
-                />
-              </div>
-              <h2 className="mt-6 text-base font-semibold text-zinc-800 dark:text-zinc-100">
-                <Card.Link href={project.link.href}>{project.name}</Card.Link>
+        <div className="space-y-20">
+          {projectGroups.map((group) => (
+            <section key={group.key} aria-labelledby={`projects-${group.key}`}>
+              <h2
+                id={`projects-${group.key}`}
+                className="mb-10 font-serif text-2xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100"
+              >
+                {t(`projects.groups.${group.key}`)}
               </h2>
-              <Card.Description>
-                {t(`projects.descriptions.${project.descriptionKey}`)}
-              </Card.Description>
-              <p className="relative z-10 mt-6 flex text-sm font-medium text-zinc-400 transition group-hover:text-purple-500 dark:text-zinc-200">
-                <LinkIcon className="h-6 w-6 flex-none" />
-                <span className="ml-2">{project.link.label}</span>
-              </p>
-            </Card>
+              <ul
+                role="list"
+                className="grid grid-cols-1 gap-x-12 gap-y-16 sm:grid-cols-2 lg:grid-cols-3"
+              >
+                {group.projects.map((project) => (
+                  <ProjectCard key={project.name} project={project} />
+                ))}
+              </ul>
+            </section>
           ))}
-        </ul>
+        </div>
       </SimpleLayout>
     </>
   )

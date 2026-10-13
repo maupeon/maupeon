@@ -5,32 +5,139 @@
     "inspirations": "Inspirations",
     "exercise": "Exercise",
     "navigation": "Navigation",
-    "menu": "Menu"
+    "menu": "Menu",
+    "about": "About"
   },
   "home": {
-    "title": "Mauricio Peón - Engineer, entrepreneur and runner.",
-    "description": "I'm Mauricio Peón, a computer science engineer and CTO at Medu.",
-    "hero": "Engineer, runner and entrepreneur.",
-    "intro": "I'm Mauricio Peón, a computer science engineer, CTO at Medu, and a lover of the most beautiful sport in the world (football). In the mornings, I run a little; at night, I read.",
-    "newsletter": {
-      "title": "What's new",
-      "description": "New ideas will gradually be added to this portfolio."
+    "title": "Mauricio Peón - Full-stack engineer, entrepreneur and runner",
+    "description": "Mauricio Peón: full-stack engineer, entrepreneur and runner. Own products, AI in production, a technology column and panels on medical education. Co-founder and CTO of Medu.",
+    "eyebrow": "Engineer · Entrepreneur · Runner",
+    "hero": "I build products, *write* and run.",
+    "intro": "I'm Mauricio Peón, a full-stack engineer and entrepreneur. I co-founded Medu, but my work doesn't fit inside one company: my own apps, AI in production, a technology column and an M.S. in data science. A lover of the most beautiful sport in the world (football); I run in the mornings and read at night.",
+    "cta": {
+      "projects": "See projects",
+      "cv": "Download CV"
+    },
+    "fronts": {
+      "eyebrow": "Index",
+      "title": "What you'll find here",
+      "items": [
+        {
+          "key": "product",
+          "title": "Product",
+          "description": "My own products and projects with other teams: from medical education platforms to apps with 3D dice."
+        },
+        {
+          "key": "words",
+          "title": "Words",
+          "description": "A technology column in Mexico Business News and panels on AI and medical education."
+        },
+        {
+          "key": "endurance",
+          "title": "Endurance",
+          "description": "The Valencia Marathon 2025 in 3:51, a 5 km open water swim and my Strava records."
+        },
+        {
+          "key": "inspiration",
+          "title": "Inspiration",
+          "description": "The books, movies, series and songs that have shaped how I think."
+        },
+        {
+          "key": "faith",
+          "title": "Faith",
+          "description": "The Gospel and the daily readings, in one place."
+        }
+      ]
+    },
+    "work": {
+      "eyebrow": "Selected work",
+      "title": "Things I've *built*",
+      "viewAll": "See all projects",
+      "inProgress": "In progress",
+      "items": {
+        "guardia": {
+          "title": "Guardia",
+          "tag": "Mobile app · React Native · Supabase",
+          "description": "A daily safety check-in: if one day you can't press the button, it automatically alerts your emergency contact.",
+          "cta": "See the app",
+          "imageAlt": "Guardia's home screen with the “I'm fine” button"
+        },
+        "celta": {
+          "title": "El sueño del celta",
+          "tag": "3D narrative game · Three.js",
+          "description": "A 3D adventure through the Congo, the Amazon and Ireland to walk through Roger Casement's story, inspired by Mario Vargas Llosa's novel.",
+          "cta": "Play"
+        },
+        "teToco": {
+          "title": "¿Te tocó?",
+          "tag": "iOS app · React Native · Three.js",
+          "description": "The most fun way to make random decisions, with interactive 3D dice. Published on the App Store.",
+          "cta": "App Store"
+        },
+        "medu": {
+          "title": "Medu",
+          "tag": "Co-founder & CTO",
+          "description": "A Spanish-language medical education platform with 200,000+ health professionals in 21 countries.",
+          "cta": "medu.ai"
+        },
+        "meduIA": {
+          "title": "Medu AI",
+          "tag": "AI · LLM",
+          "description": "A learning assistant with virtual patients, clinical cases, adaptive quizzes and podcasts generated from medical documents.",
+          "cta": "Read the coverage"
+        },
+        "meditation": {
+          "title": "Meditation app",
+          "tag": "AI · ElevenLabs",
+          "description": "AI-generated content with ElevenLabs text-to-speech."
+        }
+      }
+    },
+    "now": {
+      "eyebrow": "Now",
+      "title": "What I'm up to",
+      "items": [
+        {
+          "label": "Studying",
+          "title": "M.S. in Data Science, Big Data & AI",
+          "detail": "Universidad Complutense de Madrid"
+        },
+        {
+          "label": "Building",
+          "title": "A meditation app",
+          "detail": "AI-generated content with ElevenLabs text-to-speech."
+        },
+        {
+          "label": "Writing",
+          "title": "A technology column",
+          "detail": "Mexico Business News, since 2025."
+        }
+      ]
+    },
+    "journey": {
+      "eyebrow": "Background"
+    },
+    "contact": {
+      "eyebrow": "Contact",
+      "title": "Shall we build something *together*?",
+      "description": "A collaboration, an idea or a question: write to me and I will gladly chat.",
+      "cta": "Write to me"
     },
     "resume": {
-      "title": "Work",
-      "downloadCV": "Download CV"
+      "downloadCV": "Download CV",
+      "cvNote": "PDF · in English"
     },
     "readArticle": "Read article"
   },
   "projects": {
     "title": "Projects - Mauricio Peón",
-    "metaDescription": "Some projects I've had the opportunity to collaborate on.",
-    "heading": "Some projects I've had the opportunity to collaborate on.",
+    "metaDescription": "Products I've built and projects I've collaborated on: Medu, Medu AI, ¿Te tocó?, Guardia and more.",
+    "heading": "Products I've built and projects I've collaborated on.",
     "intro": "In this section, I invite you to explore a carefully curated collection of my most significant projects. Each one reflects my passion, dedication, and growth as a professional.",
     "descriptions": {
-      "medu": "We are a Spanish-language medical education platform specialized in audiovisual Health Sciences content.",
-            "teTocoApp": "Caught between options? Not sure what to eat, where to go, or which movie to watch? Let ¿Te tocó? make the decision for you. ¿Te tocó? is the most fun and elegant way to make random decisions. With interactive 3D dice and smooth animations, it turns indecision into a fun moment.",
-      "meduApp": "Mobile medical education app in Spanish specialized in audiovisual Health Sciences content.",
+      "medu": "We are a Spanish-language medical education platform specialized in audiovisual Health Sciences content. 200,000+ professionals in 21 countries, 31 courses and 146 live surgeries.",
+      "teTocoApp": "Caught between options? Not sure what to eat, where to go, or which movie to watch? Let ¿Te tocó? make the decision for you. ¿Te tocó? is the most fun and elegant way to make random decisions. With interactive 3D dice and smooth animations, it turns indecision into a fun moment.",
+      "meduApp": "Mobile medical education app in Spanish specialized in audiovisual Health Sciences content. Built with React Native for iOS and Android.",
       "ppaa": "PPAA is driven by an architecture of ideas over forms.",
       "a911": "a|911 is a multidisciplinary firm covering architecture, urbanism, mobility, and landscape projects.",
       "domingo": "Online store for soft, 100% cotton bedsheets based in Mexico City.",
@@ -38,7 +145,21 @@
       "zamme": "Zamme is a visual communication platform aiming to build community through knowledge sharing and collaborations.",
       "macondo": "This project is a carefully curated compendium of over 200 plant varieties and essential gardening accessories.",
       "camsam": "This innovative tool is designed to simplify and streamline tariff calculations for architects in Mexico City.",
-      "presidentes": "A satirical page about the achievements of Mexico's presidents."
+      "presidentes": "A satirical page about the achievements of Mexico's presidents.",
+      "meduIA": "AI learning assistant with interactive virtual patients, clinical case simulation, adaptive quizzes, and podcast generation from medical documents.",
+      "guardia": "Daily personal-safety check-in app: if one day you can't press the button, it automatically alerts your emergency contacts. React Native and Supabase.",
+      "meditation": "Meditation app with AI-generated content and ElevenLabs text-to-speech."
+    },
+    "groups": {
+      "built": "What I've built",
+      "more": "More projects"
+    },
+    "inProgress": "In progress",
+    "links": {
+      "meduIA": "Coverage in Mexico Business News"
+    },
+    "names": {
+      "meditation": "Meditation app"
     }
   },
   "inspirations": {
@@ -124,5 +245,201 @@
     "ctaDescription": "One minute to set up. A lifetime of peace of mind.",
     "ctaFooter": "Made with 💚 for those who live alone",
     "footerTagline": "Your safety companion."
+  },
+  "profile": {
+    "present": "Present",
+    "roles": {
+      "medu": "Co-founder & CTO",
+      "ibm": "Business Analyst Intern"
+    },
+    "orgDescriptions": {
+      "medu": "Medical education platform"
+    },
+    "degrees": {
+      "ucm": "M.S. Data Science, Big Data & AI",
+      "itesm": "B.S. Computer Science & Technology Engineering"
+    },
+    "labels": {
+      "company": "Company",
+      "role": "Role",
+      "date": "Date",
+      "degree": "Degree",
+      "school": "School"
+    }
+  },
+  "about": {
+    "title": "About - Mauricio Peón",
+    "metaDescription": "Full-stack engineer, co-founder and CTO of Medu. Experience, technical stack, education, talks and projects by Mauricio Peón.",
+    "heading": "I'm Mauricio Peón: engineer, co-founder and CTO of Medu.",
+    "portraitAlt": "Portrait of Mauricio Peón",
+    "bio": [
+      "In 2019 I co-founded Medu, a Spanish-language medical education platform. I designed and built the product from scratch — the web app, the iOS and Android apps, the APIs and the AWS infrastructure — and grew it to **200,000+ health professionals in 21 countries**, with 31 courses and 146 live surgeries.",
+      "Along the way the team grew to 20 people across engineering, product and content, and I stayed hands-on in the code every day. I also closed and delivered enterprise accounts with **Eli Lilly, Novo Nordisk and Pfizer**, owning both the technical integration and the commercial relationship.",
+      "Today I focus on getting AI into production for real: Spanish medical speech-to-text, clinical case generation and audio learning, with evaluation, cost control and latency handled end to end. Outside Medu I build my own apps — ¿Te tocó?, Guardia and a meditation app on the way — and share what I learn on panels and in a technology column.",
+      "I studied Computer Science & Technology Engineering at Tecnológico de Monterrey and an M.S. in Data Science, Big Data & AI at Universidad Complutense de Madrid. Away from the screen, I run: I finished the Valencia Marathon 2025 in 3:51."
+    ],
+    "links": {
+      "github": "Follow on GitHub",
+      "linkedin": "Connect on LinkedIn",
+      "cv": "Download CV"
+    },
+    "experience": {
+      "title": "Experience",
+      "medu": [
+        "Architected and built the entire product from scratch: Next.js web app, React Native apps for iOS and Android, REST APIs, and AWS infrastructure (Amplify, Lambda, S3, CloudFront).",
+        "Scaled to **200,000+ health professionals in 21 countries** with 31 courses and 146 live surgeries; grew and led a team of 20 across engineering, product and content.",
+        "Closed and delivered enterprise accounts with **Eli Lilly, Novo Nordisk and Pfizer**, owning both the technical integration and the commercial relationship.",
+        "Built video streaming infrastructure for live surgical broadcasts handling thousands of concurrent viewers, including adaptive delivery and graceful degradation on unreliable hospital networks.",
+        "Shipped LLM features to production, not prototypes: Spanish medical speech-to-text, clinical case generation, and AI-generated audio learning — with evaluation, cost control and latency handled end to end.",
+        "Built complex interactive interfaces: clinical case simulators and real-time gamified quiz systems.",
+        "Led product strategy and enterprise sales while writing code daily — full ownership from infrastructure to UI to revenue."
+      ],
+      "ibm": [
+        "Developed ETL pipelines and data solutions for banking clients using SQL databases.",
+        "Translated complex business requirements into technical specifications across cross-functional teams."
+      ]
+    },
+    "stack": {
+      "title": "Technical stack",
+      "categories": {
+        "languages": "Languages",
+        "frontend": "Frontend",
+        "backend": "Backend",
+        "infrastructure": "Infrastructure",
+        "ai": "AI & Data",
+        "other": "Other"
+      },
+      "items": {
+        "languages": [
+          "TypeScript",
+          "JavaScript",
+          "Python",
+          "SQL",
+          "HTML/CSS"
+        ],
+        "frontend": [
+          "React",
+          "Next.js",
+          "React Native",
+          "Three.js",
+          "D3.js",
+          "Tailwind CSS"
+        ],
+        "backend": [
+          "Node.js",
+          "REST APIs",
+          "GraphQL",
+          "AWS Lambda",
+          "Firebase Cloud Functions"
+        ],
+        "infrastructure": [
+          "AWS (Amplify, S3, CloudFront, Lambda)",
+          "PostgreSQL",
+          "MongoDB",
+          "Firebase",
+          "Docker",
+          "CI/CD",
+          "Git"
+        ],
+        "ai": [
+          "LLM API integration",
+          "RAG",
+          "Speech-to-text",
+          "pandas",
+          "scikit-learn",
+          "matplotlib",
+          "Statistical modeling"
+        ],
+        "other": [
+          "iOS/Android App Store deployment",
+          "Live video streaming",
+          "Deep linking",
+          "Stripe"
+        ]
+      }
+    },
+    "projects": {
+      "title": "Projects",
+      "viewAll": "See all projects",
+      "items": [
+        {
+          "name": "Medu IA",
+          "description": "AI learning assistant with interactive virtual patients, clinical case simulation, adaptive quizzes, and podcast generation from medical documents."
+        },
+        {
+          "name": "¿Te tocó?",
+          "description": "Decision-making app with interactive 3D dice. React Native and Three.js. Published on the App Store."
+        },
+        {
+          "name": "Guardia",
+          "description": "Personal safety check-in app with automated alerts and emergency contacts. React Native and Supabase."
+        },
+        {
+          "name": "Meditation app (in progress)",
+          "description": "AI-generated content with ElevenLabs text-to-speech."
+        }
+      ]
+    },
+    "education": {
+      "title": "Education",
+      "notes": {
+        "ucm": "Machine learning, time series analysis, data mining, statistical modeling and NLP.",
+        "itesm": "Graduated with distinction — Excellence Diploma ×4."
+      }
+    },
+    "more": {
+      "title": "Additional",
+      "languages": {
+        "label": "Languages",
+        "value": "Spanish (native) and English (advanced)."
+      },
+      "speaking": {
+        "label": "Speaking & writing",
+        "value": "Panelist at Mexico Health Summit 2025 and Neuron IT Forum 2025; technology columnist for Mexico Business News since 2025.",
+        "cta": "See speaking & writing"
+      },
+      "athlete": {
+        "label": "Endurance athlete",
+        "value": "Valencia Marathon 2025 (3:51) and a 5 km open water swim.",
+        "cta": "See my exercise"
+      }
+    }
+  },
+  "speaking": {
+    "title": "Speaking & writing - Mauricio Peón",
+    "metaDescription": "Panels, columns and press by Mauricio Peón on technology, AI and medical education.",
+    "heading": "I speak and write about technology, AI and medical education.",
+    "intro": "I share what I learn building Medu on panels and at conferences, and in a technology column. These are my most recent appearances.",
+    "sections": {
+      "conferences": "Conferences",
+      "writing": "Writing",
+      "press": "In the press"
+    },
+    "items": {
+      "mhs": {
+        "title": "Mexico Health Summit 2025",
+        "event": "Panelist · September 2025",
+        "description": "I took part as a panelist at the Mexico Health Summit, held on September 10, 2025 in Mexico City.",
+        "cta": "View event"
+      },
+      "neuron": {
+        "title": "Impulsando la innovación empresarial con datos y tecnologías cloud",
+        "event": "Neuron IT Forum 2025 · Panel",
+        "description": "A panel with José Luis Mendoza of Bafar on how data and cloud technologies turn into competitive advantage across two very different industries: education and food. In Spanish.",
+        "cta": "Read the article"
+      },
+      "mbn": {
+        "title": "Medvi AI Scandal Highlights Shortcuts and Fine Print",
+        "event": "Mexico Business News · Column · May 2026",
+        "description": "A critical look at how two brothers scaled a business with AI tools on the back of deceptive practices: fake doctor profiles and unverified medications.",
+        "cta": "Read the column"
+      },
+      "meduAi": {
+        "title": "Medu AI Transforms Medical Learning With Advanced AI Tool",
+        "event": "Mexico Business News · August 2024",
+        "description": "Coverage of the launch of Medu AI, Medu's tool that gives instant access to curated medical resources and personalizes learning.",
+        "cta": "Read the article"
+      }
+    }
   }
 }

@@ -5,31 +5,138 @@
     "inspirations": "Inspiraciones",
     "exercise": "Ejercicio",
     "navigation": "Navegación",
-    "menu": "Menú"
+    "menu": "Menú",
+    "about": "Sobre mí"
   },
   "home": {
-    "title": "Mauricio Peón - Ingeniero, emprendedor y corredor.",
-    "description": "Soy Mauricio Peón, ingeniero en tecnologías computacionales, director de tecnología en Medu.",
-    "hero": "Ingeniero, corredor y emprendedor.",
-    "intro": "Soy Mauricio Peón, ingeniero en tecnologías computacionales, director de tecnología en Medu y amante del deporte más bonito del mundo (fútbol). Por las mañanas, corro un poco, por las noches, leo.",
-    "newsletter": {
-      "title": "Nuevos cambios",
-      "description": "Poco a poco se irán agregando nuevas ideas a este portafolio."
+    "title": "Mauricio Peón - Ingeniero full-stack, emprendedor y corredor",
+    "description": "Mauricio Peón: ingeniero full-stack, emprendedor y corredor. Productos propios, IA en producción, una columna de tecnología y paneles sobre educación médica. Cofundador y CTO de Medu.",
+    "eyebrow": "Ingeniero · Emprendedor · Corredor",
+    "hero": "Construyo productos, *escribo* y corro.",
+    "intro": "Soy Mauricio Peón, ingeniero full-stack y emprendedor. Cofundé Medu, pero mi trabajo no cabe en una sola empresa: apps propias, IA en producción, una columna de tecnología y una maestría en ciencia de datos. Amante del deporte más bonito del mundo (fútbol); por las mañanas corro, por las noches leo.",
+    "cta": {
+      "projects": "Ver proyectos",
+      "cv": "Descargar CV"
+    },
+    "fronts": {
+      "eyebrow": "Índice",
+      "title": "Lo que encontrarás aquí",
+      "items": [
+        {
+          "key": "product",
+          "title": "Producto",
+          "description": "Productos propios y proyectos con otros equipos: desde plataformas de educación médica hasta apps con dados 3D."
+        },
+        {
+          "key": "words",
+          "title": "Palabra",
+          "description": "Una columna de tecnología en Mexico Business News y paneles sobre IA y educación médica."
+        },
+        {
+          "key": "endurance",
+          "title": "Resistencia",
+          "description": "El Maratón de Valencia 2025 en 3:51, 5 km de nado en aguas abiertas y mis marcas de Strava."
+        },
+        {
+          "key": "inspiration",
+          "title": "Inspiración",
+          "description": "Los libros, películas, series y canciones que han moldeado mi forma de pensar."
+        },
+        {
+          "key": "faith",
+          "title": "Fe",
+          "description": "Cada día, el Evangelio y las lecturas en un solo lugar."
+        }
+      ]
+    },
+    "work": {
+      "eyebrow": "Obra seleccionada",
+      "title": "Cosas que he *construido*",
+      "viewAll": "Ver todos los proyectos",
+      "inProgress": "En desarrollo",
+      "items": {
+        "guardia": {
+          "title": "Guardia",
+          "tag": "App móvil · React Native · Supabase",
+          "description": "Un check-in diario de seguridad: si un día no puedes pulsar el botón, avisa automáticamente a tu contacto de emergencia.",
+          "cta": "Ver la app",
+          "imageAlt": "Pantalla principal de Guardia con el botón «Estoy bien»"
+        },
+        "celta": {
+          "title": "El sueño del celta",
+          "tag": "Juego narrativo 3D · Three.js",
+          "description": "Una aventura 3D por el Congo, la Amazonía e Irlanda para recorrer la historia de Roger Casement, inspirada en la novela de Mario Vargas Llosa.",
+          "cta": "Jugar"
+        },
+        "teToco": {
+          "title": "¿Te tocó?",
+          "tag": "App iOS · React Native · Three.js",
+          "description": "La forma más divertida de tomar decisiones aleatorias, con dados 3D interactivos. Publicada en la App Store.",
+          "cta": "App Store"
+        },
+        "medu": {
+          "title": "Medu",
+          "tag": "Cofundador y CTO",
+          "description": "Plataforma de educación médica en español con más de 200,000 profesionales de la salud en 21 países.",
+          "cta": "medu.ai"
+        },
+        "meduIA": {
+          "title": "Medu IA",
+          "tag": "IA · LLM",
+          "description": "Asistente de aprendizaje con pacientes virtuales, casos clínicos, quizzes adaptativos y podcasts generados a partir de documentos médicos.",
+          "cta": "Leer la cobertura"
+        },
+        "meditation": {
+          "title": "App de meditación",
+          "tag": "IA · ElevenLabs",
+          "description": "Contenido generado por IA con voz sintetizada por ElevenLabs."
+        }
+      }
+    },
+    "now": {
+      "eyebrow": "Ahora",
+      "title": "En qué ando",
+      "items": [
+        {
+          "label": "Estudiando",
+          "title": "Maestría en Ciencia de Datos, Big Data e IA",
+          "detail": "Universidad Complutense de Madrid"
+        },
+        {
+          "label": "Construyendo",
+          "title": "Una app de meditación",
+          "detail": "Contenido generado por IA y voz sintetizada con ElevenLabs."
+        },
+        {
+          "label": "Escribiendo",
+          "title": "Columna de tecnología",
+          "detail": "Mexico Business News, desde 2025."
+        }
+      ]
+    },
+    "journey": {
+      "eyebrow": "Trayectoria"
+    },
+    "contact": {
+      "eyebrow": "Contacto",
+      "title": "¿Construimos algo *juntos*?",
+      "description": "Una colaboración, una idea o una pregunta: escríbeme y con gusto conversamos.",
+      "cta": "Escríbeme"
     },
     "resume": {
-      "title": "Trabajo",
-      "downloadCV": "Descargar CV"
+      "downloadCV": "Descargar CV",
+      "cvNote": "PDF · en inglés"
     },
     "readArticle": "Leer artículo"
   },
   "projects": {
     "title": "Proyectos - Mauricio Peón",
-    "metaDescription": "Algunos proyectos en los que he tenido la oportunidad de colaborar.",
-    "heading": "Algunos proyectos en los que he tenido la oportunidad de colaborar.",
+    "metaDescription": "Productos que he construido y proyectos en los que he colaborado: Medu, Medu IA, ¿Te tocó?, Guardia y más.",
+    "heading": "Productos que he construido y proyectos en los que he colaborado.",
     "intro": "En esta sección, te invito a explorar una colección cuidadosamente seleccionada de mis proyectos más significativos. Cada uno de ellos es un reflejo de mi pasión, dedicación y evolución como profesional.",
     "descriptions": {
-      "medu": "Somos una plataforma de educación médica en español especializada en contenido audiovisual de Ciencias de la Salud.",
-      "meduApp": "Aplicación móvil de educación médica en español especializada en contenido audiovisual de Ciencias de la Salud.",
+      "medu": "Somos una plataforma de educación médica en español especializada en contenido audiovisual de Ciencias de la Salud. Más de 200,000 profesionales en 21 países, 31 cursos y 146 cirugías en vivo.",
+      "meduApp": "Aplicación móvil de educación médica en español especializada en contenido audiovisual de Ciencias de la Salud. Hecha con React Native para iOS y Android.",
       "teTocoApp": "¿Atrapado entre opciones? ¿No sabes qué comer, a dónde ir, o qué película ver? Deja que ¿Te tocó? tome la decisión por ti. ¿Te tocó? es la forma más divertida y elegante de tomar decisiones aleatorias. Con dados 3D interactivos y animaciones fluidas, convierte la indecisión en un momento entretenido.",
       "ppaa": "PPAA es impulsado por una arquitectura de ideas sobre una de formas.",
       "a911": "a|911 es una oficina multidisciplinaria que abarca proyectos de arquitectura, urbanismo, movilidad y paisaje.",
@@ -38,7 +145,21 @@
       "zamme": "Zamme es una plataforma de comunicación visual con el objetivo de construir comunidad a través del intercambio de conocimiento y colaboraciones.",
       "macondo": "Este proyecto es un compendio cuidadosamente curado de más de 200 variedades de plantas y accesorios esenciales de jardinería.",
       "camsam": "Esta herramienta innovadora está diseñada para simplificar y agilizar el cálculo de aranceles para arquitectos en la Ciudad de México.",
-      "presidentes": "Es una página sátira de las hazañas que han logrado los presidentes de México."
+      "presidentes": "Es una página sátira de las hazañas que han logrado los presidentes de México.",
+      "meduIA": "Asistente de aprendizaje con IA: pacientes virtuales interactivos, simulación de casos clínicos, quizzes adaptativos y podcasts generados a partir de documentos médicos.",
+      "guardia": "App de check-in diario de seguridad personal: si un día no puedes pulsar el botón, avisa automáticamente a tus contactos de emergencia. React Native y Supabase.",
+      "meditation": "App de meditación con contenido generado por IA y voz sintetizada con ElevenLabs."
+    },
+    "groups": {
+      "built": "Lo que he construido",
+      "more": "Más proyectos"
+    },
+    "inProgress": "En desarrollo",
+    "links": {
+      "meduIA": "Cobertura en Mexico Business News"
+    },
+    "names": {
+      "meditation": "App de meditación"
     }
   },
   "inspirations": {
@@ -124,5 +245,201 @@
     "ctaDescription": "Un minuto de configuración. Una vida de tranquilidad.",
     "ctaFooter": "Hecho con 💚 para quienes viven solos",
     "footerTagline": "Tu compañero de seguridad."
+  },
+  "profile": {
+    "present": "Presente",
+    "roles": {
+      "medu": "Cofundador y CTO",
+      "ibm": "Practicante de análisis de negocio"
+    },
+    "orgDescriptions": {
+      "medu": "Plataforma de educación médica"
+    },
+    "degrees": {
+      "ucm": "Maestría en Ciencia de Datos, Big Data e IA",
+      "itesm": "Ingeniería en Tecnologías Computacionales"
+    },
+    "labels": {
+      "company": "Empresa",
+      "role": "Puesto",
+      "date": "Fecha",
+      "degree": "Título",
+      "school": "Institución"
+    }
+  },
+  "about": {
+    "title": "Sobre mí - Mauricio Peón",
+    "metaDescription": "Ingeniero full-stack, cofundador y CTO de Medu. Experiencia, stack técnico, educación, charlas y proyectos de Mauricio Peón.",
+    "heading": "Soy Mauricio Peón: ingeniero, cofundador y CTO de Medu.",
+    "portraitAlt": "Retrato de Mauricio Peón",
+    "bio": [
+      "En 2019 cofundé Medu, una plataforma de educación médica en español. Diseñé y construí el producto desde cero —la app web, las apps móviles para iOS y Android, las APIs y la infraestructura en AWS— y lo acompañé hasta más de **200,000 profesionales de la salud en 21 países**, con 31 cursos y 146 cirugías transmitidas en vivo.",
+      "En el camino el equipo creció hasta 20 personas entre ingeniería, producto y contenido, y yo seguí con las manos en el código todos los días. También cerré y entregué cuentas empresariales con **Eli Lilly, Novo Nordisk y Pfizer**, a cargo tanto de la integración técnica como de la relación comercial.",
+      "Hoy me enfoco en llevar la IA a producción de verdad: voz a texto médico en español, generación de casos clínicos y audio de aprendizaje, con evaluación, control de costos y latencia resueltos de punta a punta. Fuera de Medu construyo mis propias apps —¿Te tocó?, Guardia y una app de meditación en camino— y comparto lo que aprendo en paneles y en una columna de tecnología.",
+      "Estudié Ingeniería en Tecnologías Computacionales en el Tec de Monterrey y una maestría en Ciencia de Datos, Big Data e IA en la Universidad Complutense de Madrid. Lejos de la pantalla, corro: terminé el Maratón de Valencia 2025 en 3:51."
+    ],
+    "links": {
+      "github": "Sígueme en GitHub",
+      "linkedin": "Conecta en LinkedIn",
+      "cv": "Descargar CV"
+    },
+    "experience": {
+      "title": "Experiencia",
+      "medu": [
+        "Diseñé y construí todo el producto desde cero: app web en Next.js, apps de React Native para iOS y Android, APIs REST e infraestructura en AWS (Amplify, Lambda, S3, CloudFront).",
+        "Escalé a **más de 200,000 profesionales de la salud en 21 países**, con 31 cursos y 146 cirugías en vivo; formé y lideré un equipo de 20 personas entre ingeniería, producto y contenido.",
+        "Cerré y entregué cuentas empresariales con **Eli Lilly, Novo Nordisk y Pfizer**, a cargo de la integración técnica y de la relación comercial.",
+        "Construí la infraestructura de video para transmisiones quirúrgicas en vivo con miles de espectadores simultáneos, con entrega adaptativa y degradación elegante en redes hospitalarias poco confiables.",
+        "Llevé funciones de LLM a producción, no prototipos: voz a texto médico en español, generación de casos clínicos y audio de aprendizaje generado por IA, con evaluación, control de costos y latencia resueltos de punta a punta.",
+        "Construí interfaces interactivas complejas: simuladores de casos clínicos y sistemas de quizzes gamificados en tiempo real.",
+        "Lideré la estrategia de producto y las ventas empresariales mientras escribía código a diario: responsabilidad completa desde la infraestructura hasta la interfaz y los ingresos."
+      ],
+      "ibm": [
+        "Desarrollé pipelines ETL y soluciones de datos para clientes bancarios con bases de datos SQL.",
+        "Traduje requerimientos de negocio complejos a especificaciones técnicas con equipos multidisciplinarios."
+      ]
+    },
+    "stack": {
+      "title": "Stack técnico",
+      "categories": {
+        "languages": "Lenguajes",
+        "frontend": "Frontend",
+        "backend": "Backend",
+        "infrastructure": "Infraestructura",
+        "ai": "IA y datos",
+        "other": "Otros"
+      },
+      "items": {
+        "languages": [
+          "TypeScript",
+          "JavaScript",
+          "Python",
+          "SQL",
+          "HTML/CSS"
+        ],
+        "frontend": [
+          "React",
+          "Next.js",
+          "React Native",
+          "Three.js",
+          "D3.js",
+          "Tailwind CSS"
+        ],
+        "backend": [
+          "Node.js",
+          "REST APIs",
+          "GraphQL",
+          "AWS Lambda",
+          "Firebase Cloud Functions"
+        ],
+        "infrastructure": [
+          "AWS (Amplify, S3, CloudFront, Lambda)",
+          "PostgreSQL",
+          "MongoDB",
+          "Firebase",
+          "Docker",
+          "CI/CD",
+          "Git"
+        ],
+        "ai": [
+          "Integración de APIs de LLM",
+          "RAG",
+          "Voz a texto",
+          "pandas",
+          "scikit-learn",
+          "matplotlib",
+          "Modelado estadístico"
+        ],
+        "other": [
+          "Publicación en App Store y Google Play",
+          "Video en vivo (streaming)",
+          "Deep linking",
+          "Stripe"
+        ]
+      }
+    },
+    "projects": {
+      "title": "Proyectos",
+      "viewAll": "Ver todos los proyectos",
+      "items": [
+        {
+          "name": "Medu IA",
+          "description": "Asistente de aprendizaje con IA: pacientes virtuales interactivos, simulación de casos clínicos, quizzes adaptativos y podcasts generados a partir de documentos médicos."
+        },
+        {
+          "name": "¿Te tocó?",
+          "description": "App para tomar decisiones con dados 3D interactivos. React Native y Three.js. Publicada en la App Store."
+        },
+        {
+          "name": "Guardia",
+          "description": "App de check-in de seguridad personal con alertas automáticas y contactos de emergencia. React Native y Supabase."
+        },
+        {
+          "name": "App de meditación (en desarrollo)",
+          "description": "Contenido generado por IA con voz sintetizada por ElevenLabs."
+        }
+      ]
+    },
+    "education": {
+      "title": "Educación",
+      "notes": {
+        "ucm": "Aprendizaje automático, series de tiempo, minería de datos, modelado estadístico y NLP.",
+        "itesm": "Graduado con distinción: Diploma de Excelencia (×4)."
+      }
+    },
+    "more": {
+      "title": "Además",
+      "languages": {
+        "label": "Idiomas",
+        "value": "Español (nativo) e inglés (avanzado)."
+      },
+      "speaking": {
+        "label": "Charlas y escritura",
+        "value": "Panelista en Mexico Health Summit 2025 y Neuron IT Forum 2025; columnista de tecnología en Mexico Business News desde 2025.",
+        "cta": "Ver charlas y escritura"
+      },
+      "athlete": {
+        "label": "Atleta de resistencia",
+        "value": "Maratón de Valencia 2025 (3:51) y 5 km de nado en aguas abiertas.",
+        "cta": "Ver mi ejercicio"
+      }
+    }
+  },
+  "speaking": {
+    "title": "Charlas y escritura - Mauricio Peón",
+    "metaDescription": "Paneles, columnas y prensa de Mauricio Peón sobre tecnología, IA y educación médica.",
+    "heading": "Hablo y escribo sobre tecnología, IA y educación médica.",
+    "intro": "Comparto lo que aprendo construyendo Medu en paneles y conferencias, y en una columna de tecnología. Estas son mis apariciones más recientes.",
+    "sections": {
+      "conferences": "Conferencias",
+      "writing": "Escritura",
+      "press": "En la prensa"
+    },
+    "items": {
+      "mhs": {
+        "title": "Mexico Health Summit 2025",
+        "event": "Panelista · Septiembre 2025",
+        "description": "Participé como panelista en el Mexico Health Summit, realizado el 10 de septiembre de 2025 en la Ciudad de México.",
+        "cta": "Ver evento"
+      },
+      "neuron": {
+        "title": "Impulsando la innovación empresarial con datos y tecnologías cloud",
+        "event": "Neuron IT Forum 2025 · Panel",
+        "description": "Panel con José Luis Mendoza, de Bafar, sobre cómo los datos y las tecnologías cloud se convierten en ventaja competitiva desde dos industrias distintas: educación y alimentos.",
+        "cta": "Leer la nota"
+      },
+      "mbn": {
+        "title": "Medvi AI Scandal Highlights Shortcuts and Fine Print",
+        "event": "Mexico Business News · Columna · Mayo 2026",
+        "description": "Un análisis crítico de cómo dos hermanos escalaron un negocio con herramientas de IA apoyados en prácticas engañosas: perfiles falsos de médicos y medicamentos sin verificar. En inglés.",
+        "cta": "Leer la columna"
+      },
+      "meduAi": {
+        "title": "Medu AI Transforms Medical Learning With Advanced AI Tool",
+        "event": "Mexico Business News · Agosto 2024",
+        "description": "Cobertura del lanzamiento de Medu AI, la herramienta de Medu que da acceso inmediato a recursos médicos curados y personaliza el aprendizaje. En inglés.",
+        "cta": "Leer la nota"
+      }
+    }
   }
 }
