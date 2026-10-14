@@ -4,10 +4,12 @@ import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 
 import { Container } from '@/components/Container'
+import { Apps } from '@/components/home/Apps'
 import { ContactBand } from '@/components/home/ContactBand'
 import { Emphasis } from '@/components/home/Emphasis'
 import { Fronts } from '@/components/home/Fronts'
 import { Journey } from '@/components/home/Journey'
+import { ManuelPeonSports } from '@/components/home/ManuelPeonSports'
 import { PillButton } from '@/components/home/PillButton'
 import { Eyebrow } from '@/components/home/SectionHeading'
 import { SelectedWork } from '@/components/home/SelectedWork'
@@ -156,6 +158,8 @@ export default function Home() {
         <Photos />
       </Container>
 
+      <ManuelPeonSports />
+      <Apps />
       <Fronts />
       <SelectedWork />
       <Journey />

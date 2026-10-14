@@ -10,10 +10,10 @@
   },
   "home": {
     "title": "Mauricio Peón - Full-stack engineer, entrepreneur and runner",
-    "description": "Mauricio Peón: full-stack engineer, entrepreneur and runner. Own products, AI in production, a technology column and panels on medical education. Co-founder and CTO of Medu.",
+    "description": "Mauricio Peón: full-stack engineer, entrepreneur and runner. Manuel Peón Sports, six apps on the App Store, AI in production and a technology column. Co-founder and CTO of Medu.",
     "eyebrow": "Engineer · Entrepreneur · Runner",
     "hero": "I build products, *write* and run.",
-    "intro": "I'm Mauricio Peón, a full-stack engineer and entrepreneur. I co-founded Medu, but my work doesn't fit inside one company: my own apps, AI in production, a technology column and an M.S. in data science. A lover of the most beautiful sport in the world (football); I run in the mornings and read at night.",
+    "intro": "I'm Mauricio Peón, a full-stack engineer and entrepreneur. I co-founded Medu, but my work doesn't fit inside one company: I'm building Manuel Peón Sports with my brother, I have six apps on the App Store and I write a technology column. A lover of the most beautiful sport in the world (football); I run in the mornings and read at night.",
     "cta": {
       "projects": "See projects",
       "cv": "Download CV"
@@ -25,7 +25,7 @@
         {
           "key": "product",
           "title": "Product",
-          "description": "My own products and projects with other teams: from medical education platforms to apps with 3D dice."
+          "description": "Six apps on the App Store, Manuel Peón Sports and projects with other teams, from a medical education platform to 3D games."
         },
         {
           "key": "words",
@@ -50,29 +50,16 @@
       ]
     },
     "work": {
-      "eyebrow": "Selected work",
-      "title": "Things I've *built*",
+      "eyebrow": "More projects",
+      "title": "Beyond the *App Store*",
       "viewAll": "See all projects",
       "inProgress": "In progress",
       "items": {
-        "guardia": {
-          "title": "Guardia",
-          "tag": "Mobile app · React Native · Supabase",
-          "description": "A daily safety check-in: if one day you can't press the button, it automatically alerts your emergency contact.",
-          "cta": "See the app",
-          "imageAlt": "Guardia's home screen with the “I'm fine” button"
-        },
         "celta": {
           "title": "El sueño del celta",
           "tag": "3D narrative game · Three.js",
           "description": "A 3D adventure through the Congo, the Amazon and Ireland to walk through Roger Casement's story, inspired by Mario Vargas Llosa's novel.",
           "cta": "Play"
-        },
-        "teToco": {
-          "title": "¿Te tocó?",
-          "tag": "iOS app · React Native · Three.js",
-          "description": "The most fun way to make random decisions, with interactive 3D dice. Published on the App Store.",
-          "cta": "App Store"
         },
         "medu": {
           "title": "Medu",
@@ -85,11 +72,6 @@
           "tag": "AI · LLM",
           "description": "A learning assistant with virtual patients, clinical cases, adaptive quizzes and podcasts generated from medical documents.",
           "cta": "Read the coverage"
-        },
-        "meditation": {
-          "title": "Meditation app",
-          "tag": "AI · ElevenLabs",
-          "description": "AI-generated content with ElevenLabs text-to-speech."
         }
       }
     },
@@ -104,8 +86,8 @@
         },
         {
           "label": "Building",
-          "title": "A meditation app",
-          "detail": "AI-generated content with ElevenLabs text-to-speech."
+          "title": "Manuel Peón Sports",
+          "detail": "Spanish-language sports podcasts, a newsletter and an app."
         },
         {
           "label": "Writing",
@@ -127,7 +109,37 @@
       "downloadCV": "Download CV",
       "cvNote": "PDF · in English"
     },
-    "readArticle": "Read article"
+    "readArticle": "Read article",
+    "mps": {
+      "eyebrow": "In progress",
+      "lead": "With my brother Manuel I'm building a home for sports in Spanish: two podcasts, a weekly newsletter and a game on the App Store.",
+      "role": "Manuel brings the voice and the analysis; I build everything else: the site, the newsletter, the app and the editing of episodes and clips.",
+      "cta": "Visit manuelpeonsports.com",
+      "portraitAlt": "Manuel Peón at the microphone in front of a stadium, cover of Pasados de Yarda",
+      "portraitCaption": "Pasados de Yarda · With Manuel Peón",
+      "pieces": {
+        "pdy": {
+          "label": "Podcast · NFL",
+          "title": "Pasados de Yarda",
+          "description": "For those of us who live American football a little more intensely than everyone else."
+        },
+        "odf": {
+          "label": "Podcast · Football",
+          "title": "Obsesionados del Fútbol",
+          "description": "The World Cup, the national team and everything that keeps us up at night."
+        },
+        "newsletter": {
+          "label": "Every week",
+          "title": "The newsletter",
+          "description": "Your team first, the rest of the NFL after."
+        },
+        "app": {
+          "label": "iPhone game",
+          "title": "Pasados de Yarda app",
+          "description": "Run, dodge defenders and try to get past 1,000 yards."
+        }
+      }
+    }
   },
   "projects": {
     "title": "Projects - Mauricio Peón",
@@ -148,11 +160,13 @@
       "presidentes": "A satirical page about the achievements of Mexico's presidents.",
       "meduIA": "AI learning assistant with interactive virtual patients, clinical case simulation, adaptive quizzes, and podcast generation from medical documents.",
       "guardia": "Daily personal-safety check-in app: if one day you can't press the button, it automatically alerts your emergency contacts. React Native and Supabase.",
-      "meditation": "Meditation app with AI-generated content and ElevenLabs text-to-speech."
+      "meditation": "Meditation app with AI-generated content and ElevenLabs text-to-speech.",
+      "mps": "Spanish-language NFL and football podcasts with my brother Manuel: Pasados de Yarda, Obsesionados del Fútbol, a weekly newsletter and an app. I build the site, the newsletter and the app, and edit episodes and clips."
     },
     "groups": {
       "built": "What I've built",
-      "more": "More projects"
+      "more": "More projects",
+      "apps": "On the App Store"
     },
     "inProgress": "In progress",
     "links": {
@@ -482,6 +496,37 @@
         "event": "Mexico Business News · August 2024",
         "description": "Coverage of the launch of Medu AI, Medu's tool that gives instant access to curated medical resources and personalizes learning.",
         "cta": "Read the article"
+      }
+    }
+  },
+  "apps": {
+    "eyebrow": "App Store",
+    "title": "Six apps, *published*",
+    "intro": "Ideas I took from start to finish: design, code and release. All of them are available for iPhone.",
+    "items": {
+      "pasadosDeYarda": {
+        "category": "Game",
+        "tagline": "An American football endless runner: dodge defenders, jump obstacles and get past 1,000 yards."
+      },
+      "ubermensch": {
+        "category": "Health & Fitness",
+        "tagline": "Your training, habits and progress in a private space, no account needed."
+      },
+      "cuno": {
+        "category": "Lifestyle",
+        "tagline": "Photograph your coins and turn them into 3D pieces you can rotate, inspect and keep."
+      },
+      "guardia": {
+        "category": "Utilities",
+        "tagline": "One check-in a day; if you miss it, it alerts someone you trust by WhatsApp or email."
+      },
+      "teToco": {
+        "category": "Utilities",
+        "tagline": "Decide what to eat, where to go or what to watch with interactive 3D dice."
+      },
+      "tapmap": {
+        "category": "Education",
+        "tagline": "Explore countries, capitals and landmarks on a realistic 3D globe."
       }
     }
   }

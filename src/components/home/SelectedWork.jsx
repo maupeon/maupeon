@@ -1,61 +1,37 @@
 import Link from 'next/link'
 import clsx from 'clsx'
-import {
-  GlobeEuropeAfricaIcon,
-  MoonIcon,
-  ShieldCheckIcon,
-  SparklesIcon,
-} from '@heroicons/react/24/outline'
+import { GlobeEuropeAfricaIcon, SparklesIcon } from '@heroicons/react/24/outline'
 
 import { Container } from '@/components/Container'
 import { Bezel } from '@/components/home/Bezel'
 import { Reveal } from '@/components/home/Reveal'
 import { SectionHeading } from '@/components/home/SectionHeading'
 import { ArrowUpRightIcon } from '@/components/home/ThinIcons'
-import guardiaScreenshot from '@/images/apps/guardia.png'
 import logoMedu from '@/images/logos/medu.png'
-import logoTeToco from '@/images/logos/logoTeToco.png'
 import { useTranslation } from '@/lib/useTranslation'
 
-// Order matters: Medu is deliberately not first. `span` places each card in
-// the 12-column bento on large screens; everything stacks on mobile.
+// Work outside the App Store (the apps have their own section above).
+// `span` places each card in the 12-column bento on large screens.
 const works = [
-  {
-    key: 'guardia',
-    href: '/app/guardia',
-    span: 'lg:col-span-7 lg:row-span-2',
-    icon: ShieldCheckIcon,
-    tall: true,
-  },
   {
     key: 'celta',
     href: '/app/sueno-del-celta',
-    span: 'lg:col-span-5',
+    span: 'lg:col-span-6 lg:row-span-2',
     icon: GlobeEuropeAfricaIcon,
     forest: true,
-  },
-  {
-    key: 'teToco',
-    href: 'https://apps.apple.com/es/app/te-toc%C3%B3/id6756806727',
-    span: 'lg:col-span-5',
-    logo: logoTeToco,
+    tall: true,
   },
   {
     key: 'medu',
     href: 'https://medu.ai',
-    span: 'lg:col-span-4',
+    span: 'lg:col-span-6',
     logo: logoMedu,
   },
   {
     key: 'meduIA',
     href: 'https://mexicobusiness.news/health/news/medu-ai-transforms-medical-learning-advanced-ai-tool',
-    span: 'lg:col-span-4',
+    span: 'lg:col-span-6',
     icon: SparklesIcon,
-  },
-  {
-    key: 'meditation',
-    span: 'lg:col-span-4',
-    icon: MoonIcon,
   },
 ]
 
@@ -83,20 +59,6 @@ function Mark({ work }) {
   )
 }
 
-function PhoneMock({ alt }) {
-  return (
-    <div className="relative mt-10 h-80 overflow-hidden lg:absolute lg:inset-y-0 lg:right-8 lg:mt-0 lg:h-auto lg:w-56">
-      <div className="mx-auto w-52 rounded-[2.25rem] bg-zinc-900 p-2 shadow-[0_24px_48px_-24px_rgba(24,24,27,0.55)] ring-1 ring-white/10 lg:absolute lg:inset-x-0 lg:bottom-[-4.5rem] lg:mx-0 lg:w-full">
-        <img
-          src={guardiaScreenshot.src}
-          alt={alt}
-          className="w-full rounded-[1.75rem]"
-        />
-      </div>
-    </div>
-  )
-}
-
 function WorkCard({ work, index }) {
   const { t } = useTranslation()
   const copy = t(`home.work.items.${work.key}`, {})
@@ -111,7 +73,7 @@ function WorkCard({ work, index }) {
         className="h-full"
         innerClassName={clsx(
           'flex min-h-[19rem] flex-col p-7 sm:p-9',
-          work.tall && 'lg:min-h-[34rem]',
+          work.tall && 'lg:min-h-[32rem]',
           work.forest &&
             'bg-[radial-gradient(120%_90%_at_100%_0%,rgba(230,220,197,0.16),transparent_55%),linear-gradient(160deg,#1c3427,#0f1a14)] text-[#e6dcc5] dark:bg-[#14231b]'
         )}
@@ -125,12 +87,7 @@ function WorkCard({ work, index }) {
           />
         )}
 
-        <div
-          className={clsx(
-            'relative z-10 flex items-start justify-between gap-4',
-            work.tall && 'lg:pr-64'
-          )}
-        >
+        <div className="relative z-10 flex items-start justify-between gap-4">
           <Mark work={work} />
           <span
             className={clsx(
@@ -142,9 +99,7 @@ function WorkCard({ work, index }) {
           </span>
         </div>
 
-        <div
-          className={clsx('relative z-10 mt-auto pt-12', work.tall && 'lg:pr-64')}
-        >
+        <div className="relative z-10 mt-auto pt-12">
           <h3
             className={clsx(
               'font-serif text-3xl font-semibold tracking-tight',
@@ -191,7 +146,6 @@ function WorkCard({ work, index }) {
           </div>
         </div>
 
-        {work.tall && <PhoneMock alt={copy.imageAlt} />}
       </Bezel>
     </Reveal>
   )

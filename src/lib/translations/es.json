@@ -10,10 +10,10 @@
   },
   "home": {
     "title": "Mauricio Peón - Ingeniero full-stack, emprendedor y corredor",
-    "description": "Mauricio Peón: ingeniero full-stack, emprendedor y corredor. Productos propios, IA en producción, una columna de tecnología y paneles sobre educación médica. Cofundador y CTO de Medu.",
+    "description": "Mauricio Peón: ingeniero full-stack, emprendedor y corredor. Manuel Peón Sports, seis apps en la App Store, IA en producción y una columna de tecnología. Cofundador y CTO de Medu.",
     "eyebrow": "Ingeniero · Emprendedor · Corredor",
     "hero": "Construyo productos, *escribo* y corro.",
-    "intro": "Soy Mauricio Peón, ingeniero full-stack y emprendedor. Cofundé Medu, pero mi trabajo no cabe en una sola empresa: apps propias, IA en producción, una columna de tecnología y una maestría en ciencia de datos. Amante del deporte más bonito del mundo (fútbol); por las mañanas corro, por las noches leo.",
+    "intro": "Soy Mauricio Peón, ingeniero full-stack y emprendedor. Cofundé Medu, pero mi trabajo no cabe en una sola empresa: construyo Manuel Peón Sports con mi hermano, tengo seis apps publicadas en la App Store y escribo una columna de tecnología. Amante del deporte más bonito del mundo (fútbol); por las mañanas corro, por las noches leo.",
     "cta": {
       "projects": "Ver proyectos",
       "cv": "Descargar CV"
@@ -25,7 +25,7 @@
         {
           "key": "product",
           "title": "Producto",
-          "description": "Productos propios y proyectos con otros equipos: desde plataformas de educación médica hasta apps con dados 3D."
+          "description": "Seis apps en la App Store, Manuel Peón Sports y proyectos con otros equipos, desde una plataforma de educación médica hasta juegos en 3D."
         },
         {
           "key": "words",
@@ -50,29 +50,16 @@
       ]
     },
     "work": {
-      "eyebrow": "Obra seleccionada",
-      "title": "Cosas que he *construido*",
+      "eyebrow": "Más proyectos",
+      "title": "Fuera de la *App Store*",
       "viewAll": "Ver todos los proyectos",
       "inProgress": "En desarrollo",
       "items": {
-        "guardia": {
-          "title": "Guardia",
-          "tag": "App móvil · React Native · Supabase",
-          "description": "Un check-in diario de seguridad: si un día no puedes pulsar el botón, avisa automáticamente a tu contacto de emergencia.",
-          "cta": "Ver la app",
-          "imageAlt": "Pantalla principal de Guardia con el botón «Estoy bien»"
-        },
         "celta": {
           "title": "El sueño del celta",
           "tag": "Juego narrativo 3D · Three.js",
           "description": "Una aventura 3D por el Congo, la Amazonía e Irlanda para recorrer la historia de Roger Casement, inspirada en la novela de Mario Vargas Llosa.",
           "cta": "Jugar"
-        },
-        "teToco": {
-          "title": "¿Te tocó?",
-          "tag": "App iOS · React Native · Three.js",
-          "description": "La forma más divertida de tomar decisiones aleatorias, con dados 3D interactivos. Publicada en la App Store.",
-          "cta": "App Store"
         },
         "medu": {
           "title": "Medu",
@@ -85,11 +72,6 @@
           "tag": "IA · LLM",
           "description": "Asistente de aprendizaje con pacientes virtuales, casos clínicos, quizzes adaptativos y podcasts generados a partir de documentos médicos.",
           "cta": "Leer la cobertura"
-        },
-        "meditation": {
-          "title": "App de meditación",
-          "tag": "IA · ElevenLabs",
-          "description": "Contenido generado por IA con voz sintetizada por ElevenLabs."
         }
       }
     },
@@ -104,8 +86,8 @@
         },
         {
           "label": "Construyendo",
-          "title": "Una app de meditación",
-          "detail": "Contenido generado por IA y voz sintetizada con ElevenLabs."
+          "title": "Manuel Peón Sports",
+          "detail": "Podcasts, newsletter y una app de deporte en español."
         },
         {
           "label": "Escribiendo",
@@ -127,7 +109,37 @@
       "downloadCV": "Descargar CV",
       "cvNote": "PDF · en inglés"
     },
-    "readArticle": "Leer artículo"
+    "readArticle": "Leer artículo",
+    "mps": {
+      "eyebrow": "En marcha",
+      "lead": "Con mi hermano Manuel estoy construyendo una casa para el deporte en español: dos podcasts, una newsletter semanal y un juego en la App Store.",
+      "role": "Manuel pone la voz y el análisis; yo construyo todo lo demás: el sitio, la newsletter, la app y la edición de episodios y clips.",
+      "cta": "Visitar manuelpeonsports.com",
+      "portraitAlt": "Manuel Peón frente al micrófono con un estadio de fondo, portada de Pasados de Yarda",
+      "portraitCaption": "Pasados de Yarda · Con Manuel Peón",
+      "pieces": {
+        "pdy": {
+          "label": "Podcast · NFL",
+          "title": "Pasados de Yarda",
+          "description": "Para los que vivimos el fútbol americano un poquito más intenso que los demás."
+        },
+        "odf": {
+          "label": "Podcast · Fútbol",
+          "title": "Obsesionados del Fútbol",
+          "description": "El Mundial, la selección y todo lo que nos quita el sueño."
+        },
+        "newsletter": {
+          "label": "Cada semana",
+          "title": "La newsletter",
+          "description": "Tu equipo primero, toda la NFL después."
+        },
+        "app": {
+          "label": "Juego para iPhone",
+          "title": "App Pasados de Yarda",
+          "description": "Corre, esquiva defensas e intenta superar las 1,000 yardas."
+        }
+      }
+    }
   },
   "projects": {
     "title": "Proyectos - Mauricio Peón",
@@ -148,11 +160,13 @@
       "presidentes": "Es una página sátira de las hazañas que han logrado los presidentes de México.",
       "meduIA": "Asistente de aprendizaje con IA: pacientes virtuales interactivos, simulación de casos clínicos, quizzes adaptativos y podcasts generados a partir de documentos médicos.",
       "guardia": "App de check-in diario de seguridad personal: si un día no puedes pulsar el botón, avisa automáticamente a tus contactos de emergencia. React Native y Supabase.",
-      "meditation": "App de meditación con contenido generado por IA y voz sintetizada con ElevenLabs."
+      "meditation": "App de meditación con contenido generado por IA y voz sintetizada con ElevenLabs.",
+      "mps": "Podcasts de NFL y fútbol en español con mi hermano Manuel: Pasados de Yarda, Obsesionados del Fútbol, una newsletter semanal y una app. Construyo el sitio, la newsletter, la app y edito episodios y clips."
     },
     "groups": {
       "built": "Lo que he construido",
-      "more": "Más proyectos"
+      "more": "Más proyectos",
+      "apps": "En la App Store"
     },
     "inProgress": "En desarrollo",
     "links": {
@@ -482,6 +496,37 @@
         "event": "Mexico Business News · Agosto 2024",
         "description": "Cobertura del lanzamiento de Medu AI, la herramienta de Medu que da acceso inmediato a recursos médicos curados y personaliza el aprendizaje. En inglés.",
         "cta": "Leer la nota"
+      }
+    }
+  },
+  "apps": {
+    "eyebrow": "App Store",
+    "title": "Seis apps *publicadas*",
+    "intro": "Ideas que llevé de punta a punta: diseño, código y publicación. Todas están disponibles para iPhone.",
+    "items": {
+      "pasadosDeYarda": {
+        "category": "Juego",
+        "tagline": "Endless runner de fútbol americano: esquiva defensas, salta obstáculos y supera las 1,000 yardas."
+      },
+      "ubermensch": {
+        "category": "Salud y forma física",
+        "tagline": "Tu entrenamiento, hábitos y progreso en un espacio privado, sin crear una cuenta."
+      },
+      "cuno": {
+        "category": "Estilo de vida",
+        "tagline": "Fotografía tus monedas y conviértelas en piezas 3D para girar, inspeccionar y conservar."
+      },
+      "guardia": {
+        "category": "Utilidades",
+        "tagline": "Un check-in al día; si no lo haces, avisa a tu persona de confianza por WhatsApp o correo."
+      },
+      "teToco": {
+        "category": "Utilidades",
+        "tagline": "Decide qué comer, a dónde ir o qué película ver con dados 3D interactivos."
+      },
+      "tapmap": {
+        "category": "Educación",
+        "tagline": "Explora países, capitales y puntos clave en un globo terráqueo 3D."
       }
     }
   }

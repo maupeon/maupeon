@@ -3,11 +3,9 @@ import Head from 'next/head'
 import { Card } from '@/components/Card'
 import { SimpleLayout } from '@/components/SimpleLayout'
 import { useTranslation } from '@/lib/useTranslation'
-import {
-  MoonIcon,
-  ShieldCheckIcon,
-  SparklesIcon,
-} from '@heroicons/react/24/outline'
+import { MoonIcon, SparklesIcon } from '@heroicons/react/24/outline'
+import { appStoreApps, appStoreUrl } from '@/lib/apps'
+import logoMps from '@/images/mps/iso_mps.svg'
 import logoMedu from '@/images/logos/medu.png'
 import logoMedu2 from '@/images/logos/medu2.png'
 import ppaa from '@/images/logos/ppaa.jpg'
@@ -18,13 +16,30 @@ import zamme from '@/images/logos/zamme.png'
 import macondo from '@/images/logos/macondo.png'
 import camsam from '@/images/logos/camsam.png'
 import presidentes from '@/images/logos/presidentes.ico'
-import teToco from '@/images/logos/logoTeToco.png'
-// Products first (they mirror the "Shipped projects" section of the CV), then
-// the rest. `icon` replaces the logo circle for projects without a logo file.
+// App Store apps first, then my other products, then work with other teams.
+// `icon` replaces the logo circle for projects without a logo file.
 const projectGroups = [
+  {
+    key: 'apps',
+    projects: appStoreApps.map((app) => ({
+      name: app.name,
+      descriptionPath: `apps.items.${app.key}.tagline`,
+      link: { href: appStoreUrl(app), label: 'App Store' },
+      logo: { src: app.icon },
+    })),
+  },
   {
     key: 'built',
     projects: [
+      {
+        name: 'Manuel Peón Sports',
+        descriptionKey: 'mps',
+        link: {
+          href: 'https://manuelpeonsports.com',
+          label: 'manuelpeonsports.com',
+        },
+        logo: logoMps,
+      },
       {
         name: 'Medu',
         descriptionKey: 'medu',
@@ -48,21 +63,6 @@ const projectGroups = [
           label: 'App Store',
         },
         logo: logoMedu,
-      },
-      {
-        name: '¿Te tocó?',
-        descriptionKey: 'teTocoApp',
-        link: {
-          href: 'https://apps.apple.com/es/app/te-toc%C3%B3/id6756806727',
-          label: 'App Store',
-        },
-        logo: teToco,
-      },
-      {
-        name: 'Guardia',
-        descriptionKey: 'guardia',
-        link: { href: '/app/guardia', label: 'maupeon.com/app/guardia' },
-        icon: ShieldCheckIcon,
       },
       {
         name: 'Meditation',
@@ -177,7 +177,7 @@ function ProjectCard({ project }) {
         )}
       </h3>
       <Card.Description>
-        {t(`projects.descriptions.${project.descriptionKey}`)}
+        {t(project.descriptionPath ?? `projects.descriptions.${project.descriptionKey}`)}
       </Card.Description>
       {project.link ? (
         <p className="relative z-10 mt-6 flex text-sm font-medium text-zinc-400 transition group-hover:text-purple-500 dark:text-zinc-200">
