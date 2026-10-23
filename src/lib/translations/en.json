@@ -529,5 +529,53 @@
         "tagline": "Explore countries, capitals and landmarks on a realistic 3D globe."
       }
     }
+  },
+  "companies": {
+    "title": "Companies - Mauricio Peón",
+    "metaDescription": "My city of AI agents: each agent is a building, and anything that handles money or clients lives on its own island.",
+    "eyebrow": "Companies",
+    "heading": "My city of *agents*.",
+    "intro": "Every AI agent that works with me is a building. They send messages along the streets of the main island. Anything that handles money or clients lives apart, on its own island.",
+    "fig": "Fig. 1",
+    "figTitle": "City of agents",
+    "figAria": "Isometric city of agents at night: a main island with five buildings and six shops, and four separate islands.",
+    "hint": "Hover or Tab onto a building",
+    "hintTouch": "Tap a building or a name",
+    "readout": "{agents} agents · {active} active · {tbd} to be defined",
+    "status": {
+      "activo": "Active",
+      "por_definir": "To be defined"
+    },
+    "card": {
+      "channel": "Channel",
+      "island": "Island",
+      "status": "Status",
+      "building": "Building",
+      "none": "—",
+      "close": "Close"
+    },
+    "legend": {
+      "title": "Legend",
+      "messages": "Message between agents",
+      "windows": "Lights on",
+      "isolated": "Isolated, no bridge",
+      "ferry": "Notion ferry",
+      "tbd": "To be defined"
+    },
+    "notes": {
+      "coordinate": {
+        "title": "One boss",
+        "body": "neumann lives in the tower at the centre. It hands out the work and sends me a summary every morning."
+      },
+      "isolate": {
+        "title": "Separate islands",
+        "body": "nash handles finance and has no bridge. Medu, Unio and Blue Book live on their own land too."
+      },
+      "ferry": {
+        "title": "Paperwork only",
+        "body": "Only a ferry runs between Blue Book and the main island, and it carries one thing: a Notion table."
+      }
+    },
+    "activeCount": "Active {n}"
   }
 }

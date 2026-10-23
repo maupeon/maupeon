@@ -1,0 +1,114 @@
+/* The city on /empresas: a pixel-art canvas under a vector layer that holds
+   the words and the shapes you can point at. */
+
+.figure {
+  font-family: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+}
+
+.mono {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+}
+
+.corner {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #6b7280;
+}
+
+:global(.dark) .corner {
+  color: #b9c4db;
+}
+
+.canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  image-rendering: pixelated;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.canvasReady {
+  opacity: 1;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+.hit {
+  cursor: pointer;
+  outline: none;
+}
+
+.callout {
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.callout[data-active]:not([data-on]) {
+  opacity: 0.35;
+}
+
+.labelShort {
+  display: inline;
+}
+
+.labelFull {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .labelShort {
+    display: none;
+  }
+
+  .labelFull {
+    display: inline;
+  }
+}
+
+.card {
+  box-shadow: 4px 4px 0 0 var(--c, #e6eaf2);
+}
+
+.sheet {
+  animation: sheetIn 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+@keyframes sheetIn {
+  from {
+    transform: translateY(100%);
+  }
+}
+
+.dot {
+  animation: blink 2.4s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .canvas,
+  .callout,
+  .sheet,
+  .dot {
+    animation: none;
+    transition: none;
+  }
+}

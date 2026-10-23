@@ -1,0 +1,161 @@
+{
+  "islas": {
+    "principal": { "nombre": "VPS principal", "en": "Main VPS" },
+    "islote": { "nombre": "Islote sin puente", "en": "Islet, no bridge" },
+    "blue-book": { "nombre": "Otro VPS", "en": "Another VPS" },
+    "unio": { "nombre": "Islote de la colina", "en": "Hill islet" },
+    "medu": { "nombre": "Tierra firme", "en": "Mainland" }
+  },
+  "agentes": [
+    {
+      "id": "neumann",
+      "nombre": "neumann",
+      "tipo": "agente",
+      "rol": "Jefe. Coordina a los demás agentes y manda un resumen cada mañana.",
+      "edificio": "Torre de control con faro",
+      "canal": "Telegram",
+      "estado": "activo",
+      "isla": "principal",
+      "color": "#FFD27A",
+      "en": {
+        "rol": "The boss. Coordinates the other agents and sends a summary every morning.",
+        "edificio": "Control tower with a lighthouse"
+      }
+    },
+    {
+      "id": "shannon",
+      "nombre": "shannon",
+      "tipo": "agente",
+      "rol": "Lleva Manuel Peón Sports.",
+      "edificio": "Estadio con antena de transmisión",
+      "canal": "Telegram",
+      "estado": "activo",
+      "isla": "principal",
+      "color": "#7FE0C4",
+      "en": {
+        "rol": "Runs Manuel Peón Sports.",
+        "edificio": "Stadium with a broadcast antenna"
+      }
+    },
+    {
+      "id": "babbage",
+      "nombre": "babbage",
+      "tipo": "agente",
+      "rol": "Marketing del estudio 1001.",
+      "edificio": "Edificio de espectaculares",
+      "canal": "Telegram",
+      "estado": "activo",
+      "isla": "principal",
+      "color": "#FF9E8A",
+      "en": {
+        "rol": "Marketing for the 1001 studio.",
+        "edificio": "Billboard building"
+      }
+    },
+    {
+      "id": "apps",
+      "nombre": "6 apps",
+      "tipo": "lugar",
+      "rol": "Las seis apps del estudio 1001 en la App Store. babbage las vende y hopper las opera.",
+      "edificio": "Seis tienditas junto a babbage",
+      "canal": null,
+      "estado": "activo",
+      "isla": "principal",
+      "color": "#E6EAF2",
+      "en": {
+        "rol": "The six apps of the 1001 studio on the App Store. babbage sells them and hopper runs them.",
+        "edificio": "Six little shops next to babbage"
+      }
+    },
+    {
+      "id": "hopper",
+      "nombre": "hopper",
+      "tipo": "agente",
+      "rol": "Operación de las apps: que todo siga corriendo.",
+      "edificio": "Taller con cortina y chimenea",
+      "canal": "Telegram",
+      "estado": "activo",
+      "isla": "principal",
+      "color": "#8EC1FF",
+      "en": {
+        "rol": "Runs app operations: keeps everything going.",
+        "edificio": "Workshop with a roller door and a chimney"
+      }
+    },
+    {
+      "id": "lovelace",
+      "nombre": "lovelace",
+      "tipo": "agente",
+      "rol": "Líneas en Blanco. Su trabajo está por definir.",
+      "edificio": "Biblioteca translúcida",
+      "canal": null,
+      "estado": "por_definir",
+      "isla": "principal",
+      "color": "#C9B6FF",
+      "en": {
+        "rol": "Líneas en Blanco. Its job is still to be defined.",
+        "edificio": "Translucent library"
+      }
+    },
+    {
+      "id": "nash",
+      "nombre": "nash",
+      "tipo": "agente",
+      "rol": "Hermes Financiero. Vive aislado, sin puente a la isla principal.",
+      "edificio": "Bóveda con cerca",
+      "canal": "Telegram",
+      "estado": "activo",
+      "isla": "islote",
+      "color": "#FF6B7A",
+      "en": {
+        "rol": "Hermes Financiero. Lives isolated, with no bridge to the main island.",
+        "edificio": "Fenced vault"
+      }
+    },
+    {
+      "id": "bluebook",
+      "nombre": "Blue Book",
+      "tipo": "lugar",
+      "rol": "Corre en su propio VPS. Solo comparte papeles con la isla principal: una tabla de Notion que viaja en ferry.",
+      "edificio": "Capilla",
+      "canal": null,
+      "estado": "activo",
+      "isla": "blue-book",
+      "color": "#8FB0F0",
+      "en": {
+        "rol": "Runs on its own VPS. It only shares paperwork with the main island: a Notion table that travels by ferry.",
+        "edificio": "Chapel"
+      }
+    },
+    {
+      "id": "unio",
+      "nombre": "Unio",
+      "tipo": "lugar",
+      "rol": "Unio, la app católica de oración.",
+      "edificio": "Iglesia en la colina",
+      "canal": null,
+      "estado": "activo",
+      "isla": "unio",
+      "color": "#E2C27E",
+      "en": {
+        "rol": "Unio, the Catholic prayer app.",
+        "edificio": "Church on the hill"
+      }
+    },
+    {
+      "id": "medu",
+      "nombre": "Medu",
+      "tipo": "lugar",
+      "rol": "Medu vive en tierra firme: un campus aparte, sin puente ni ferry.",
+      "edificio": "Campus con hospital y aulas",
+      "canal": null,
+      "estado": "activo",
+      "isla": "medu",
+      "color": "#6FD1BE",
+      "en": {
+        "rol": "Medu lives on the mainland: a separate campus, with no bridge or ferry.",
+        "edificio": "Campus with a hospital and classrooms"
+      }
+    }
+  ]
+}

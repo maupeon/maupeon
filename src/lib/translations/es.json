@@ -529,5 +529,53 @@
         "tagline": "Explora países, capitales y puntos clave en un globo terráqueo 3D."
       }
     }
+  },
+  "companies": {
+    "title": "Empresas - Mauricio Peón",
+    "metaDescription": "Mi ciudad de agentes de IA: cada agente es un edificio y lo que maneja dinero o clientes vive en su propia isla.",
+    "eyebrow": "Empresas",
+    "heading": "Mi ciudad de *agentes*.",
+    "intro": "Cada agente de IA que trabaja conmigo es un edificio. Se mandan mensajes por las calles de la isla principal. Lo que maneja dinero o clientes vive aparte, en su propia isla.",
+    "fig": "Fig. 1",
+    "figTitle": "Ciudad de agentes",
+    "figAria": "Ciudad isométrica de agentes de noche: una isla principal con cinco edificios y seis tiendas, y cuatro islas separadas.",
+    "hint": "Pasa el mouse o usa Tab sobre un edificio",
+    "hintTouch": "Toca un edificio o un nombre",
+    "readout": "{agents} agentes · {active} activos · {tbd} por definir",
+    "status": {
+      "activo": "Activo",
+      "por_definir": "Por definir"
+    },
+    "card": {
+      "channel": "Canal",
+      "island": "Isla",
+      "status": "Estado",
+      "building": "Edificio",
+      "none": "—",
+      "close": "Cerrar"
+    },
+    "legend": {
+      "title": "Leyenda",
+      "messages": "Mensaje entre agentes",
+      "windows": "Ventanas encendidas",
+      "isolated": "Aislado, sin puente",
+      "ferry": "Ferry de Notion",
+      "tbd": "Por definir"
+    },
+    "notes": {
+      "coordinate": {
+        "title": "Un jefe",
+        "body": "neumann vive en la torre del centro. Reparte el trabajo y cada mañana me manda un resumen."
+      },
+      "isolate": {
+        "title": "Islas aparte",
+        "body": "nash maneja finanzas y no tiene puente. Medu, Unio y Blue Book también viven en su propia tierra."
+      },
+      "ferry": {
+        "title": "Solo papeles",
+        "body": "Entre Blue Book y la isla principal solo viaja un ferry, y lleva una sola cosa: una tabla de Notion."
+      }
+    },
+    "activeCount": "Activos {n}"
   }
 }
