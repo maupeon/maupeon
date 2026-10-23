@@ -536,12 +536,8 @@
     "eyebrow": "Companies",
     "heading": "My city of *agents*.",
     "intro": "Every AI agent that works with me is a building. They send messages along the streets of the main island. Anything that handles money or clients lives apart, on its own island.",
-    "fig": "Fig. 1",
-    "figTitle": "City of agents",
     "figAria": "Isometric city of agents at night: a main island with five buildings and six shops, and four separate islands.",
-    "hint": "Hover or Tab onto a building",
-    "hintTouch": "Tap a building or a name",
-    "readout": "{agents} agents · {active} active · {tbd} to be defined",
+    "hint": "Drag to turn the city. Tap a building to see its card.",
     "status": {
       "activo": "Active",
       "por_definir": "To be defined"
@@ -575,7 +571,6 @@
         "title": "Paperwork only",
         "body": "Only a ferry runs between Blue Book and the main island, and it carries one thing: a Notion table."
       }
-    },
-    "activeCount": "Active {n}"
+    }
   }
 }

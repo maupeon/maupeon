@@ -536,12 +536,8 @@
     "eyebrow": "Empresas",
     "heading": "Mi ciudad de *agentes*.",
     "intro": "Cada agente de IA que trabaja conmigo es un edificio. Se mandan mensajes por las calles de la isla principal. Lo que maneja dinero o clientes vive aparte, en su propia isla.",
-    "fig": "Fig. 1",
-    "figTitle": "Ciudad de agentes",
     "figAria": "Ciudad isométrica de agentes de noche: una isla principal con cinco edificios y seis tiendas, y cuatro islas separadas.",
-    "hint": "Pasa el mouse o usa Tab sobre un edificio",
-    "hintTouch": "Toca un edificio o un nombre",
-    "readout": "{agents} agentes · {active} activos · {tbd} por definir",
+    "hint": "Arrastra para girar la ciudad. Toca un edificio para ver su ficha.",
     "status": {
       "activo": "Activo",
       "por_definir": "Por definir"
@@ -575,7 +571,6 @@
         "title": "Solo papeles",
         "body": "Entre Blue Book y la isla principal solo viaja un ferry, y lleva una sola cosa: una tabla de Notion."
       }
-    },
-    "activeCount": "Activos {n}"
+    }
   }
 }

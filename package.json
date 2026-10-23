@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "strava:snapshot": "node scripts/strava-snapshot.mjs"
+    "strava:snapshot": "node scripts/strava-snapshot.mjs",
+    "figure:ciudad": "node scripts/build-ciudad.mjs"
   },
   "browserslist": "defaults, not ie <= 11",
   "dependencies": {

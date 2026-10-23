@@ -1,0 +1,831 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ciudad de agentes</title>
+<style>
+  :root{--paper:#f6f4ef}
+  html.night{--paper:#0b1630;--ink:#ece6d6;--muted:#9aa6c4;--rule:#22325a}
+  html.night body{background-image:none}
+  body{background-color:var(--paper)}
+  header,.stage,.controls,.made-with,#readout{max-width:1180px!important}
+  #fig{max-width:1180px!important}
+  .ctl:has(#pals){display:none}
+  /* the card that names the building in focus */
+  #ficha{position:absolute;left:0;bottom:18px;z-index:3;width:min(300px,42%);background:#fff4d6;color:#231e16;border:1.5px solid #231e16;
+    border-radius:12px;box-shadow:3px 3px 0 #231e16;padding:12px 14px;font:12px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace;
+    opacity:0;transform:translateY(6px);transition:opacity .18s ease,transform .18s ease;pointer-events:none}
+  #ficha.show{opacity:1;transform:none}
+  #ficha .nm{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:15px;font-weight:800}
+  #ficha .sw{display:inline-block;width:11px;height:11px;border:1.2px solid #231e16;border-radius:3px;margin-right:7px;vertical-align:-1px}
+  #ficha .st{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border:1.2px solid #231e16;border-radius:999px;padding:1px 7px}
+  #ficha .st.tbd{border-style:dashed}
+  #ficha .bd{color:#6b6252;margin-top:2px}
+  #ficha .rl{margin-top:8px}
+  #ficha dl{display:grid;grid-template-columns:1fr 1fr;gap:2px 12px;margin:10px 0 0;padding-top:8px;border-top:1px dashed #b8ad95}
+  #ficha dt{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#6b6252} #ficha dd{margin:0;font-weight:700}
+  #ficha .apps{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px} #ficha .apps span{border:1px solid #231e16;border-radius:6px;padding:0 5px;font-size:11px}
+  @media (max-width:560px){#ficha{position:static;width:100%;margin:6px 0 4px;display:none}#ficha.show{display:block}}
+</style>
+</head><body>
+<script src="core.js"></script>
+<script>
+/* =====================================================================================================
+   Ciudad de agentes: Mauricio's AI agents as a city on islands, drawn on a tray of water.
+
+   How it really works (what the figure shows)
+   - The main island is one VPS. Each agent there is a building; they talk to each other through the
+     streets (in see-through: the network cable under the streets) and neumann, in the control tower at
+     the centre, coordinates them and sends Mauricio a summary every morning.
+   - Whatever touches money or clients lives apart: nash (finance) is a vault on an islet with a fence
+     and no bridge, so a message from the main island stops at the shore.
+   - Blue Book runs on another VPS. Only paperwork crosses: a ferry carries the Notion table.
+   - Unio (the prayer app) and Medu (mainland campus) are separate, with no bridge or ferry.
+
+   Coordinates: x = depth (toward viewer-right), y = width (toward viewer-left), z = up; 1 unit ≈ 1 m.
+   The tray of water is 1040 × 875; islands stand on it. Positions come from the approved sketch
+   (2:1 screen → floor), with the outer islands pulled in so the buildings read larger.
+
+   Parts (each sits on another part)
+   TRAY     water slab . wave marks . ferry route
+   MAIN     island slab . two streets with sidewalks and dashed lines . roundabout with lawn . promenade .
+            pier and its posts . plaza with bench . trees . street network (see-through)
+   neumann  plinth . tower . windows . floor bands . door . parapet . lantern room . mast . beacon ;
+            inside: floor plates, lift core, server rack with LEDs, control-room desk and monitors, riser cable
+   shannon  stand walls . entrances . light band . pitch with stripes and lines . floodlight poles . mast .
+            broadcast arcs ; inside: broadcast booth, camera on tripod, mixer desk, cable to the mast
+   babbage  brick tower . billboard "1001 apps" . bar-chart board . windows . roof unit . aerial ;
+            inside: plotter with paper roll, poster stacks, design desk
+   shops    six shops with storefront, awning and counter
+   hopper   workshop . roller door . vents . chimney . smoke . the moth ;
+            inside: workbench, red toolbox, conveyor with six app boxes
+   lovelace translucent library, dashed (to be defined) ; inside: empty shelves, typewriter, blank pages
+   nash     islet . apron . vault . round door with bolts . camera . fence on posts in the water . buoys ;
+            inside: lock bolts, gear wheel, ledger shelf
+   BlueBook islet . dock . path . chapel with pyramid roof . rose window ; inside: pews, lectern with papers
+   Unio     islet . hill . path . church with roof and cross ; inside: pews, altar, candles
+   Medu     mainland . walks . hospital with helipad and red cross . two classroom blocks . ambulance . trees ;
+            inside: beds, desks and a board
+   ferry    hull . cabin . papers on deck . mast light
+   ===================================================================================================== */
+
+const QS = new URLSearchParams(location.search);
+let LANG = QS.get('lang') === 'en' ? 'en' : 'es';
+let THEME = QS.get('theme') === 'night' ? 'night' : 'day';
+document.documentElement.classList.toggle('night', THEME === 'night');
+const AGENTS_DATA = /*AGENTS*/null;
+const AG = Object.fromEntries((AGENTS_DATA ? AGENTS_DATA.agentes : []).map(a => [a.id, a]));
+const ISLAS = AGENTS_DATA ? AGENTS_DATA.islas : {};
+
+const TXT = {
+  es: { title:'Ciudad de agentes', summary:'Resumen de la mañana', nash:'Escribirle a nash', pick:'Edificios',
+        active:'Activos', msgs:'Mensajes', role:'Rol', channel:'Canal', island:'Isla', none:'—',
+        st:{ activo:'Activo', por_definir:'Por definir' },
+        fSummary:'Llegaron los reportes: neumann te mandó el resumen', fNash:'Sin puente: a nash se le escribe aparte',
+        fBusy:'Espera a que termine', fPick:'Elige un edificio' },
+  en: { title:'City of agents', summary:'Morning summary', nash:'Message nash', pick:'Buildings',
+        active:'Active', msgs:'Messages', role:'Role', channel:'Channel', island:'Island', none:'—',
+        st:{ activo:'Active', por_definir:'To be defined' },
+        fSummary:'Reports are in: neumann sent you the summary', fNash:'No bridge: you message nash separately',
+        fBusy:'Wait for it to finish', fPick:'Pick a building' },
+};
+const tr = () => TXT[LANG];
+
+/* ---------------------------------------------------------------- palettes */
+const THEMES = {
+  day: { sea:{ l:'#bcdcef', m:'#9fcbe6', d:'#6f9fc4' }, wave:'#6f9fc4', grass:'#a6d27a', grassB:'#93c466', cliff:matOf('#c9a273'),
+         medu:'#b9dca6', bb:'#a3cf86', road:'#5e6370', walk:'#e9e3d3', dash:'#f2c94c', lawn:'#8cc461', shadow:'#41538f',
+         lit:'#ffd95e', dim:'#e8dcb4', glass:'#cfe3f4', route:'#5c86b8', beacon:.35, night:0 },
+  night:{ sea:{ l:'#1e2d52', m:'#18264a', d:'#101b38' }, wave:'#34497a', grass:'#23365a', grassB:'#2a3f66', cliff:matOf('#22345a'),
+         medu:'#2a4a46', bb:'#2b3160', road:'#2e4370', walk:'#3a5287', dash:'#8fa3d6', lawn:'#2a5a48', shadow:'#050b1d',
+         lit:'#ffd27a', dim:'#7c6a48', glass:'#2b3c63', route:'#8fa6d6', beacon:.55, night:1 },
+};
+const TH = () => THEMES[THEME];
+// a building colour, darkened a little at night so the lit windows carry the picture
+const mat = hex => matOf(THEME === 'night' ? mix(hex, '#0b1630', .38) : hex);
+
+/* ---------------------------------------------------------------- layout */
+const ZS = 4, ZT = 26, ZM = 30;                          // water surface, island tops, mainland top
+const TRAY = [120, 60, 1013, 820], TRAY_W = TRAY[2] - TRAY[0], TRAY_D = TRAY[3] - TRAY[1];
+const MAIN = [400, 265, 780, 645];                       // main island
+const CX = 590, CY = 455, RR = 48;                       // roundabout centre and lane radius
+const NASH = [590, 45, 680, 135], FENCE = [570, 25, 700, 155];
+const BB = [902, 407, 1008, 513], UNIO = [600, 765, 680, 845], MEDU = [10, 55, 195, 530];
+const B = {                                              // buildings: [x0, y0, x1, y1, height]
+  neumann: [570, 435, 610, 475, 232],
+  shannon: [455, 520, 525, 590, 34],
+  babbage: [643, 328, 687, 372, 160],
+  hopper:  [626, 561, 674, 609, 56],
+  lovelace:[702, 492, 742, 532, 100],
+};
+const SHOPS = [0, 1, 2, 3, 4, 5].map(i => [745, 292 + 24*i, 757, 304 + 24*i, 18]);
+const SHOP_COL = ['#f7d488', '#9fd3f5', '#c7b6f7', '#8fe0b0', '#f5a9c4', '#eef0f4'];
+const AGENT_COL = { neumann:'#FFD27A', shannon:'#7FE0C4', babbage:'#FF9E8A', apps:'#E6EAF2', hopper:'#8EC1FF', lovelace:'#C9B6FF',
+  nash:'#FF6B7A', bluebook:'#8FB0F0', unio:'#E2C27E', medu:'#6FD1BE' };
+const NAMES = ['neumann', 'shannon', 'babbage', 'apps', 'hopper', 'lovelace', 'nash', 'bluebook', 'unio', 'medu'];
+
+/* ---------------------------------------------------------------- helpers */
+const hsh = n => ((Math.sin(n * 127.1) * 43758.5453) % 1 + 1) % 1;
+const dash = (svg, d) => svg.replace(/\/>/g, ` stroke-dasharray="${d}"/>`);
+const corners = (x0, y0, x1, y1, z0, z1) => { const o = []; for (const x of [x0, x1]) for (const y of [y0, y1]) for (const z of [z0, z1]) o.push([x, y, z]); return o; };
+const boxPart = (x0, y0, z0, x1, y1, z1, svg) => ({ box:[[x0, y0, z0], [x1, y1, z1]], svg });
+// an exterior block: shaded faces with fine ink, then a heavier silhouette
+const block = (x0, y0, z0, x1, y1, z1, m, w = 2.2) => box(x0, y0, z0, x1, y1, z1, m, tone, .8) + hullInk(corners(x0, y0, x1, y1, z0, z1), w);
+// any convex footprint (2D points, counter-clockwise or not) lifted from z0 to z1
+function prism(poly, z0, z1, m, shade = tone, w = 1.4){
+  const A = poly.map(([x, y]) => [x, y, z0]), Bv = poly.map(([x, y]) => [x, y, z1]);
+  return loft(A, Bv, n => shade(n, m)) + (vis([0,0,1]) ? fill(pd(Bv), shade([0,0,1], m)) + ink(pd(Bv), .8) : '') + hullInk([...A, ...Bv], w);
+}
+// a rounded slab: the islands and the tray
+function slab(x0, y0, x1, y1, z0, z1, r, side, top){
+  const A = on(PZ(z0), rrUV(x0, y0, x1, y1, r)), Bv = on(PZ(z1), rrUV(x0, y0, x1, y1, r));
+  return { sides: loft(A, Bv, n => tone(n, side)), top: fill(pd(Bv), top), edge: ink(pd(Bv), 1.2) + hullInk([...A, ...Bv], 2.6), outline: Bv };
+}
+// shadow on a surface at height z0, clipped to that surface, in this theme's colour
+function shadowOn(pts3, z0, clip){
+  const k = SHADOW_LEN / SHADOW_K, [sx, sy] = yawTurn(SH);
+  const s = fill(sp(hull(pts3.map(([x, y, z]) => P(x + (z - z0)*sx*k, y + (z - z0)*sy*k, z0)))), TH().shadow, THEME === 'night' ? 'opacity=".55"' : '');
+  return clip ? clipTo(clip, s) : s;
+}
+// rectangles on the four walls of a box, each drawn only while its wall faces the viewer
+const WALLS = [
+  ['px', [1, 0, 0]], ['mx', [-1, 0, 0]], ['py', [0, 1, 0]], ['my', [0, -1, 0]],
+];
+function wallPlane(face, x0, y0, x1, y1){
+  const e = .25;
+  if (face === 'px') return { pl: PX(x1 + e), u0: y0, u1: y1, flip: true };
+  if (face === 'mx') return { pl: PX(x0 - e), u0: y0, u1: y1, flip: false };
+  if (face === 'py') return { pl: PY(y1 + e), u0: x0, u1: x1, flip: false };
+  return { pl: PY(y0 - e), u0: x0, u1: x1, flip: true };
+}
+function windows(x0, y0, x1, y1, z0, z1, o){
+  const { rows, cols, gapU = 3, gapV = 4, pad = 4, seed = 0, lit = true, skip } = o;
+  let s = '';
+  for (const [face, n] of WALLS){
+    if (!vis(n)) continue;
+    const { pl, u0, u1 } = wallPlane(face, x0, y0, x1, y1);
+    const cw = (u1 - u0 - 2*pad - (cols - 1)*gapU) / cols, rh = (z1 - z0 - 2*pad - (rows - 1)*gapV) / rows;
+    for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++){
+      if (skip && skip(face, r, c)) continue;
+      const a = u0 + pad + c*(cw + gapU), v = z0 + pad + r*(rh + gapV);
+      const i = seed + r*13 + c*7 + face.charCodeAt(1)*3;
+      const col = !lit ? TH().glass : hsh(i + Math.floor(ST.t * .9 + hsh(i) * 9)) < .16 ? TH().dim : TH().lit;
+      s += shape(on(pl, rectUV(a, v, a + cw, v + rh)), col, .45);
+    }
+  }
+  return s;
+}
+// the outline of every visible face of a box, without fills
+function boxEdges(x0, y0, z0, x1, y1, z1, w){
+  const F = [[[0,1,0], [[x0,y1,z0],[x1,y1,z0],[x1,y1,z1],[x0,y1,z1]]], [[1,0,0], [[x1,y0,z0],[x1,y1,z0],[x1,y1,z1],[x1,y0,z1]]],
+    [[0,-1,0], [[x0,y0,z0],[x1,y0,z0],[x1,y0,z1],[x0,y0,z1]]], [[-1,0,0], [[x0,y0,z0],[x0,y1,z0],[x0,y1,z1],[x0,y0,z1]]], [[0,0,1], [[x0,y0,z1],[x1,y0,z1],[x1,y1,z1],[x0,y1,z1]]]];
+  return F.filter(([n]) => vis(n)).map(([, q]) => ink(pd(q), w)).join('');
+}
+// The outer islands are drawn where the sketch put them and slid closer to the main island along the
+// floor. A floor shift projects to a plain screen shift, so it is a translate on the island's group.
+function moved(part, dx, dy){
+  const [ox, oy] = Dv(dx, dy, 0);
+  return { box: [[part.box[0][0] + dx, part.box[0][1] + dy, part.box[0][2]], [part.box[1][0] + dx, part.box[1][1] + dy, part.box[1][2]]],
+    svg: `<g transform="translate(${f(ox)} ${f(oy)})">${part.svg}</g>` };
+}
+// a name tag like the engine's, a size smaller: the city is wide and the names are many
+function nameTag(p3, dy, text, on){
+  const u = window.LBL_U ? LBL_U() : 0, n = ((window.__ln || (window.__ln = {}))[text] || (__ln[text] = Object.keys(__ln).length + 1));
+  const k = INK_K, [X, Y] = P(...p3), fs = u ? 10*u : 6.6*k, h = u ? 17*u : fs*1.75, w = u ? h*(n > 9 ? 1.3 : 1) : text.length*fs*.62 + fs*1.4, cy = Y + dy*k;
+  return `<g class="tag${on ? ' on' : ''}" data-n="${n}" data-t="${text}"><path d="M${f(X)} ${f(Y)}L${f(X)} ${f(cy)}" fill="none" stroke="${INK}" stroke-width=".9"/>`
+    + `<circle cx="${f(X)}" cy="${f(Y)}" r="${f(1.1*k)}" fill="${INK}"/>`
+    + `<rect x="${f(X - w/2)}" y="${f(cy - h/2)}" width="${f(w)}" height="${f(h)}" rx="${f(h/2)}" fill="${on ? 'var(--accent,#f4b829)' : '#fff4d6'}" stroke="${INK}" stroke-width="1.1"/>`
+    + `<text x="${f(X)}" y="${f(cy + fs*.36)}" font-size="${f(fs)}" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-weight="800" letter-spacing=".03em" fill="${INK}">${u ? n : text}</text></g>`;
+}
+// screen-space glow (lamps, the beacon): a soft disc and a core
+const glow = (p3, r, col, a) => { const [X, Y] = P(...p3); return `<circle cx="${f(X)}" cy="${f(Y)}" r="${f(r)}" fill="${col}" opacity="${f(a)}"/>`; };
+
+/* ---------------------------------------------------------------- trees */
+function coneTree(x, y, z, h = 26, r = 7){
+  const ring = on(PZ(z + 5), ellUV(x, y, r, r, 12)), tip = on(PZ(z + 5 + h), ellUV(x, y, .2, .2, 12));
+  const pine = mat('#4e9f5e');
+  return boxPart(x - r, y - r, z, x + r, y + r, z + h + 5,
+    cyl(x, y, z, z + 5, 1.4, mat('#7a5634'), tone, .8, 8) + loft(ring, tip, n => tone(n, pine)) + hullInk([...ring, ...tip], 1.5));
+}
+function blobTree(x, y, z, r = 8){
+  const t = mat('#9ccb55'), [X, Y] = P(x, y, z + 8 + r), k = 1.25 * 1.15;
+  const c = (dx, dy, rr, col) => `<circle cx="${f(X + dx*k)}" cy="${f(Y + dy*k)}" r="${f(rr*k)}" fill="${col}" stroke="${INK}" stroke-width="1"/>`;
+  return boxPart(x - r, y - r, z, x + r, y + r, z + 8 + 2*r,
+    cyl(x, y, z, z + 9, 1.5, mat('#7a5634'), tone, .8, 8)
+    + c(-r*.45, .2*r, r*.72, t.m) + c(r*.5, .3*r, r*.66, t.m) + c(0, -r*.35, r*.8, t.l)
+    + `<circle cx="${f(X - r*.3*k)}" cy="${f(Y - r*.6*k)}" r="${f(r*.22*k)}" fill="#ffffff" opacity=".35"/>`);
+}
+const treeShadow = (x, y, z, h, r) => [...on(PZ(z), ellUV(x, y, r, r, 8)), [x, y, z + h]];
+
+/* ---------------------------------------------------------------- routes */
+// a route: corner points and ring arcs, sampled into a polyline with its lengths
+function route(spec){
+  const pts = [];
+  for (const s of spec){
+    if (s.arc){ const [a0, a1] = s.arc, n = 12;
+      for (let i = 0; i <= n; i++){ const a = (a0 + (a1 - a0)*i/n) * Math.PI/180; pts.push([CX + RR*Math.cos(a), CY + RR*Math.sin(a)]); } }
+    else pts.push(s);
+  }
+  const L = [0]; for (let i = 1; i < pts.length; i++) L.push(L[i-1] + Math.hypot(pts[i][0] - pts[i-1][0], pts[i][1] - pts[i-1][1]));
+  return { pts, L, len: L[L.length - 1],
+    at(u){ const d = Math.max(0, Math.min(1, u)) * this.len; let i = 1; while (i < this.L.length - 1 && this.L[i] < d) i++;
+      const t = (d - this.L[i-1]) / ((this.L[i] - this.L[i-1]) || 1); return [pts[i-1][0] + (pts[i][0] - pts[i-1][0])*t, pts[i-1][1] + (pts[i][1] - pts[i-1][1])*t]; } };
+}
+const R = {
+  shannon: route([[CX - RR, CY], [497, CY]]),
+  babbage: route([[CX, CY - RR], [CX, 352]]),
+  hopper:  route([[CX, CY + RR], [CX, 585]]),
+  lovelace:route([[CX + RR, CY], [722, CY]]),
+  bShops:  route([[CX, 352], [CX, CY - RR], { arc:[-90, 0] }, [770, CY], [770, 300]]),
+  hShops:  route([[CX, 585], [CX, CY + RR], { arc:[90, 0] }, [770, CY], [770, 340]]),
+  toNash:  route([[CX, CY - RR], [CX, MAIN[1] + 3]]),
+};
+const AMBIENT = [
+  { r:'shannon', dur:4.2, begin:0,   c:0 },
+  { r:'shannon', dur:4.6, begin:2.3, c:1, back:true },
+  { r:'babbage', dur:4,   begin:.8,  c:1 },
+  { r:'babbage', dur:4.4, begin:3.1, c:0, back:true },
+  { r:'hopper',  dur:4.4, begin:1.4, c:0 },
+  { r:'lovelace',dur:7,   begin:2.6, c:1, rest:.55 },
+  { r:'bShops',  dur:11,  begin:1,   c:0 },
+  { r:'hShops',  dur:12,  begin:6,   c:1 },
+];
+const STILL_DOTS = [[540, 455, 0], [590, 380, 1], [590, 540, 0], [690, 455, 1], [770, 400, 0]];
+const DOT_COL = () => THEME === 'night' ? ['#ffe08a', '#ffffff'] : ['#f2b630', '#ffffff'];
+function msgDot(x, y, col, a = 1, big = 1){
+  const [X, Y] = P(x, y, ZT + .6), k = 1.25;
+  return `<circle cx="${f(X)}" cy="${f(Y)}" r="${f(7*big)}" fill="${col}" opacity="${f(.35*a)}"/>`
+    + `<circle cx="${f(X)}" cy="${f(Y)}" r="${f(3.2*big)}" fill="${col}" stroke="${INK}" stroke-width=".6" opacity="${f(a)}"/>`;
+}
+
+/* ---------------------------------------------------------------- the tray of water */
+function tray(){
+  const t = TH(), s = slab(...TRAY, 0, ZS, 26, t.sea, t.sea.l);
+  let w = '';
+  for (let i = 0; i < 46; i++){
+    const x = TRAY[0] + 22 + hsh(i + .3) * (TRAY_W - 44), y = TRAY[1] + 22 + hsh(i + 7.7) * (TRAY_D - 44);
+    if (inside(x, y, 26)) continue;
+    const ph = Math.floor(ST.t * .8 + hsh(i) * 4) % 2 ? 2.5 : 0;
+    w += `<path d="${pd([[x - 9 + ph, y, ZS + .1], [x - 3 + ph, y - 4, ZS + .1], [x + 3 + ph, y, ZS + .1], [x + 9 + ph, y - 4, ZS + .1]], false)}" fill="none" stroke="${t.wave}" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>`;
+  }
+  return s.sides + s.top + w + s.edge;
+}
+const slid = ([x0, y0, x1, y1], [dx, dy]) => [x0 + dx, y0 + dy, x1 + dx, y1 + dy];
+const RECTS = [MAIN, slid(NASH, [0, 60]), slid(BB, [-20, 0]), slid(UNIO, [0, -50]), slid(MEDU, [135, 0]), slid(FENCE, [0, 60])];
+const inside = (x, y, m) => RECTS.some(([x0, y0, x1, y1]) => x > x0 - m && x < x1 + m && y > y0 - m && y < y1 + m);
+
+/* ---------------------------------------------------------------- buildings on the main island */
+const ghost = (k, shell, inner) => k <= 0 ? shell : `<g opacity="${f(k)}">${inner}</g><g opacity="${f(1 - .78*k)}">${shell}</g>`;
+const ring = (id, x0, y0, x1, y1) => {
+  if (ST.focus !== id) return '';
+  const z = id === 'medu' ? ZM + .3 : ZT + .3;
+  return `<path d="${pd(on(PZ(z), rrUV(x0 - 7, y0 - 7, x1 + 7, y1 + 7, 6)))}" fill="${AGENT_COL[id]}" fill-opacity=".4" stroke="${INK}" stroke-width="1.3" stroke-dasharray="5 4"/>`;
+};
+
+function neumann(k){
+  const [x0, y0, x1, y1, h] = B.neumann, zb = ZT + 6, zt = zb + h, cx = (x0 + x1)/2, cy = (y0 + y1)/2, m = mat('#c3cde3');
+  let sh = block(x0 - 4, y0 - 4, ZT, x1 + 4, y1 + 4, zb, mat('#8a99ba'), 1.6);
+  sh += block(x0, y0, zb, x1, y1, zt, m, 2.6);
+  sh += windows(x0, y0, x1, y1, zb + 10, zt - 6, { rows: 11, cols: 3, seed: 3, gapV: 9 });
+  // a floor band every few storeys, all round
+  for (const z of [zb + 78, zb + 156]) for (const [face, n] of WALLS) if (vis(n)){ const { pl, u0, u1 } = wallPlane(face, x0, y0, x1, y1); sh += line(on(pl, [[u0, z], [u1, z]]), .8); }
+  // door facing the roundabout's south arm (+y)
+  if (vis([0,1,0])) sh += shape(on(PY(y1 + .3), rectUV(cx - 5, zb, cx + 5, zb + 13)), '#3b4a6b', .8);
+  // parapet, lantern room, mast and beacon
+  sh += block(x0 + 3, y0 + 3, zt, x1 - 3, y1 - 3, zt + 3, mat('#dce4f2'), 1);
+  sh += block(cx - 10, cy - 10, zt + 3, cx + 10, cy + 10, zt + 24, mat('#ffd27a'), 1.8);
+  sh += windows(cx - 10, cy - 10, cx + 10, cy + 10, zt + 8, zt + 20, { rows: 1, cols: 2, seed: 70, pad: 3 });
+  sh += rod([cx, cy, zt + 24], [cx, cy, zt + 54], 1, METAL, tone, .9);
+  sh += rod([cx - 6, cy, zt + 44], [cx + 6, cy, zt + 44], .6, METAL, tone, .7);
+  const pulse = .5 + .5*Math.sin(ST.t * 1.3), flash = ST.flash || 0;
+  sh += glow([cx, cy, zt + 58], (11 + 7*pulse + 22*flash)*1.25, '#ffd27a', TH().beacon*(.35 + .4*pulse) + .5*flash);
+  sh += glow([cx, cy, zt + 58], (5 + 2*pulse)*1.25, '#ffd27a', .45 + .3*pulse);
+  sh += shape(on(PZ(zt + 58), ellUV(cx, cy, 3, 3, 12)), '#ffd27a', .9);
+  // inside: floor plates, the lift core, a rack at the bottom, the control room at the top, a cable up to the beacon
+  let ins = '';
+  if (k > 0){
+    for (let z = zb + 26; z < zt - 30; z += 26) ins += prism([[x0 + 1, y0 + 1], [x1 - 1, y0 + 1], [x1 - 1, y1 - 1], [x0 + 1, y1 - 1]], z, z + 1.5, mat('#dce4f2'), toneI, .7);
+    ins += block(cx - 5, cy - 5, zb, cx + 5, cy + 5, zt - 30, mat('#8a99ba'), 1);
+    ins += block(x0 + 3, y1 - 13, zb, x0 + 13, y1 - 3, zb + 22, DARK, 1.1);
+    for (let i = 0; i < 5; i++) ins += glow([x0 + 13.2, y1 - 8, zb + 4 + i*4], 1.3*1.25, i % 2 ? '#43c25c' : '#ffd27a', .95);
+    ins += block(x0 + 6, y0 + 8, zt - 30, x1 - 6, y0 + 16, zt - 24, mat('#b07a52'), 1);
+    for (let i = 0; i < 3; i++) ins += prism([[x0 + 9 + i*8, y0 + 9], [x0 + 15 + i*8, y0 + 9], [x0 + 15 + i*8, y0 + 10.5], [x0 + 9 + i*8, y0 + 10.5]], zt - 24, zt - 18, { l:'#2e3b5c', m:'#26324e', d:'#1b2438' }, toneI, .7);
+    ins += rod([cx + 4, cy + 4, zb], [cx + 4, cy + 4, zt + 24], .9, mat('#e8505b'), toneI, .7);
+  }
+  return ghost(k, sh, ins);
+}
+
+function shannon(k){
+  const [x0, y0, x1, y1, h] = B.shannon, z1 = ZT + h, m = mat('#5fc9aa'), cx = (x0 + x1)/2, cy = (y0 + y1)/2;
+  let sh = block(x0, y0, ZT, x1, y1, z1, m, 2.4);
+  for (const [face, n] of WALLS) if (vis(n)){
+    const { pl, u0, u1 } = wallPlane(face, x0, y0, x1, y1);
+    for (let i = 0; i < 4; i++){ const a = u0 + 8 + i*((u1 - u0 - 16)/3) - 3; sh += shape(on(pl, [...arcUV(a + 3, ZT + 9, 3, 0, 180, 6), [a, ZT], [a + 6, ZT]]), '#1f5e4d', .6); }
+    sh += `<path d="${pd(on(pl, [[u0 + 2, z1 - 5], [u1 - 2, z1 - 5]]), false)}" fill="none" stroke="${TH().lit}" stroke-width="1.6" opacity=".8"/>`;
+  }
+  // pitch with mowing stripes and lines, inset in the stands
+  const fx0 = x0 + 9, fy0 = y0 + 9, fx1 = x1 - 9, fy1 = y1 - 9;
+  sh += shape(on(PZ(z1 + .1), rectUV(fx0, fy0, fx1, fy1)), '#4dae5f', .8);
+  for (let i = 0; i < 6; i += 2){ const a = fx0 + (fx1 - fx0)*i/6, b2 = fx0 + (fx1 - fx0)*(i + 1)/6; sh += fill(pd(on(PZ(z1 + .15), rectUV(a, fy0, b2, fy1))), '#43a055'); }
+  const lw = '#f4f7ef';
+  sh += `<g stroke="${lw}" stroke-width="1" fill="none">` + `<path d="${pd(on(PZ(z1 + .2), rectUV(fx0 + 2, fy0 + 2, fx1 - 2, fy1 - 2)))}"/>`
+    + `<path d="${pd([[cx, fy0 + 2, z1 + .2], [cx, fy1 - 2, z1 + .2]], false)}"/>` + `<path d="${pd(on(PZ(z1 + .2), ellUV(cx, cy, 7, 7, 20)))}"/>`
+    + `<path d="${pd(on(PZ(z1 + .2), rectUV(fx0 + 2, cy - 9, fx0 + 9, cy + 9)))}"/><path d="${pd(on(PZ(z1 + .2), rectUV(fx1 - 9, cy - 9, fx1 - 2, cy + 9)))}"/></g>`;
+  // seats round the rim: little red and mint dots
+  for (let i = 0; i < 28; i++){ const t = i/28, side = Math.floor(t*4), u = (t*4) % 1;
+    const p = side === 0 ? [x0 + 4.5 + u*(x1 - x0 - 9), y0 + 4.5] : side === 1 ? [x1 - 4.5, y0 + 4.5 + u*(y1 - y0 - 9)] : side === 2 ? [x1 - 4.5 - u*(x1 - x0 - 9), y1 - 4.5] : [x0 + 4.5, y1 - 4.5 - u*(y1 - y0 - 9)];
+    sh += fill(pd(on(PZ(z1 + .1), ellUV(p[0], p[1], 1.4, 1.4, 6))), i % 3 ? '#3f9f84' : '#e8505b'); }
+  // floodlights on two corners and the broadcast mast in the middle of the far stand
+  for (const [px, py] of [[x0 + 2, y0 + 2], [x1 - 2, y1 - 2]]){
+    sh += rod([px, py, z1], [px, py, z1 + 30], .8, METAL, tone, .9);
+    sh += block(px - 4, py - 1.5, z1 + 30, px + 4, py + 1.5, z1 + 34, mat('#fff3c4'), 1);
+    sh += glow([px, py, z1 + 32], 6*1.25, TH().lit, THEME === 'night' ? .35 : .15);
+  }
+  const mx = x0 + 6, my = cy;
+  sh += rod([mx, my, z1], [mx, my, z1 + 62], 1, METAL, tone, .9);
+  sh += line([[mx - 6, my, z1], [mx, my, z1 + 30]], .7) + line([[mx + 6, my, z1], [mx, my, z1 + 30]], .7);
+  const [AX, AY] = P(mx, my, z1 + 64), ph = (ST.t * .9) % 1;
+  for (let i = 0; i < 2; i++){ const r = (7 + 8*i + 6*ph)*1.25;
+    sh += `<path d="M${f(AX - r)} ${f(AY - r*.15)} Q${f(AX)} ${f(AY - r*1.1)} ${f(AX + r)} ${f(AY - r*.15)}" fill="none" stroke="#3fb894" stroke-width="${f(1.6)}" stroke-linecap="round" opacity="${f(1 - .45*i - .3*ph)}"/>`; }
+  let ins = '';
+  if (k > 0){
+    ins += block(x0 + 6, y0 + 6, ZT, x0 + 24, y0 + 26, ZT + 16, mat('#2e3b5c'), 1.1);                       // broadcast booth
+    ins += block(x0 + 9, y0 + 9, ZT + 4, x0 + 21, y0 + 16, ZT + 9, mat('#e9eef7'), .8);                      // mixer desk
+    ins += rod([x0 + 35, y0 + 20, ZT], [x0 + 35, y0 + 20, ZT + 12], .6, DARK, toneI, .7);                     // tripod
+    ins += block(x0 + 32, y0 + 17, ZT + 12, x0 + 40, y0 + 23, ZT + 17, DARK, .9);                              // camera
+    ins += rod([x0 + 15, y0 + 26, ZT + 1], [mx, my, ZT + 1], .7, mat('#e8505b'), toneI, .6);                  // cable to the mast
+  }
+  return ghost(k, sh, ins);
+}
+
+function babbage(k){
+  const [x0, y0, x1, y1, h] = B.babbage, zt = ZT + h, cx = (x0 + x1)/2, cy = (y0 + y1)/2;
+  let sh = block(x0, y0, ZT, x1, y1, zt, mat('#e86e57'), 2.6);
+  // brick courses
+  for (const [face, n] of WALLS) if (vis(n)){ const { pl, u0, u1 } = wallPlane(face, x0, y0, x1, y1);
+    for (let z = ZT + 8; z < zt; z += 8) sh += `<path d="${pd(on(pl, [[u0, z], [u1, z]]), false)}" fill="none" stroke="${mix(mat('#e86e57').d, '#e86e57', .4)}" stroke-width=".6" opacity=".6"/>`; }
+  sh += windows(x0, y0, x1, y1, ZT + 6, ZT + 70, { rows: 4, cols: 3, seed: 30, skip: (face) => false });
+  // billboard on the +y wall, bar-chart board on the +x wall
+  if (vis([0,1,0])){ const pl = PY(y1 + .6);
+    sh += shape(on(pl, rectUV(x0 + 3, zt - 62, x1 - 3, zt - 8)), '#7a2e1f', 1) + shape(on(pl, rectUV(x0 + 5, zt - 60, x1 - 5, zt - 10)), '#fff4ee', .7);
+    sh += txY(cx, y1 + .7, zt - 30, '1001', 11.5, '#b44e3b', 800) + txY(cx, y1 + .7, zt - 44, 'apps', 8, '#b44e3b', 700);
+    for (let i = 0; i < 3; i++) sh += glow([x0 + 10 + i*12, y1 + .8, zt - 5], 1.6*1.25, TH().lit, .9); }
+  if (vis([1,0,0])){ const pl = PX(x1 + .6);
+    sh += shape(on(pl, rectUV(y0 + 5, zt - 60, y1 - 5, zt - 10)), '#ffc93c', 1);
+    for (let i = 0; i < 3; i++){ const u = y1 - 12 - i*10; sh += shape(on(pl, rectUV(u - 3, zt - 56, u + 3, zt - 50 + i*12)), '#7a2e1f', .5); } }
+  sh += block(x0 + 3, y0 + 3, zt, x1 - 3, y1 - 3, zt + 2, mat('#ff9e8a'), 1);
+  sh += block(x0 + 8, y0 + 8, zt + 2, x0 + 20, y0 + 18, zt + 9, mat('#ffe6dd'), 1);
+  sh += rod([cx + 8, cy + 6, zt + 2], [cx + 8, cy + 6, zt + 30], .7, METAL, tone, .8);
+  sh += glow([cx + 8, cy + 6, zt + 31], 3*1.25, '#ffc93c', .5 + .5*(Math.floor(ST.t*1.5) % 2));
+  let ins = '';
+  if (k > 0){
+    ins += block(x0 + 5, y0 + 6, ZT, x0 + 30, y0 + 16, ZT + 12, mat('#e9eef7'), 1.1);                 // plotter
+    ins += rod([x0 + 7, y0 + 18, ZT + 12], [x0 + 28, y0 + 18, ZT + 12], 2.5, CERAMIC, toneI, .8);     // paper roll
+    for (let i = 0; i < 3; i++) ins += block(x0 + 6 + i*11, y1 - 14, ZT, x0 + 14 + i*11, y1 - 4, ZT + 6 + i*3, mat(['#fff4ee', '#ffc93c', '#9fd3f5'][i]), .8);   // poster stacks
+    ins += block(x1 - 16, y0 + 22, ZT + 60, x1 - 4, y0 + 34, ZT + 66, mat('#b07a52'), .9);           // design desk upstairs
+    ins += prism([[x0 + 2, y0 + 2], [x1 - 2, y0 + 2], [x1 - 2, y1 - 2], [x0 + 2, y1 - 2]], ZT + 58, ZT + 60, mat('#f4d6cc'), toneI, .7);
+  }
+  return ghost(k, sh, ins);
+}
+
+function shops(k){
+  let s = '';
+  SHOPS.forEach(([x0, y0, x1, y1, h], i) => {
+    const m = mat(SHOP_COL[i]), zt = ZT + h;
+    let one = block(x0, y0, ZT, x1, y1, zt, m, 1.6);
+    if (vis([1,0,0])){ const pl = PX(x1 + .3);
+      one += shape(on(pl, rectUV(y0 + 2, ZT + 2, y1 - 2, ZT + 11)), TH().lit, .6);
+      one += shape(on(PX(x1 + .3), rectUV(y0 + 5, ZT, y0 + 8, ZT + 8)), '#5a4632', .5); }
+    // striped awning sticking out over the storefront
+    const aw = [[x1, y0], [x1 + 4, y0], [x1 + 4, y1], [x1, y1]];
+    one += prism(aw, ZT + 11, ZT + 13, mat('#ffffff'), tone, .8);
+    for (let j = 0; j < 3; j++) one += fill(pd([[x1 + .2, y0 + 1 + j*4, ZT + 13.1], [x1 + 4, y0 + 1 + j*4, ZT + 13.1], [x1 + 4, y0 + 3 + j*4, ZT + 13.1], [x1 + .2, y0 + 3 + j*4, ZT + 13.1]]), m.m);
+    s += one;
+  });
+  return s;
+}
+
+function hopper(k){
+  const [x0, y0, x1, y1, h] = B.hopper, zt = ZT + h, m = mat('#4f8fe0');
+  let sh = block(x0, y0, ZT, x1, y1, zt, m, 2.4);
+  // corrugation on the walls
+  for (const [face, n] of WALLS) if (vis(n)){ const { pl, u0, u1 } = wallPlane(face, x0, y0, x1, y1);
+    for (let u = u0 + 4; u < u1; u += 4) sh += `<path d="${pd(on(pl, [[u, ZT + 1], [u, zt - 1]]), false)}" fill="none" stroke="${m.d}" stroke-width=".5" opacity=".45"/>`; }
+  if (vis([0,1,0])){ const pl = PY(y1 + .3);                                    // the roller door: the cortina
+    sh += shape(on(pl, rectUV(x0 + 8, ZT, x1 - 18, ZT + 32)), '#1b3560', 1);
+    for (let z = ZT + 4; z < ZT + 32; z += 5) sh += line(on(pl, [[x0 + 8, z], [x1 - 18, z]]), .5);
+    sh += shape(on(pl, rectUV(x0 + 6, ZT + 32, x1 - 16, ZT + 36)), '#c4deff', .8); }
+  if (vis([1,0,0])){ const pl = PX(x1 + .3);                                    // vents and the moth
+    for (let i = 0; i < 3; i++) sh += shape(on(pl, rectUV(y0 + 8, ZT + 30 + i*5, y0 + 20, ZT + 32 + i*5)), '#28508a', .4);
+    const [MX, MY] = P(x1 + .4, y1 - 12, ZT + 22), k2 = 1.25, flap = (Math.floor(ST.t * 2) % 7) === 0 ? .5 : 1;
+    sh += `<ellipse cx="${f(MX - 2.6*k2)}" cy="${f(MY)}" rx="${f(2.6*k2*flap)}" ry="${f(2*k2)}" fill="#e8dcc0" stroke="${INK}" stroke-width=".5"/>`
+      + `<ellipse cx="${f(MX + 2.6*k2)}" cy="${f(MY)}" rx="${f(2.6*k2*flap)}" ry="${f(2*k2)}" fill="#e8dcc0" stroke="${INK}" stroke-width=".5"/>`
+      + `<path d="M${f(MX)} ${f(MY - 3*k2)}L${f(MX)} ${f(MY + 3*k2)}" stroke="${INK}" stroke-width="1.2"/>`; }
+  sh += block(x0 + 10, y0 + 10, zt, x1 - 10, y0 + 22, zt + 2, mat('#c4deff'), .8);       // skylight
+  sh += cyl(x1 - 12, y1 - 12, zt, zt + 16, 3.2, mat('#c9ced9'), tone, 1.1, 14);          // chimney
+  for (let i = 0; i < 3; i++){ const a = ((ST.t / 5.5) + i/3) % 1, [X, Y] = P(x1 - 12 + 6*a, y1 - 12, zt + 18 + 26*a);
+    sh += `<circle cx="${f(X)}" cy="${f(Y)}" r="${f((2.5 + 4*a)*1.25)}" fill="#c9ced9" stroke="${INK}" stroke-width=".6" opacity="${f(a < .2 ? a/.2*.8 : .8*(1 - a))}"/>`; }
+  let ins = '';
+  if (k > 0){
+    ins += block(x0 + 4, y0 + 4, ZT, x0 + 30, y0 + 12, ZT + 10, mat('#b07a52'), 1);                // workbench
+    ins += block(x0 + 6, y0 + 5, ZT + 10, x0 + 14, y0 + 10, ZT + 15, mat('#e2483d'), .9);           // toolbox
+    ins += block(x0 + 6, y1 - 12, ZT + 5, x1 - 6, y1 - 6, ZT + 7, DARK, .9);                       // conveyor
+    for (let i = 0; i < 6; i++){ const u = x0 + 8 + ((i*6 + ST.t*4) % 32); ins += block(u, y1 - 11, ZT + 7, u + 4, y1 - 7, ZT + 11, mat(SHOP_COL[i]), .6); }
+  }
+  return ghost(k, sh, ins);
+}
+
+function lovelace(k){
+  const [x0, y0, x1, y1, h] = B.lovelace, zt = ZT + h, m = mat('#9a82e6');
+  // still to be defined: a translucent glass house with a dashed outline
+  let s = `<g opacity=".55">` + box(x0, y0, ZT, x1, y1, zt, m, tone, 0) + `</g>`;
+  for (const [face, n] of WALLS) if (vis(n)){ const { pl, u0, u1 } = wallPlane(face, x0, y0, x1, y1);
+    for (let u = u0 + 8; u < u1 - 2; u += 8) s += `<path d="${pd(on(pl, [[u, ZT + 2], [u, zt - 2]]), false)}" fill="none" stroke="#ede6ff" stroke-width="1.2" opacity=".8"/>`; }
+  s += dash(boxEdges(x0, y0, ZT, x1, y1, zt, 1), '5 4');
+  s += dash(hullInk(corners(x0, y0, x1, y1, ZT, zt), 2), '7 5');
+  // inside (always half visible through the glass, fully in see-through): empty shelves, a typewriter, blank pages
+  const ins = block(x0 + 3, y0 + 3, ZT, x0 + 7, y1 - 3, ZT + 60, mat('#d9c9a0'), .8)
+    + [20, 40].map(z => block(x0 + 3, y0 + 3, ZT + z, x0 + 12, y1 - 3, ZT + z + 1.5, mat('#d9c9a0'), .6)).join('')
+    + block(x1 - 16, y1 - 16, ZT, x1 - 6, y1 - 8, ZT + 9, mat('#b07a52'), .8)
+    + block(x1 - 15, y1 - 15, ZT + 9, x1 - 7, y1 - 9, ZT + 12, DARK, .7)
+    + block(x1 - 13, y1 - 14, ZT + 12, x1 - 9, y1 - 10, ZT + 15, CERAMIC, .5);
+  return `<g opacity="${f(.35 + .65*k)}">${ins}</g>` + `<g opacity="${f(1 - .5*k)}">${s}</g>`;
+}
+
+/* ---------------------------------------------------------------- the main island */
+function mainIsland(k){
+  const t = TH(), [x0, y0, x1, y1] = MAIN;
+  const sl = slab(x0, y0, x1, y1, ZS, ZT, 14, t.cliff, t.grass), top = sl.outline;
+  let g = sl.sides + sl.top;
+  // speckles in the lawn
+  for (let i = 0; i < 70; i++){ const x = x0 + 8 + hsh(i*1.7) * (x1 - x0 - 16), y = y0 + 8 + hsh(i*2.3 + 5) * (y1 - y0 - 16);
+    if (Math.abs(y - CY) < 16 || Math.abs(x - CX) < 16) continue;
+    g += fill(pd(on(PZ(ZT + .05), ellUV(x, y, 1.6, 1, 6))), t.grassB); }
+  // plazas under the buildings and the square
+  const pave = (a, b, c, d) => shape(on(PZ(ZT + .1), rrUV(a, b, c, d, 3)), t.walk, .7);
+  g += pave(448, 513, 532, 597) + pave(636, 321, 694, 379) + pave(619, 554, 681, 616) + pave(695, 485, 749, 539) + pave(692, 552, 728, 588);
+  g += block(706, 566, ZT, 716, 569, ZT + 3, mat('#8a6a4a'), .7);
+  // streets: sidewalk, asphalt, dashed centre lines; then the roundabout
+  g += shape(on(PZ(ZT + .15), rectUV(x0 + 2, CY - 13, x1 - 2, CY + 13)), t.walk, .8) + shape(on(PZ(ZT + .15), rectUV(CX - 13, y0 + 2, CX + 13, y1 - 2)), t.walk, .8);
+  g += fill(pd(on(PZ(ZT + .2), rectUV(x0 + 2, CY - 9, x1 - 2, CY + 9))), t.road) + fill(pd(on(PZ(ZT + .2), rectUV(CX - 9, y0 + 2, CX + 9, y1 - 2))), t.road);
+  g += shape(on(PZ(ZT + .25), ellUV(CX, CY, RR + 11, RR + 11, 40)), t.walk, .8) + shape(on(PZ(ZT + .3), ellUV(CX, CY, RR + 8, RR + 8, 40)), t.road, .6);
+  g += shape(on(PZ(ZT + .35), ellUV(CX, CY, RR - 9, RR - 9, 40)), t.lawn, .9);
+  const dl = (pts) => `<path d="${pd(pts, false)}" fill="none" stroke="${t.dash}" stroke-width="1.2" stroke-dasharray="6 6"/>`;
+  g += dl([[x0 + 4, CY, ZT + .3], [CX - RR - 9, CY, ZT + .3]]) + dl([[CX + RR + 9, CY, ZT + .3], [x1 - 4, CY, ZT + .3]])
+    + dl([[CX, y0 + 4, ZT + .3], [CX, CY - RR - 9, ZT + .3]]) + dl([[CX, CY + RR + 9, ZT + .3], [CX, y1 - 4, ZT + .3]])
+    + `<path d="${pd(on(PZ(ZT + .4), ellUV(CX, CY, RR, RR, 40)))}" fill="none" stroke="${t.dash}" stroke-width="1.2" stroke-dasharray="6 6"/>`;
+  // zebra crossings where the arms meet the roundabout
+  for (const [ax, ay, dx, dy] of [[CX - RR - 16, CY, 1, 0], [CX + RR + 16, CY, 1, 0], [CX, CY - RR - 16, 0, 1], [CX, CY + RR + 16, 0, 1]])
+    for (const o of [-6, -2, 2, 6]) g += fill(pd(dx ? on(PZ(ZT + .4), rectUV(ax - 3, ay + o - 1, ax + 3, ay + o + 1)) : on(PZ(ZT + .4), rectUV(ax + o - 1, ay - 3, ax + o + 1, ay + 3))), '#f6f4ee');
+  // promenade by the shops, down to the pier
+  g += shape(on(PZ(ZT + .15), rectUV(763, 288, 777, CY - 13)), t.walk, .7);
+  // see-through: the network under the streets, one cable from the tower to each building (none to nash)
+  if (k > 0){
+    const net = [[[CX, CY], [497, CY], [497, 520]], [[CX, CY], [CX, 352], [643, 352]], [[CX, CY], [CX, 585], [626, 585]], [[CX, CY], [722, CY], [722, 492]], [[CX, CY], [770, CY], [770, 300], [757, 300]]];
+    for (const p of net){ const d = pd(p.map(([x, y]) => [x, y, ZT + .5]), false);
+      g += `<g opacity="${f(k)}"><path d="${d}" fill="none" stroke="${INK}" stroke-width="3.6" stroke-linejoin="round"/><path d="${d}" fill="none" stroke="#ffb347" stroke-width="2" stroke-linejoin="round"/></g>`; }
+  }
+  // cast shadows of the buildings and trees, on the island
+  let shd = '';
+  for (const [id, [a, b2, c, d, h]] of Object.entries(B)) shd += shadowOn(corners(a, b2, c, d, ZT, ZT + h + (id === 'neumann' ? 30 : 0)), ZT, top);
+  for (const [a, b2, c, d, h] of SHOPS) shd += shadowOn(corners(a, b2, c + 4, d, ZT, ZT + h), ZT, top);
+  for (const [x, y, h, r] of TREES) shd += shadowOn(treeShadow(x, y, ZT, h, r), ZT, top);
+  g += shd;
+  // focus ring and the street traffic, under everything that stands
+  for (const id of Object.keys(B)) g += ring(id, ...B[id].slice(0, 4));
+  if (ST.focus === 'apps') g += ring('apps', 742, 288, 762, 430);
+  g += traffic();
+  g += sl.edge;
+  // pier with its posts and lamp
+  const pier = block(780, 384, ZT - 3, 808, 396, ZT - 1, mat('#a07a52'), 1)
+    + [786, 796, 806].map(x => rod([x, 394, ZS], [x, 394, ZT - 3], .9, mat('#5a4230'), tone, .7)).join('')
+    + rod([806, 386, ZT - 1], [806, 386, ZT + 10], .5, METAL, tone, .6) + glow([806, 386, ZT + 11], 3*1.25, TH().lit, .8);
+  // what stands on it, sorted for this view
+  const parts = [
+    boxPart(...pick(B.neumann, ZT, 290), act('b-neumann', neumann(k))),
+    boxPart(...pick(B.shannon, ZT, 100), act('b-shannon', shannon(k))),
+    boxPart(...pick(B.babbage, ZT, 200), act('b-babbage', babbage(k))),
+    boxPart(...pick(B.hopper, ZT, 100), act('b-hopper', hopper(k))),
+    boxPart(...pick(B.lovelace, ZT, 130), act('b-lovelace', lovelace(k))),
+    boxPart(745, 292, ZT, 761, 424, ZT + 18, act('b-apps', shops(k))),
+    boxPart(780, 384, ZS, 808, 396, ZT + 12, pier),
+    ...TREES.map(([x, y, h, r, kind]) => kind === 'c' ? coneTree(x, y, ZT, h - 5, r) : blobTree(x, y, ZT, r)),
+  ];
+  return boxPart(x0, y0, ZS, x1 + 30, y1, ZT + 290, g + byDepth(parts));
+}
+const pick = ([x0, y0, x1, y1], z0, h) => [x0, y0, z0, x1, y1, z0 + h];
+// trees: x, y, height, radius, kind (c = cone, b = round)
+const TREES = [
+  [449, 359, 30, 7, 'c'], [494, 314, 30, 7, 'c'], [475, 398, 30, 7, 'c'], [533, 340, 30, 7, 'c'], [475, 428, 26, 6, 'c'], [555, 330, 30, 7, 'c'],
+  [422, 300, 24, 8, 'b'], [537, 287, 24, 8, 'b'], [442, 330, 22, 7, 'b'], [440, 612, 24, 8, 'b'], [484, 625, 26, 6, 'c'],
+  [674, 291, 24, 8, 'b'], [728, 300, 26, 6, 'c'], [628, 628, 24, 7, 'b'], [760, 600, 24, 8, 'b'], [560, 622, 26, 6, 'c'], [742, 625, 22, 7, 'b'],
+];
+
+/* ---------------------------------------------------------------- traffic: messages on the streets */
+function traffic(){
+  const cols = DOT_COL();
+  if (ST.still) return STILL_DOTS.map(([x, y, c]) => msgDot(x, y, cols[c])).join('');
+  let s = '';
+  for (const m of AMBIENT){
+    if (ST.t < m.begin) continue;
+    const rest = m.rest ?? .3, run = 1 - rest, u = ((ST.t - m.begin) % m.dur) / m.dur;
+    if (u >= run) continue;
+    const v = u / run, a = Math.min(1, v/.1, (1 - v)/.15), p = R[m.r].at(m.back ? 1 - v : v);
+    s += msgDot(p[0], p[1], cols[m.c], a);
+  }
+  // the morning summary: three reports come in to the tower
+  if (ST.sum != null){ const v = Math.min(1, ST.sum / 1.8);
+    if (v < 1) for (const [r, c] of [['shannon', 0], ['babbage', 1], ['hopper', 0]]) { const p = R[r].at(1 - v); s += msgDot(p[0], p[1], cols[c], Math.min(1, (1 - v)/.12), 1.2); } }
+  // a message for nash runs to the shore and stops there
+  if (ST.nash != null){ const t = ST.nash, v = t < 1.4 ? t/1.4 : t < 2.2 ? 1 : 1 - (t - 2.2)/1.2;
+    const p = R.toNash.at(v); s += msgDot(p[0], p[1], '#ff6b7a', t > 3.2 ? Math.max(0, 1 - (t - 3.2)/.3) : 1, 1.2);
+    if (t > 1.3 && t < 2.6){ const [X, Y] = P(CX, MAIN[1] + 3, ZT + .6), r = (6 + 10*((t - 1.3) % .65)/.65) * INK_K;
+      s += `<circle cx="${f(X)}" cy="${f(Y)}" r="${f(r)}" fill="none" stroke="#ff6b7a" stroke-width="1.6"/>`; } }
+  return s;
+}
+
+/* ---------------------------------------------------------------- the other islands */
+function nash(k){
+  const t = TH(), [x0, y0, x1, y1] = NASH, cx = (x0 + x1)/2, cy = (y0 + y1)/2;
+  const sl = slab(x0, y0, x1, y1, ZS, ZT, 10, t.cliff, t.grass);
+  let s = sl.sides + sl.top + shape(on(PZ(ZT + .1), rrUV(cx - 30, cy - 30, cx + 30, cy + 30, 4)), t.walk, .8);
+  const v = [cx - 18, cy - 18, cx + 18, cy + 18], vz = ZT + 4, vh = 44;
+  s += shadowOn(corners(...v.slice(0, 2), ...v.slice(2), vz, vz + vh), ZT, sl.outline);
+  s += ring('nash', cx - 22, cy - 22, cx + 22, cy + 22) + sl.edge;
+  let vault = block(v[0] - 4, v[1] - 4, ZT, v[2] + 4, v[3] + 4, vz, mat('#9ca4b4'), 1.4) + block(v[0], v[1], vz, v[2], v[3], vz + vh, mat('#c7cdd8'), 2.4);
+  vault += block(v[0] + 3, v[1] + 3, vz + vh, v[2] - 3, v[3] - 3, vz + vh + 2, mat('#d9dee8'), .8);
+  if (vis([1,0,0])){ const pl = PX(v[2] + .4), dz = vz + 22;
+    vault += shape(on(pl, ellUV(cy, dz, 13, 13, 28)), '#c99a2e', 1.4) + shape(on(pl, ellUV(cy, dz, 9, 9, 24)), '#d9ae4e', .8);
+    for (let i = 0; i < 8; i++){ const a = i/8*Math.PI*2; vault += fill(pd(on(pl, ellUV(cy + 11*Math.cos(a), dz + 11*Math.sin(a), 1, 1, 6))), '#8a6514'); }
+    vault += line(on(pl, [[cy - 6, dz], [cy + 6, dz]]), 1.2) + line(on(pl, [[cy, dz - 6], [cy, dz + 6]]), 1.2); }
+  vault += rod([v[0], v[1], vz + vh - 4], [v[0] - 6, v[1] - 4, vz + vh - 2], .8, DARK, tone, .7) + glow([v[0] - 6, v[1] - 4, vz + vh - 2], 2*1.25, '#ff6b7a', Math.floor(ST.t*1.2) % 2 ? .9 : .25);
+  let ins = '';
+  if (k > 0){
+    for (let i = 0; i < 4; i++) ins += rod([v[2] - 2, cy - 14 + i*9, vz + 22], [v[2] - 16, cy - 14 + i*9, vz + 22], 1.2, METAL, toneI, .7);   // lock bolts
+    ins += cyl(v[2] - 18, cy, vz + 12, vz + 14, 9, mat('#d8b25a'), toneI, .9, 18);                                                         // gear
+    ins += block(v[0] + 2, v[1] + 2, vz, v[0] + 10, v[3] - 2, vz + 30, mat('#b07a52'), .8);                                                 // ledger shelf
+    for (let i = 0; i < 5; i++) ins += block(v[0] + 3, v[1] + 4 + i*6, vz + 30, v[0] + 9, v[1] + 8 + i*6, vz + 37, mat(['#e2483d', '#3f7fc0', '#2f8a4a', '#d8b25a', '#7059b5'][i]), .5);
+  }
+  s += act('b-nash', ghost(k, vault, ins));
+  // the fence stands in the water all round: posts with two rails, and buoys
+  const [fx0, fy0, fx1, fy1] = FENCE, edges = [[[fx0, fy0], [fx1, fy0]], [[fx1, fy0], [fx1, fy1]], [[fx1, fy1], [fx0, fy1]], [[fx0, fy1], [fx0, fy0]]];
+  const fp = [];
+  for (const [a, b2] of edges) for (let i = 0; i < 8; i++){ const u = i/8, x = a[0] + (b2[0] - a[0])*u, y = a[1] + (b2[1] - a[1])*u;
+    fp.push(boxPart(x - 1.2, y - 1.2, ZS, x + 1.2, y + 1.2, ZS + 12, block(x - 1.2, y - 1.2, ZS, x + 1.2, y + 1.2, ZS + 12, mat(i % 2 ? '#ffffff' : '#e8505b'), .8))); }
+  for (const [a, b2] of edges){ const xs = [a[0], b2[0]], ys = [a[1], b2[1]];
+    fp.push(boxPart(Math.min(...xs) - .3, Math.min(...ys) - .3, ZS + 8, Math.max(...xs) + .3, Math.max(...ys) + .3, ZS + 10,
+      `<path d="${pd([[a[0], a[1], ZS + 10], [b2[0], b2[1], ZS + 10]], false)}" fill="none" stroke="#e8505b" stroke-width="1.6"/>` + `<path d="${pd([[a[0], a[1], ZS + 6], [b2[0], b2[1], ZS + 6]], false)}" fill="none" stroke="#e8505b" stroke-width="1.2" stroke-dasharray="4 3"/>`)); }
+  for (const [x, y, i] of [[fx1 + 14, cy - 30, 0], [fx1 + 14, cy + 30, 1], [cx - 30, fy1 + 14, 2], [cx + 30, fy0 - 14, 3]]){
+    fp.push(boxPart(x - 4, y - 4, ZS, x + 4, y + 4, ZS + 16, prism(ellUV(x, y, 4, 4, 10).map(p => p), ZS, ZS + 6, mat('#e8505b'), tone, 1)
+      + rod([x, y, ZS + 6], [x, y, ZS + 13], .5, METAL, tone, .6) + glow([x, y, ZS + 14], 2.4*1.25, '#ff6b7a', (Math.floor(ST.t*1.2) + i) % 2 ? .95 : .3))); }
+  // the islet first, the fence parts sorted with it
+  return boxPart(fx0 - 20, fy0 - 20, ZS, fx1 + 20, fy1 + 20, ZT + 60, byDepth([boxPart(x0, y0, ZS, x1, y1, ZT + 60, s), ...fp]));
+}
+
+function bluebook(k){
+  const t = TH(), [x0, y0, x1, y1] = BB, cx = 955, cy = 460;
+  const sl = slab(x0, y0, x1, y1, ZS, ZT, 10, t.cliff, t.bb);
+  let s = sl.sides + sl.top;
+  s += `<path d="${pd([[x0 + 2, 440, ZT + .2], [cx - 14, cy + 4, ZT + .2]], false)}" fill="none" stroke="${t.walk}" stroke-width="3" stroke-linecap="round"/>`;
+  const c = [cx - 13, cy - 13, cx + 13, cy + 13], wh = 46;
+  s += shadowOn([...corners(...c.slice(0, 2), ...c.slice(2), ZT, ZT + wh), [cx, cy, ZT + wh + 40]], ZT, sl.outline);
+  for (const [x, y] of [[930, 432], [925, 490], [990, 495]]) s += shadowOn(treeShadow(x, y, ZT, 28, 7), ZT, sl.outline);
+  s += ring('bluebook', 940, 445, 970, 475) + sl.edge;
+  // the dock on the side that faces the main island
+  s += block(884, 424, ZT - 3, x0 + 2, 436, ZT - 1, mat('#a07a52'), 1) + rod([886, 434, ZS], [886, 434, ZT - 3], .9, mat('#5a4230'), tone, .7);
+  let ch = block(...c.slice(0, 2), ZT, ...c.slice(2), ZT + wh, mat('#e3ddcf'), 2.2);
+  if (vis([0,1,0])) ch += shape(on(PY(c[3] + .3), [...arcUV(cx, ZT + 16, 5, 0, 180, 8), [cx - 5, ZT], [cx + 5, ZT]]), '#4a3f35', .9);
+  if (vis([1,0,0])){ const pl = PX(c[2] + .3); ch += shape(on(pl, ellUV(cy, ZT + 32, 5.5, 5.5, 18)), TH().lit, 1) + line(on(pl, [[cy - 5.5, ZT + 32], [cy + 5.5, ZT + 32]]), .6) + line(on(pl, [[cy, ZT + 26.5], [cy, ZT + 37.5]]), .6); }
+  ch += pyramid(c, ZT + wh, 40, mat('#8fb0f0'));
+  let ins = '';
+  if (k > 0){
+    for (let i = 0; i < 3; i++) ins += block(c[0] + 4, c[1] + 4 + i*6, ZT, c[2] - 8, c[1] + 6.5 + i*6, ZT + 6, mat('#a07a52'), .7);   // pews
+    ins += block(c[2] - 7, cy - 3, ZT, c[2] - 3, cy + 3, ZT + 12, mat('#7a5634'), .8) + block(c[2] - 7, cy - 3, ZT + 12, c[2] - 3, cy + 3, ZT + 13, CERAMIC, .5);   // lectern with papers
+  }
+  const tree = [[930, 432, 'c'], [925, 490, 'c'], [990, 495, 'b']].map(([x, y, kd]) => kd === 'c' ? coneTree(x, y, ZT, 24, 7) : blobTree(x, y, ZT, 7));
+  return boxPart(884, y0, ZS, x1, y1, ZT + 100, s + byDepth([boxPart(...c.slice(0, 2), ZT, ...c.slice(2), ZT + wh + 40, act('b-bluebook', ghost(k, ch, ins))), ...tree]));
+}
+// a four-sided roof rising to a point over [x0, y0, x1, y1] at height z, h tall
+function pyramid([x0, y0, x1, y1], z, h, m){
+  const apex = [(x0 + x1)/2, (y0 + y1)/2, z + h], q = [[x0, y0, z], [x1, y0, z], [x1, y1, z], [x0, y1, z]];
+  let s = '';
+  for (let i = 0; i < 4; i++){ const a = q[i], b2 = q[(i + 1) % 4], n = norm(cross(sub(b2, a), sub(apex, a)));
+    const out = dot(n, sub(avg([a, b2]), [apex[0], apex[1], z])) < 0 ? n.map(v => -v) : n;
+    if (vis(out)) s += shape([a, b2, apex], tone(out, m), .9); }
+  return s + hullInk([...q, apex], 1.8);
+}
+
+function unio(k){
+  const t = TH(), [x0, y0, x1, y1] = UNIO, cx = 640, cy = 805;
+  const sl = slab(x0, y0, x1, y1, ZS, ZT, 10, t.cliff, t.grass);
+  let s = sl.sides + sl.top + ring('unio', 620, 785, 660, 825) + sl.edge;
+  // the hill: rings stacked into a dome
+  const hz = [0, 7, 13, 17.5, 20], hr = [34, 30, 23, 14, 4], hm = mat(THEME === 'night' ? '#2f6a4d' : '#5fae6a');
+  for (let i = 0; i < hz.length - 1; i++) s += loft(on(PZ(ZT + hz[i]), ellUV(cx, cy, hr[i], hr[i], 28)), on(PZ(ZT + hz[i + 1]), ellUV(cx, cy, hr[i + 1], hr[i + 1], 28)), n => tone(n, hm));
+  s += fill(pd(on(PZ(ZT + 20), ellUV(cx, cy, 4, 4, 12))), hm.l) + hullInk([...on(PZ(ZT), ellUV(cx, cy, 34, 34, 28)), [cx, cy, ZT + 20]], 1.8);
+  s += `<path d="${pd([[cx + 6, cy + 8, ZT + 19], [cx + 14, cy + 18, ZT + 15], [cx + 22, cy + 30, ZT + 3]], false)}" fill="none" stroke="${t.walk}" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="3 3"/>`;
+  const zc = ZT + 19, c = [cx - 8, cy - 8, cx + 8, cy + 8];
+  let ch = block(...c.slice(0, 2), zc, ...c.slice(2), zc + 26, mat('#f4f1ea'), 2);
+  if (vis([0,1,0])) ch += shape(on(PY(c[3] + .3), rectUV(cx - 3, zc, cx + 3, zc + 10)), '#5a4632', .8);
+  if (vis([1,0,0])) ch += shape(on(PX(c[2] + .3), ellUV(cy, zc + 17, 2.6, 2.6, 12)), TH().lit, .8);
+  ch += pyramid(c, zc + 26, 30, mat('#e2c27e'));
+  ch += rod([cx, cy, zc + 56], [cx, cy, zc + 70], .7, CERAMIC, tone, .8) + rod([cx - 5, cy, zc + 65], [cx + 5, cy, zc + 65], .6, CERAMIC, tone, .7);
+  let ins = '';
+  if (k > 0){
+    for (let i = 0; i < 2; i++) ins += block(c[0] + 2, c[1] + 3 + i*5, zc, c[2] - 6, c[1] + 5 + i*5, zc + 4, mat('#a07a52'), .6);
+    ins += block(c[2] - 5, cy - 4, zc, c[2] - 2, cy + 4, zc + 6, CERAMIC, .7);
+    for (const dy of [-2.5, 2.5]) ins += rod([c[2] - 3.5, cy + dy, zc + 6], [c[2] - 3.5, cy + dy, zc + 9], .4, CERAMIC, toneI, .5) + glow([c[2] - 3.5, cy + dy, zc + 9.6], 1.4*1.25, '#ffd27a', .9);
+  }
+  const trees = [[x0 + 12, y1 - 12], [x1 - 12, y0 + 14]].map(([x, y]) => coneTree(x, y, ZT, 20, 5));
+  return boxPart(x0, y0, ZS, x1, y1, ZT + 100, s + byDepth([boxPart(...c.slice(0, 2), zc, ...c.slice(2), zc + 72, act('b-unio', ghost(k, ch, ins))), ...trees]));
+}
+
+function medu(k){
+  const t = TH(), [x0, y0, x1, y1] = MEDU;
+  const sl = slab(x0, y0, x1, y1, ZS, ZM, 12, t.cliff, t.medu);
+  let s = sl.sides + sl.top;
+  const walk = (pts) => `<path d="${pd(pts.map(([x, y]) => [x, y, ZM + .1]), false)}" fill="none" stroke="${t.walk}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>`;
+  s += walk([[150, 210], [130, 287], [130, 342], [140, 400]]) + walk([[130, 342], [185, 360]]);
+  const H = [102, 288, 158, 343, 50], C1 = [135, 205, 165, 235, 30], C2 = [125, 400, 155, 430, 30];
+  for (const [a, b2, c, d, h] of [H, C1, C2]) s += shadowOn(corners(a, b2, c, d, ZM, ZM + h), ZM, sl.outline);
+  const tr = [[60, 120, 'c'], [70, 470, 'c'], [175, 120, 'b'], [180, 480, 'b'], [45, 300, 'c'], [60, 380, 'b'], [175, 260, 'c'],
+    [40, 200, 'b'], [90, 90, 'c'], [120, 500, 'c'], [178, 400, 'b'], [40, 440, 'c'], [95, 225, 'b']];
+  for (const [x, y] of tr) s += shadowOn(treeShadow(x, y, ZM, 28, 7), ZM, sl.outline);
+  s += ring('medu', 95, 195, 172, 440) + sl.edge;
+  const bldg = ([a, b2, c, d, h], col, rows, seed) => block(a, b2, ZM, c, d, ZM + h, mat(col), 2.2) + windows(a, b2, c, d, ZM + 4, ZM + h - 3, { rows, cols: 4, seed });
+  let hosp = bldg(H, '#eef4f2', 4, 200);
+  if (vis([1,0,0])){ const pl = PX(H[2] + .4), u = (H[1] + H[3])/2, z = ZM + 30; hosp += shape(on(pl, rectUV(u - 3, z - 10, u + 3, z + 10)), '#e8505b', .8) + shape(on(pl, rectUV(u - 10, z - 3, u + 10, z + 3)), '#e8505b', .8); }
+  hosp += shape(on(PZ(ZM + H[4] + .1), ellUV((H[0] + H[2])/2, (H[1] + H[3])/2, 14, 14, 28)), '#f5faf9', 1)
+    + `<g stroke="#7e9692" stroke-width="2" stroke-linecap="round" fill="none"><path d="${pd([[123, 309, ZM + 50.2], [123, 321, ZM + 50.2]], false)}"/><path d="${pd([[137, 309, ZM + 50.2], [137, 321, ZM + 50.2]], false)}"/><path d="${pd([[123, 315, ZM + 50.2], [137, 315, ZM + 50.2]], false)}"/></g>`;
+  let ins = '';
+  if (k > 0){ for (let i = 0; i < 3; i++) ins += block(106 + i*16, 292, ZM, 116 + i*16, 300, ZM + 4, CERAMIC, .7) + block(106 + i*16, 292, ZM + 4, 109 + i*16, 300, ZM + 7, mat('#9fd3f5'), .5); }
+  const c1 = bldg(C1, '#e2ece9', 2, 220), c2 = bldg(C2, '#e2ece9', 2, 240);
+  let c2i = '';
+  if (k > 0){ c2i = [0, 1, 2].map(i => block(129 + i*8, 405, ZM, 134 + i*8, 412, ZM + 4, mat('#b07a52'), .5)).join('') + block(127, 425, ZM + 6, 153, 427, ZM + 16, mat('#2f5a45'), .6); }
+  const amb = block(186, 330, ZM, 194, 342, ZM + 7, mat('#ffffff'), 1.2) + glow([190, 336, ZM + 8], 2*1.25, '#ff6b7a', Math.floor(ST.t*2) % 2 ? .9 : .2);
+  const parts = [
+    boxPart(H[0], H[1], ZM, H[2], H[3], ZM + H[4], ghost(k, hosp, ins)),
+    boxPart(C1[0], C1[1], ZM, C1[2], C1[3], ZM + C1[4], ghost(k, c1, '')),
+    boxPart(C2[0], C2[1], ZM, C2[2], C2[3], ZM + C2[4], ghost(k, c2, c2i)),
+    boxPart(186, 330, ZM, 194, 342, ZM + 8, amb),
+    ...tr.map(([x, y, kd]) => kd === 'c' ? coneTree(x, y, ZM, 24, 7) : blobTree(x, y, ZM, 8)),
+  ];
+  return boxPart(x0, y0, ZS, x1, y1, ZM + 60, act('b-medu', s + byDepth(parts)));
+}
+
+/* ---------------------------------------------------------------- the ferry */
+const FERRY = [[812, 391], [840, 398], [862, 430]];
+function ferryAt(time){
+  const T = 30, u = (time % T) / T, e = x => x < .5 ? 2*x*x : 1 - Math.pow(-2*x + 2, 2)/2;
+  const v = ST.still ? .35 : u < .4 ? e(u/.4) : u < .5 ? 1 : u < .9 ? 1 - e((u - .5)/.4) : 0;
+  const q = (a, b2, c, s) => (1 - s)*(1 - s)*a + 2*(1 - s)*s*b2 + s*s*c;
+  const pos = s => [q(FERRY[0][0], FERRY[1][0], FERRY[2][0], s), q(FERRY[0][1], FERRY[1][1], FERRY[2][1], s)];
+  const p = pos(v), p2 = pos(Math.min(1, v + .02)), p1 = pos(Math.max(0, v - .02));
+  return { p, dir: norm([p2[0] - p1[0], p2[1] - p1[1], 0]) };
+}
+function ferry(){
+  const { p, dir } = ferryAt(ST.t), [x, y] = p, side = [-dir[1], dir[0], 0];
+  const at = (a, b2) => [x + dir[0]*a*1.5 + side[0]*b2*1.5, y + dir[1]*a*1.5 + side[1]*b2*1.5];
+  const hull = [at(-11, -5), at(9, -5), at(14, 0), at(9, 5), at(-11, 5)];
+  let s = '';
+  // route under it, wake behind it
+  s += `<path d="${pd(Array.from({ length: 20 }, (_, i) => { const t2 = i/19, q = (a, b2, c) => (1 - t2)*(1 - t2)*a + 2*(1 - t2)*t2*b2 + t2*t2*c; return [q(FERRY[0][0], FERRY[1][0], FERRY[2][0]), q(FERRY[0][1], FERRY[1][1], FERRY[2][1]), ZS + .1]; }), false)}" fill="none" stroke="${TH().route}" stroke-width="1.3" stroke-dasharray="5 6"/>`;
+  s += `<path d="${pd([[...at(-14, -3), ZS + .2], [...at(-22, -6), ZS + .2]], false)}" fill="none" stroke="#ffffff" stroke-width="1.4" opacity=".7"/><path d="${pd([[...at(-14, 3), ZS + .2], [...at(-22, 6), ZS + .2]], false)}" fill="none" stroke="#ffffff" stroke-width="1.4" opacity=".7"/>`;
+  s += prism(hull, ZS, ZS + 6, mat('#f4f6fa'), tone, 1.8);
+  s += prism([at(-11, -5), at(9, -5), at(9, -4.2), at(-11, -4.2)], ZS + 3, ZS + 4.5, mat('#e8505b'), tone, .5);
+  s += prism([at(-8, -3.5), at(2, -3.5), at(2, 3.5), at(-8, 3.5)], ZS + 6, ZS + 15, mat('#6c8fd8'), tone, 1.2);
+  s += prism([at(4, -3), at(9, -3), at(9, 3), at(4, 3)], ZS + 6, ZS + 9, mat('#ffffff'), tone, .9);   // the papers on deck
+  s += prism([at(4.6, -2.4), at(8.4, -2.4), at(8.4, 2.4), at(4.6, 2.4)], ZS + 9, ZS + 11, mat('#f2f4f8'), tone, .7);
+  s += rod([...at(-3, 0), ZS + 15], [...at(-3, 0), ZS + 25], .5, METAL, tone, .6) + glow([...at(-3, 0), ZS + 26], 3, '#ffe7a8', .9);
+  return boxPart(x - 22, y - 22, ZS, x + 22, y + 22, ZS + 26, s);
+}
+
+/* ---------------------------------------------------------------- scene */
+const SLIDE = { medu:[135, 0], nash:[0, 60], bluebook:[-20, 0], unio:[0, -50] };
+const ORIGIN = [120, 60];                                   // the tray's corner after the slide
+const shiftPt = (id, [x, y, z]) => { const d = SLIDE[id] || [0, 0]; return [x + d[0] - ORIGIN[0], y + d[1] - ORIGIN[1], z]; };
+function scene(st){
+  const k = ease(st.xr || 0);
+  let s = tray();
+  s += byDepth([moved(medu(k), ...SLIDE.medu), moved(nash(k), ...SLIDE.nash), mainIsland(k), moved(bluebook(k), ...SLIDE.bluebook), moved(unio(k), ...SLIDE.unio), ferry()]);
+  const [ox, oy] = Dv(-ORIGIN[0], -ORIGIN[1], 0);
+  s = `<g transform="translate(${f(ox)} ${f(oy)})">${s}</g>`;
+  // names over the buildings (the Labels switch); the one in focus lights up
+  if (k <= .6) s += NAMES.map(id => { const a = AG[id]; if (!a) return '';
+    const [p, dy] = LABEL_AT[id]; return nameTag(shiftPt(id, p), dy, a.nombre, st.focus === id); }).join('');
+  else { const id = INSIDE[st.focus] ? st.focus : 'all'; s += xrCallouts(INSIDE[id]().map(it => ({ ...it, at: shiftPt(it.isl || (id === 'all' ? '' : id), it.at) })), [0, TRAY_W, 0, TRAY_D, 0, 300]); }
+  return s;
+}
+const LABEL_AT = {
+  neumann: [[590, 455, ZT + 300], -10], shannon: [[490, 555, ZT + 104], -12], babbage: [[665, 350, ZT + 194], -12],
+  apps: [[751, 358, ZT + 18], -26], hopper: [[650, 585, ZT + 74], -16], lovelace: [[722, 512, ZT + 100], -14],
+  nash: [[635, 90, ZT + 54], -14], bluebook: [[955, 460, ZT + 88], -12], unio: [[640, 805, ZT + 92], -10], medu: [[130, 315, ZM + 52], -14],
+};
+// what see-through names inside each building
+const INSIDE = {
+  neumann: () => [{ at:[590, 455, ZT + 210], text: LANG === 'en' ? 'CONTROL ROOM' : 'SALA DE CONTROL' }, { at:[590, 455, ZT + 100], text: LANG === 'en' ? 'LIFT CORE' : 'ELEVADOR' },
+    { at:[577, 467, ZT + 20], text: LANG === 'en' ? 'SERVER RACK' : 'RACK', on: true }, { at:[594, 459, ZT + 150], text: LANG === 'en' ? 'RISER TO THE BEACON' : 'CABLE AL FARO' }],
+  shannon: () => [{ at:[470, 535, ZT + 10], text: LANG === 'en' ? 'BROADCAST BOOTH' : 'CABINA' }, { at:[494, 540, ZT + 15], text: LANG === 'en' ? 'CAMERA' : 'CÁMARA' }, { at:[461, 555, ZT + 60], text: LANG === 'en' ? 'MAST' : 'ANTENA', on: true }],
+  babbage: () => [{ at:[660, 340, ZT + 8], text:'PLOTTER' }, { at:[660, 362, ZT + 6], text: LANG === 'en' ? 'POSTERS' : 'CARTELES' }, { at:[677, 356, ZT + 64], text: LANG === 'en' ? 'DESIGN DESK' : 'ESCRITORIO' }],
+  hopper: () => [{ at:[640, 568, ZT + 8], text: LANG === 'en' ? 'WORKBENCH' : 'BANCO' }, { at:[640, 570, ZT + 14], text: LANG === 'en' ? 'TOOLBOX' : 'HERRAMIENTAS' }, { at:[650, 600, ZT + 9], text: LANG === 'en' ? 'APP CONVEYOR' : 'BANDA DE APPS', on: true }],
+  lovelace: () => [{ at:[707, 512, ZT + 40], text: LANG === 'en' ? 'EMPTY SHELVES' : 'ESTANTES VACÍOS' }, { at:[730, 520, ZT + 12], text: LANG === 'en' ? 'TYPEWRITER' : 'MÁQUINA DE ESCRIBIR' }],
+  nash: () => [{ at:[640, 95, ZT + 26], text: LANG === 'en' ? 'LOCK BOLTS' : 'CERROJOS' }, { at:[635, 90, ZT + 17], text: LANG === 'en' ? 'GEAR' : 'ENGRANE' }, { at:[621, 90, ZT + 40], text: LANG === 'en' ? 'LEDGERS' : 'LIBROS' }],
+  bluebook: () => [{ at:[950, 455, ZT + 4], text: LANG === 'en' ? 'PEWS' : 'BANCAS' }, { at:[963, 460, ZT + 12], text: LANG === 'en' ? 'LECTERN' : 'ATRIL' }],
+  unio: () => [{ at:[640, 805, ZT + 22], text: LANG === 'en' ? 'PEWS' : 'BANCAS' }, { at:[645, 805, ZT + 27], text: LANG === 'en' ? 'ALTAR' : 'ALTAR', on: true }],
+  medu: () => [{ at:[120, 296, ZM + 4], text: LANG === 'en' ? 'BEDS' : 'CAMAS' }, { at:[140, 426, ZM + 12], text: LANG === 'en' ? 'BLACKBOARD' : 'PIZARRÓN' }],
+  apps: () => [{ at:[757, 300, ZT + 6], text: LANG === 'en' ? 'STOREFRONT' : 'APARADOR' }],
+  all: () => [{ at:[590, 455, ZT + 210], text: LANG === 'en' ? 'CONTROL ROOM' : 'SALA DE CONTROL' }, { at:[650, 600, ZT + 9], text: LANG === 'en' ? 'APP CONVEYOR' : 'BANDA DE APPS' },
+    { at:[660, 340, ZT + 8], text:'PLOTTER' }, { at:[470, 535, ZT + 10], text: LANG === 'en' ? 'BROADCAST BOOTH' : 'CABINA' }, { at:[640, 95, ZT + 26], text: LANG === 'en' ? 'LOCK BOLTS' : 'CERROJOS', isl:'nash' },
+    { at:[700, CY, ZT + .5], text: LANG === 'en' ? 'VPS NETWORK' : 'RED DEL VPS', on: true }, { at:[730, 520, ZT + 12], text: LANG === 'en' ? 'TYPEWRITER' : 'MÁQUINA DE ESCRIBIR' }],
+};
+
+/* ---------------------------------------------------------------- behaviour */
+const ST = { t: 0, msgs: 0, focus: null, sel: null, hover: null, still: false, sum: null, nash: null, flash: 0, busy: false };
+function morning(st, ui){
+  if (st.busy) return ui.flash(tr().fBusy);
+  st.busy = true; st.sum = 0; st.flash = 0;
+  if (st.still){ st.sum = null; st.msgs += 4; st.busy = false; ui.flash(tr().fSummary, 2600); return; }
+  ui.animate(dt => { st.sum += dt;
+    if (st.sum > 1.8) st.flash = Math.max(0, 1 - Math.abs(st.sum - 2.3)/.5);
+    if (st.sum > 1.8 && !st.counted){ st.counted = true; st.msgs += 3; }
+    if (st.sum > 2.4 && !st.sent){ st.sent = true; st.msgs += 1; ui.flash(tr().fSummary, 2600); }
+    if (st.sum > 3){ st.sum = null; st.flash = 0; st.busy = false; st.counted = st.sent = false; return false; }
+    return true; });
+}
+function toNash(st, ui){
+  if (st.busy) return ui.flash(tr().fBusy);
+  if (st.still){ ui.flash(tr().fNash, 2600); return; }
+  st.busy = true; st.nash = 0;
+  ui.animate(dt => { st.nash += dt; if (st.nash > 1.4 && !st.told){ st.told = true; ui.flash(tr().fNash, 2600); }
+    if (st.nash > 3.5){ st.nash = null; st.busy = false; st.told = false; return false; } return true; });
+}
+function focusOn(st, id){ st.sel = st.sel === id ? null : id; }
+
+/* ---------------------------------------------------------------- the card */
+let fichaEl;
+function drawFicha(){
+  const id = ST.focus, a = AG[id];
+  if (!fichaEl) return;
+  if (!a){ fichaEl.classList.remove('show'); return; }
+  const en = LANG === 'en', x = tr(), isla = ISLAS[a.isla] || {};
+  const apps = id === 'apps' && AGENTS_DATA && AGENTS_DATA.apps ? `<div class="apps">${AGENTS_DATA.apps.map(n => `<span>${n}</span>`).join('')}</div>` : '';
+  fichaEl.innerHTML = `<div class="nm"><span><i class="sw" style="background:${AGENT_COL[id]}"></i>${a.nombre}</span><span class="st${a.estado === 'por_definir' ? ' tbd' : ''}">${x.st[a.estado]}</span></div>`
+    + `<div class="bd">${en ? a.en.edificio : a.edificio}</div><div class="rl">${en ? a.en.rol : a.rol}</div>${apps}`
+    + `<dl><div><dt>${x.channel}</dt><dd>${a.canal ?? x.none}</dd></div><div><dt>${x.island}</dt><dd>${en ? isla.en : isla.nombre}</dd></div></dl>`;
+  fichaEl.classList.add('show');
+}
+
+/* ---------------------------------------------------------------- mount */
+const acts = {};
+for (const id of NAMES) acts['b-' + id] = (st, el, ui) => focusOn(st, id);
+let sceneFn = st => { st.focus = st.hover || st.sel; return scene(st); };
+const ui = mountFigure({
+  fig: '1', turn: 'full', title: tr().title, credit: true,
+  size: [TRAY_W, TRAY_D, 320], palette: 'mustard',
+  state: ST,
+  scene: sceneFn,
+  stats: st => [{ label: tr().active, value: `${Object.values(AG).filter(a => a.tipo === 'agente' && a.estado === 'activo').length}/${Object.values(AG).filter(a => a.tipo === 'agente').length}` },
+                { label: tr().msgs, value: st.msgs, small: true }],
+  buttons: [
+    { label: tr().summary, onClick: morning },
+    { label: tr().nash, onClick: toNash },
+    { label: tr().pick, choices: st => NAMES.filter(id => AG[id]).map(id => ({ label: AG[id].nombre, current: st.sel === id, onClick: s2 => { s2.sel = id; } })) },
+  ],
+  acts,
+  params: (st, q) => { if (q.get('sel')) st.sel = q.get('sel'); if (q.get('t')) st.t = +q.get('t'); },
+});
+xrMount(() => ui, () => '');
+// names on by default: they are what makes the city readable
+if (!QS.has('labels')) document.getElementById('lblb').click();
+fichaEl = document.createElement('div'); fichaEl.id = 'ficha'; fichaEl.setAttribute('aria-live', 'polite');
+document.querySelector('.stage').appendChild(fichaEl);
+{ const r0 = ui.render; ui.render = () => { r0(); drawFicha(); }; }
+ui.render();
+
+// hovering a building shows its card (the scene is redrawn, so listen on the svg itself)
+const figEl = document.getElementById('fig');
+figEl.addEventListener('pointerover', e => { if (e.pointerType !== 'mouse') return; const a = e.target.closest('[data-act^="b-"]');
+  const id = a ? a.dataset.act.slice(2) : null; if (id !== ST.hover){ ST.hover = id; ui.render(); } });
+figEl.addEventListener('pointerleave', () => { if (ST.hover){ ST.hover = null; ui.render(); } });
+
+// a slow clock for the city: windows, beacon, traffic, ferry; still under reduced motion and offscreen
+const RM = matchMedia('(prefers-reduced-motion: reduce)');
+let seen = true, tick = 0, last = performance.now();
+const clock = () => { const now = performance.now(), dt = Math.min(.25, (now - last)/1000); last = now;
+  if (!ST.still && seen && !document.hidden){ ST.t += dt; ui.render(); } };
+const startClock = () => { ST.still = RM.matches; clearInterval(tick); last = performance.now(); if (!ST.still) tick = setInterval(clock, 110); ui.render(); };
+RM.addEventListener('change', startClock);
+new IntersectionObserver(([e]) => { seen = e.isIntersecting; }).observe(figEl);
+startClock();
+
+// talking to the page around it: theme and language in, height out
+const post = m => { try { if (parent !== window) parent.postMessage(m, location.origin); } catch (e) {} };
+addEventListener('message', e => { if (e.origin !== location.origin || !e.data) return;
+  if (e.data.type === 'city:theme' && THEMES[e.data.theme]){ THEME = e.data.theme; document.documentElement.classList.toggle('night', THEME === 'night'); ui.render(); }
+  if (e.data.type === 'city:agents' && e.data.data){ for (const a of e.data.data.agentes || []) AG[a.id] = a; ui.render(); } });
+// the content's own height (body is 100% tall, so its scroll height would only echo the frame's)
+const contentHeight = () => Math.ceil(Math.max(...[...document.body.children].filter(e => e.tagName !== 'SCRIPT' && e.tagName !== 'STYLE')
+  .map(e => e.getBoundingClientRect().bottom + scrollY)) + parseFloat(getComputedStyle(document.body).paddingBottom));
+const sendHeight = () => post({ type: 'city:height', h: contentHeight() });
+new ResizeObserver(sendHeight).observe(document.body);
+for (const el of document.body.children) new ResizeObserver(sendHeight).observe(el);
+post({ type: 'city:ready' });
+</script></body></html>

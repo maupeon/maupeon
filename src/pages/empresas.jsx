@@ -1,7 +1,7 @@
 import Head from 'next/head'
 
 import { Container } from '@/components/Container'
-import { AgentCity } from '@/components/empresas/AgentCity'
+import { AgentList, CityFrame, CityLegend } from '@/components/empresas/CityFrame'
 import { Emphasis } from '@/components/home/Emphasis'
 import { Eyebrow } from '@/components/home/SectionHeading'
 import { getAgents } from '@/lib/agents'
@@ -15,10 +15,6 @@ export default function Empresas({ data }) {
       <Head>
         <title>{t('companies.title')}</title>
         <meta name="description" content={t('companies.metaDescription')} />
-        <link
-          href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;600&display=swap"
-          rel="stylesheet"
-        />
       </Head>
 
       <Container className="mt-16 sm:mt-28">
@@ -35,7 +31,12 @@ export default function Empresas({ data }) {
 
       <Container.Outer className="mt-14 sm:mt-20">
         <div className="px-4 sm:px-8 lg:px-12">
-          <AgentCity data={data} />
+          <CityFrame data={data} />
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <CityLegend />
+            <p className="text-xs text-zinc-500 dark:text-zinc-400">{t('companies.hint')}</p>
+          </div>
+          <AgentList data={data} />
         </div>
       </Container.Outer>
 
